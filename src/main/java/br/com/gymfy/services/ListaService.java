@@ -13,6 +13,7 @@ public class ListaService {
     @Autowired
     ListaRepository listaRepository;
 
+
     public Lista findById(Integer id){
         Optional<Lista> lista = listaRepository.findById(id);
         return lista.orElse(null);
@@ -29,5 +30,16 @@ public class ListaService {
 
     public void deletar(Integer id){
         listaRepository.deleteById(id);
+    }
+
+    public Lista update(Integer id, Lista lista) {
+        Lista alterado = findById(id);
+        if(alterado != null){
+            alterado.setNome(lista.getNome());
+            alterado.setData(lista.getData());
+            alterado.setDia(lista.getDia());
+            return listaRepository.save(alterado);
+        }
+        return null;
     }
 }
