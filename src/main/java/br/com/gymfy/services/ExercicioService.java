@@ -20,11 +20,21 @@ public class ExercicioService {
 
 
 
+
+    public List<Exercicio> findByTipo(String tipo) {
+        return exercicioRepository.findByTipo(tipo);
+    }
+
+
+
+
+
     public List<Exercicio> findAll(){
         List<Exercicio> exercicios = exercicioRepository.findAll();
         return exercicios;
-
     }
+
+    
 
 
 

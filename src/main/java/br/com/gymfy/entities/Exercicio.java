@@ -47,6 +47,8 @@ public class Exercicio implements Serializable {
     public Exercicio() {
     }
 
+
+
     public Integer getId() {
         return id;
     }
