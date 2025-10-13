@@ -24,6 +24,17 @@ public class ExercicioResource {
 
     }
 
+    @GetMapping(value = "/tipo/{tipo}")
+    public ResponseEntity<List<Exercicio>> findByTipo(@PathVariable String tipo) {
+        List<Exercicio> exercicios = exercicioService.findByTipo(tipo);
+        return ResponseEntity.ok().body(exercicios);
+    }
+
+
+
+
+
+
 
 
     // Listar todos
@@ -41,6 +52,7 @@ public class ExercicioResource {
                 .path("/{id}").buildAndExpand(exercicio.getId()).toUri();
         return ResponseEntity.created(uri).body(exercicio);
     }
+
 
     //deletar
     @DeleteMapping(value = "/{id}")
