@@ -1,6 +1,7 @@
 package br.com.gymfy.services;
 
 
+import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,9 @@ public class UsuarioService {
         return usuario.orElse(null);
     }
 
-
+    public List<Usuario> findByTipo(String tipo) {
+        return usuarioRepository.findByTipo(tipo);
+    }
 
     public List<Usuario> findAll(){
         List<Usuario> usuarios = usuarioRepository.findAll();
