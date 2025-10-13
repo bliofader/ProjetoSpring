@@ -1,5 +1,6 @@
 package br.com.gymfy.services;
 
+import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Lista;
 import br.com.gymfy.repositories.ListaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class ListaService {
     public List<Lista> findAll(){
         List<Lista> listas = listaRepository.findAll();
         return listas;
+    }
+
+    public List<Lista> findByDia(String dia) {
+        return listaRepository.findByDia(dia);
     }
 
     public Lista cadastrarLista(Lista lista){
