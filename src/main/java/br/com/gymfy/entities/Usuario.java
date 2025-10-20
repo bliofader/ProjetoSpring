@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity(name = "Usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

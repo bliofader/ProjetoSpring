@@ -35,6 +35,10 @@ public class UsuarioService {
 
     }
 
+    public List<Usuario> findByTipo(String tipo) {
+        return usuarioRepository.findByTipo(tipo);
+    }
+
     public Usuario findByCpf(String cpf){
         Optional<Usuario> usuarios = usuarioRepository.findByCpf(cpf);
         return usuarios.orElse(null);

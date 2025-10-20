@@ -25,10 +25,6 @@ public class ExercicioService {
         return exercicioRepository.findByTipo(tipo);
     }
 
-
-
-
-
     public List<Exercicio> findAll(){
         List<Exercicio> exercicios = exercicioRepository.findAll();
         return exercicios;

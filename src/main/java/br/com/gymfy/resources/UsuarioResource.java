@@ -1,6 +1,5 @@
 package br.com.gymfy.resources;
 
-import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.services.UsuarioService;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
