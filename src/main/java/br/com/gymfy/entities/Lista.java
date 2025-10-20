@@ -3,7 +3,10 @@ package br.com.gymfy.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 
 @Entity(name = "Listas")
 public class Lista implements Serializable {
@@ -21,6 +24,15 @@ public class Lista implements Serializable {
 
     @Column(name = "Dia")
     String dia;
+
+    @ManyToMany
+    @JoinTable(
+            name = "lista_exercicios",
+            joinColumns = @JoinColumn(name = "lista_id"),
+            inverseJoinColumns = @JoinColumn(name = "exercicio_id")
+    )
+    private List<Exercicio> exercicios = new ArrayList<>();
+
 
     public Lista(int id, String nome, Date data, String dia) {
         this.id = id;
@@ -70,6 +82,16 @@ public class Lista implements Serializable {
         this.dia = dia;
     }
 
+    public List<Exercicio> getExercicios() {
+        return exercicios;
+    }
+
+    public void setExercicios(List<Exercicio> exercicios) {
+        this.exercicios = exercicios;
+    }
+
+
+
     @Override
     public String toString() {
         return "Lista{" +
@@ -77,6 +99,7 @@ public class Lista implements Serializable {
                 ", nome='" + nome + '\'' +
                 ", data=" + data +
                 ", dia='" + dia + '\'' +
+                ", exercicios" + exercicios + '\'' +
                 '}';
     }
 }
