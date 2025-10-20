@@ -1,5 +1,6 @@
 package br.com.gymfy.resources;
 
+
 import br.com.gymfy.services.UsuarioService;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class UsuarioResource {
         List<Usuario> usuarios = usuarioService.findByTipo(tipo);
         return ResponseEntity.ok().body(usuarios);
     }
+
+
 
     // Listar todos
     @GetMapping

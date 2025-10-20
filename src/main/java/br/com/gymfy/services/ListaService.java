@@ -1,7 +1,9 @@
 package br.com.gymfy.services;
 
+import br.com.gymfy.DTO.ListaDTO;
 import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Lista;
+import br.com.gymfy.repositories.ExercicioRepository;
 import br.com.gymfy.repositories.ListaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,8 @@ import java.util.Optional;
 public class ListaService {
     @Autowired
     ListaRepository listaRepository;
-
+    @Autowired
+    ExercicioRepository exercicioRepository;
 
     public Lista findById(Integer id){
         Optional<Lista> lista = listaRepository.findById(id);
@@ -25,26 +28,17 @@ public class ListaService {
         return listas;
     }
 
-    public List<Lista> findByDia(String dia) {
-        return listaRepository.findByDia(dia);
-    }
+    public Lista cadastrarLista(ListaDTO dto){
+        Lista lista = new Lista(dto.getNome(), dto.getData(), dto.getDia());
 
-    public Lista cadastrarLista(Lista lista){
+        List<Exercicio> exercicios = exercicioRepository.findAllById(dto.getExercicioIds());
+        lista.setExercicios(exercicios);
+
         return listaRepository.save(lista);
     }
 
+
     public void deletar(Integer id){
         listaRepository.deleteById(id);
-    }
-
-    public Lista update(Integer id, Lista lista) {
-        Lista alterado = findById(id);
-        if(alterado != null){
-            alterado.setNome(lista.getNome());
-            alterado.setData(lista.getData());
-            alterado.setDia(lista.getDia());
-            return listaRepository.save(alterado);
-        }
-        return null;
     }
 }
