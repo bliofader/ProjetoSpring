@@ -1,7 +1,8 @@
 package br.com.gymfy.resources;
 
-import br.com.gymfy.entities.Exercicio;
+//import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Lista;
+import br.com.gymfy.entities.Usuario;
 import br.com.gymfy.services.ListaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,12 @@ public class ListaResource {
         Lista lista = listaService.findById(id);
         return ResponseEntity.ok().body(lista);
 
+    }
+
+    @GetMapping(value = "/dia/{dia}")
+    public ResponseEntity<List<Lista>> findByDia(@PathVariable String dia) {
+        List<Lista> listas = listaService.findByDia(dia);
+        return ResponseEntity.ok().body(listas);
     }
 
 
@@ -47,5 +54,12 @@ public class ListaResource {
     public ResponseEntity<Lista> deletar(@PathVariable Integer id){
         listaService.deletar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //atualizar
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Lista> update(@PathVariable Integer id, @RequestBody Lista lista){
+        Lista alterado = listaService.update(id, lista);
+        return ResponseEntity.ok().body(alterado);
     }
 }

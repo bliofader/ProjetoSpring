@@ -1,13 +1,12 @@
 package br.com.gymfy.repositories;
 
-import br.com.gymfy.entities.Lista;
-import br.com.gymfy.entities.Usuario;
+import br.com.gymfy.entities.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ListaRepository extends JpaRepository<Lista,Integer> {
-    List<Lista> findByDia(String dia);
+public interface ProdutoRepository extends JpaRepository<Produto,Integer> {
+    List<Produto> findByTipo(String tipo);
 }

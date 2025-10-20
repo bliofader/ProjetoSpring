@@ -19,7 +19,9 @@ public class UsuarioService {
         return usuario.orElse(null);
     }
 
-
+    public List<Usuario> findByTipo(String tipo) {
+        return usuarioRepository.findByTipo(tipo);
+    }
 
     public List<Usuario> findAll(){
         List<Usuario> usuarios = usuarioRepository.findAll();
