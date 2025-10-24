@@ -26,7 +26,6 @@ public class DBService {
     @Autowired
     private PersonalRepository personalRepository;
 
-    // NOVO: Injete o PasswordEncoder para criptografar as senhas
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -34,11 +33,9 @@ public class DBService {
     public String instanciarDB() throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
-        // 1. Criptografa as senhas em texto puro ANTES de criar os objetos
         String hash123 = passwordEncoder.encode("teste123");
         String hash12345 = passwordEncoder.encode("teste12345");
 
-        // 2. Cria os usuários usando os HASHES
         Usuario usuario1 = new Usuario("kauã diodato", "Comum", formato.parse("21/10/2004"), "491.064.038-90", "kauadiodato@outlook.com.br", hash123);
         Usuario usuario2 = new Usuario("kauã diodato2", "Admin", formato.parse("21/10/2004"), "491.064.038-90", "kauadiodato@outlook.com", hash123);
         usuarioRepository.saveAll(Arrays.asList(usuario1,usuario2));
