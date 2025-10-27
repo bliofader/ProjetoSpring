@@ -1,0 +1,53 @@
+<!-- Cabeçalho -->
+<header class="header">
+  <div class="logo">
+    <img src="assets\images\logo.png" alt="Gymfy" />
+  </div>
+  <span class="welcome-text">Seja bem-vindo, Administrador!</span>
+</header>
+
+<!-- Menu de navegação -->
+<nav class="navbar">
+  <ul>
+    <li><a routerLink="/home"><i class="fa-solid fa-house"></i> HOME</a></li>
+    <li><a routerLink="/produtos"><i class="fa-solid fa-box"></i> EXERCÍCIOS</a></li>
+    <li><a routerLink="/cadastrar"><i class="fa-solid fa-circle-plus"></i> CADASTRAR</a></li>
+    <li><a routerLink="/usuarios" class="active"><i class="fa-solid fa-users"></i> USUÁRIOS</a></li>
+  </ul>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar" [(ngModel)]="searchTerm" />
+    <button (click)="onSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+</nav>
+
+<!-- Lista de exercícios -->
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Lista de Exercícios</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Ativo</th>
+        <th>Excluir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exercicios of exercicios">
+        <td>{{ exercicios.nome }}</td>
+        <td>{{ exercicios.cargo }}</td>
+        <td>
+          <i class="fa-solid fa-check-circle ativo" *ngIf="exercicios.ativo"></i>
+        </td>
+        <td>
+          <button (click)="excluirExercicio(exercicios)">
+            <i class="fa-solid fa-trash excluir"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+

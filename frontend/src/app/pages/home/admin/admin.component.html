@@ -1,0 +1,79 @@
+<!-- Cabeçalho -->
+<header class="header">
+  <div class="logo">
+    <img src="assets\images\logo.png" alt="Gymfy" />
+  </div>
+  <span class="welcome-text">Seja bem-vindo, Administrador!</span>
+</header>
+
+<!-- Menu de navegação -->
+<nav class="navbar">
+  <ul>
+    <li>
+      <a routerLink="/home" routerLinkActive="active">
+        <i class="fa-solid fa-house"></i> HOME
+      </a>
+    </li>
+    <li>
+      <a routerLink="/exercicios" routerLinkActive="active">
+        <i class="fa-solid fa-dumbbell"></i> EXERCÍCIOS
+      </a>
+    </li>
+    <li>
+      <a routerLink="/cadastrar" routerLinkActive="active">
+        <i class="fa-solid fa-circle-plus"></i> CADASTRAR
+      </a>
+    </li>
+    <li>
+      <a routerLink="/usuarios" routerLinkActive="active">
+        <i class="fa-solid fa-users"></i> USUÁRIOS
+      </a>
+    </li>
+  </ul>
+
+  <div class="search-box">
+    <input type="text" placeholder="Buscar usuário" [(ngModel)]="searchTerm" />
+    <button (click)="onSearch()">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </div>
+</nav>
+
+
+<!-- Lista de usuários -->
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Lista de usuários</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>DataDeNascimento</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Senha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.ID }}</td>
+        <td>{{ usuario.Nome }}</td>
+        <td>{{ usuario.Tipo }}</td>
+        <td>{{ usuario.DataDeNascimento }}</td>
+        <td>{{ usuario.CPF }}</td>
+        <td>{{ usuario.Email }}</td>
+        <td>{{ usuario.Senha }}</td>
+        <td>
+          <i class="fa-solid fa-check-circle ativo" *ngIf="usuario.ativo"></i>
+        </td>
+        <td>
+          <button (click)="excluirUsuario(usuario)">
+            <i class="fa-solid fa-trash excluir"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

@@ -1,0 +1,124 @@
+.navbar {
+  position: absolute;
+  width: 97%;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0 128px; */
+  ;
+
+}
+
+.navbar-logo {
+  text-decoration: none;
+
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+  margin-right: 125px;
+}
+
+.navbar-item a:hover {
+  color: var(--primary-color);
+
+}
+
+.navbar-item a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+img {
+  width: 150px;
+}
+
+/* login */
+
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo img {
+  width: 150px;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+  margin-right: 125px;
+}
+
+.navbar-item a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar-item a:hover {
+  color: var(--primary-color);
+}
+
+/* LOGIN FIXO */
+.login-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Poppins', sans-serif;
+  /* position: relative; */
+}
+
+.login-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.login-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.login-options {
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+  /* align-items: center;
+  justify-content: center; */
+  /* border: 1px solid red; */
+}
+
+.login-options hr {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 2px auto;
+  width: 80%;
+}
+
+.login-options a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  padding: 10px 10px;
+  transition: 0.3s;
+}
