@@ -32,17 +32,21 @@ public class Usuario implements Serializable {
     @Column(name = "Senha")
     String senha;
 
+    @Column(name = "ImagePath")
+    String imagePath;
 
-    public Usuario(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha) {
+
+    public Usuario(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha,String imagePath) {
         this.nome = nome;
         this.tipo = tipo;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.imagePath = imagePath;
     }
 
-    public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha) {
+    public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String imagePath) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -50,6 +54,7 @@ public class Usuario implements Serializable {
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.imagePath = imagePath;
     }
 
     public Usuario() {
@@ -111,6 +116,14 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -121,6 +134,7 @@ public class Usuario implements Serializable {
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", imagemPath='" + imagePath + '\'' +
                 '}';
     }
 
