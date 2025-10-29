@@ -1,10 +1,16 @@
 package br.com.gymfy.services;
 
+import br.com.gymfy.DTO.PersonalCadastroDTO;
 import br.com.gymfy.entities.Personal;
 import br.com.gymfy.repositories.PersonalRepository;
+import br.com.gymfy.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +19,12 @@ public class PersonalService {
 
     @Autowired
     private PersonalRepository personalRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     public Personal findById(Integer id) {
         Optional<Personal> personal = personalRepository.findById(id);
@@ -25,9 +37,6 @@ public class PersonalService {
     }
 
 
-    public Personal cadastrarPersonal(Personal personal) {
-        return personalRepository.save(personal);
-    }
 
     public void deletar(Integer id) {
         personalRepository.deleteById(id);
@@ -46,5 +55,41 @@ public class PersonalService {
             return personalRepository.save(atual);
         }
         return null;
+    }
+
+    public Personal cadastrarPersonal(PersonalCadastroDTO cadastroDTO) {
+
+        if (usuarioRepository.findByEmail(cadastroDTO.getEmail()).isPresent()) {
+            throw new RuntimeException("E-mail já cadastrado.");
+        }
+
+        Personal novoPersonal = new Personal();
+
+        novoPersonal.setNome(cadastroDTO.getNome());
+        novoPersonal.setSobrenome(cadastroDTO.getSobrenome());
+        novoPersonal.setCep(cadastroDTO.getCep());
+        novoPersonal.setEmail(cadastroDTO.getEmail());
+        novoPersonal.setCpf(cadastroDTO.getCpf());
+
+
+
+        try {
+            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+            Date dataConvertida = formatador.parse(cadastroDTO.getDataNascimento());
+            novoPersonal.setDataNascimento(dataConvertida);
+        } catch (ParseException e) {
+            throw new RuntimeException("Formato de Data de Nascimento inválido. Use YYYY-MM-DD.", e);
+        }
+
+        String senhaCriptografada = passwordEncoder.encode(cadastroDTO.getSenha());
+        novoPersonal.setSenha(senhaCriptografada);
+
+        novoPersonal.setEspecialidade(cadastroDTO.getEspecialidade());
+        novoPersonal.setDescricão(cadastroDTO.getDescricao());
+        novoPersonal.setRedeSocial(cadastroDTO.getRedeSocial());
+
+        novoPersonal.setTipo("PERSONAL");
+
+        return personalRepository.save(novoPersonal);
     }
 }

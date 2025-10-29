@@ -39,6 +39,7 @@ public class TokenService {
     }
 
     public String validarToken(String token){
+        System.out.println("--- CHAVE SECRETA INJETADA: " + secret + " ---");
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)

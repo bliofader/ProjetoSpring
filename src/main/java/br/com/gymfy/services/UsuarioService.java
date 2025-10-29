@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.gymfy.repositories.UsuarioRepository;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import br.com.gymfy.DTO.UsuarioCadastroDTO;
 
 @Service
 public class UsuarioService {
@@ -51,13 +56,41 @@ public class UsuarioService {
         return usuario.orElse(null);
     }
 
-    public Usuario cadastrarUsuario(Usuario usuario){
+    public Usuario cadastrarUsuario(UsuarioCadastroDTO cadastroDTO) {
 
-        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaCriptografada);
+        if (usuarioRepository.findByEmail(cadastroDTO.getEmail()).isPresent()) {
+            throw new RuntimeException("E-mail já cadastrado.");
+        }
 
-        return usuarioRepository.save(usuario);
+        Usuario novoUsuario = new Usuario();
+
+        novoUsuario.setNome(cadastroDTO.getNome());
+        novoUsuario.setSobrenome(cadastroDTO.getSobrenome());
+        novoUsuario.setCep(cadastroDTO.getCep());
+        novoUsuario.setEmail(cadastroDTO.getEmail());
+        novoUsuario.setCpf(cadastroDTO.getCpf());
+
+        try {
+
+            SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+            Date dataConvertida = formatador.parse(cadastroDTO.getDataNascimento());
+            novoUsuario.setDataNascimento(dataConvertida);
+
+        } catch (ParseException e) {
+            throw new RuntimeException("Formato de Data de Nascimento inválido. Use YYYY-MM-DD.", e);
+        }
+        // -----
+
+        String senhaCriptografada = passwordEncoder.encode(cadastroDTO.getSenha());
+        novoUsuario.setSenha(senhaCriptografada);
+
+        novoUsuario.setTipo("COMUM");
+
+        return usuarioRepository.save(novoUsuario);
     }
+
+    // O método antigo cadastrarUsuario(Usuario usuario) foi substituído por este,
+    // garantindo que NUNCA salvamos senha sem criptografar.
 
     public void deletar(Integer id) {
         usuarioRepository.deleteById(id);
@@ -66,6 +99,8 @@ public class UsuarioService {
     public Usuario update (Integer id, Usuario usuario){
         Usuario alterado = findById(id);
         if(alterado!=null){
+            // Atenção: A senha deve ser criptografada se for alterada.
+            // Para manter o foco no cadastro, vamos ignorar a senha no update por enquanto.
             alterado.setNome(usuario.getNome());
             alterado.setEmail(usuario.getEmail());
             alterado.setCpf(usuario.getCpf());

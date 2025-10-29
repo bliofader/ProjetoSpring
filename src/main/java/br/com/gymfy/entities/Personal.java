@@ -15,15 +15,15 @@ public class Personal extends Usuario {
 
     public Personal(){
     }
-    public Personal(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String especialidade, String descricão, String redeSocial) {
-        super(nome, tipo, dataNascimento, cpf, email, senha);
+    public Personal(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String especialidade, String descricão, String redeSocial, String sobrenome, String cep) {
+        super(nome, tipo, dataNascimento, cpf, email, senha, sobrenome, cep);
         this.especialidade = especialidade;
         this.descricão = descricão;
         this.redeSocial = redeSocial;
     }
 
-    public Personal(int id,String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String especialidade, String descricão, String redeSocial) {
-        super(id,nome, tipo, dataNascimento, cpf, email, senha);
+    public Personal(int id,String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String especialidade, String descricão, String redeSocial, String sobrenome, String cep) {
+        super(id,nome, tipo, dataNascimento, cpf, email, senha, sobrenome, cep);
         this.especialidade = especialidade;
         this.descricão = descricão;
         this.redeSocial = redeSocial;

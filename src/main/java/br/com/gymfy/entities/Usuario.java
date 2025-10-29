@@ -32,23 +32,32 @@ public class Usuario implements Serializable, UserDetails {
     @Column(name = "CPF")
     String cpf;
 
-    @Column(name = "Email")
+    @Column(name = "Email", unique = true)
     String email;
 
     @Column(name = "Senha")
     String senha;
 
+    @Column(name = "Sobrenome")
+    String sobrenome;
 
-    public Usuario(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha) {
+    @Column(name = "CEP")
+    String cep;
+
+
+    public Usuario(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String sobrenome, String cep) {
         this.nome = nome;
         this.tipo = tipo;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.sobrenome = sobrenome;
+        this.cep = cep;
     }
 
-    public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha) {
+
+    public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String sobrenome, String cep) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -56,6 +65,8 @@ public class Usuario implements Serializable, UserDetails {
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.sobrenome = sobrenome;
+        this.cep = cep;
     }
 
     public Usuario() {
@@ -117,6 +128,11 @@ public class Usuario implements Serializable, UserDetails {
         this.senha = senha;
     }
 
+    public String getSobrenome() { return sobrenome; }
+    public void setSobrenome(String sobrenome) { this.sobrenome = sobrenome; }
+    public String getCep() { return cep; }
+    public void setCep(String cep) { this.cep = cep; }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + tipo.toUpperCase()));
@@ -164,6 +180,8 @@ public class Usuario implements Serializable, UserDetails {
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", cep='" + cep + '\'' +
                 '}';
     }
 

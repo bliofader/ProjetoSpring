@@ -36,8 +36,8 @@ public class DBService {
         String hash123 = passwordEncoder.encode("teste123");
         String hash12345 = passwordEncoder.encode("teste12345");
 
-        Usuario usuario1 = new Usuario("kauã diodato", "Comum", formato.parse("21/10/2004"), "491.064.038-90", "kauadiodato@outlook.com.br", hash123);
-        Usuario usuario2 = new Usuario("kauã diodato2", "Admin", formato.parse("21/10/2004"), "491.064.038-90", "kauadiodato@outlook.com", hash123);
+        Usuario usuario1 = new Usuario("kauã diodato", "Comum", formato.parse("21/10/2004"), "491.064.038-90", "kauadiodato@outlook.com.br", hash123, "oi", "121212");
+        Usuario usuario2 = new Usuario("kauã diodato2", "Admin", formato.parse("21/10/2004"), "491.064.038-90", "kauadiodato@outlook.com", hash123, "reis", "asdf");
         usuarioRepository.saveAll(Arrays.asList(usuario1,usuario2));
 
         Exercicio exercicio = new Exercicio("Costas1","costas","Costas","avançado","asjdiasndnas");
@@ -45,7 +45,7 @@ public class DBService {
         Exercicio exercicio3 = new Exercicio("Costas2","costas","Costas","avançado","asjdiasndnas");
         exercicioRepository.saveAll(Arrays.asList(exercicio,exercicio2,exercicio3));
 
-        Personal personal = new Personal("Kauã","Personal",formato.parse("24/10/2003"),"49103302190","personalkauadiodato@outlook.com", hash12345, "Musculação","saidjsajid","hsahdsjadojsaoj");
+        Personal personal = new Personal("Kauã","Personal",formato.parse("24/10/2003"),"49103302190","personalkauadiodato@outlook.com", hash12345, "Musculação","saidjsajid","hsahdsjadojsaoj", "a","asaa");
         personalRepository.saveAll(Arrays.asList(personal));
 
         return "Banco de dados instanciado com sucesso!";

@@ -1,8 +1,10 @@
 package br.com.gymfy.resources;
 
 
+import br.com.gymfy.DTO.UsuarioCadastroDTO;
 import br.com.gymfy.services.UsuarioService;
 import br.com.gymfy.entities.Usuario;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +42,19 @@ public class UsuarioResource {
     }
 
 
-    @PostMapping
+    @PostMapping("/cadastro")
     public ResponseEntity<Usuario> CadastrarUsuario(
-            @RequestBody Usuario usuario){
-        usuario = usuarioService.cadastrarUsuario(usuario);
+            @RequestBody @Valid UsuarioCadastroDTO cadastroDTO){
+
+        Usuario usuarioCadastrado = usuarioService.cadastrarUsuario(cadastroDTO);
+
+
+        usuarioCadastrado.setSenha(null);
+
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(usuario.getId()).toUri();
-        return ResponseEntity.created(uri).body(usuario);
+                .path("/{id}").buildAndExpand(usuarioCadastrado.getId()).toUri();
+        return ResponseEntity.created(uri).body(usuarioCadastrado);
     }
 
     //deletar
