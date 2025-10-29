@@ -52,16 +52,17 @@ public class UsuarioService {
 
     public Usuario update (Integer id, Usuario usuario){
         Usuario alterado = findById(id);
-        if(alterado!=null){
+        if(alterado != null){
             alterado.setNome(usuario.getNome());
             alterado.setEmail(usuario.getEmail());
             alterado.setCpf(usuario.getCpf());
             alterado.setDataNascimento(usuario.getDataNascimento());
-
+            alterado.setImagePath(usuario.getImagePath());
             return usuarioRepository.save(alterado);
         }
         return null;
     }
+
 }
 
 
