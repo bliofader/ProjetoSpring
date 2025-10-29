@@ -1,6 +1,7 @@
 package br.com.gymfy.services;
 
 
+import br.com.gymfy.DTO.UsuarioUpdateDTO;
 import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +25,18 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
 
     public Usuario findById(Integer id) {
-        Optional<Usuario> usuario= usuarioRepository.findById(id);
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
         return usuario.orElse(null);
     }
 
 
-
-    public List<Usuario> findAll(){
+    public List<Usuario> findAll() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios;
 
     }
 
-    public Usuario findByNome(String nome){
+    public Usuario findByNome(String nome) {
         Optional<Usuario> usuarios = usuarioRepository.findByNome(nome);
         return usuarios.orElse(null);
 
@@ -46,12 +46,12 @@ public class UsuarioService {
         return usuarioRepository.findByTipo(tipo);
     }
 
-    public Usuario findByCpf(String cpf){
+    public Usuario findByCpf(String cpf) {
         Optional<Usuario> usuarios = usuarioRepository.findByCpf(cpf);
         return usuarios.orElse(null);
     }
 
-    public Usuario findByEmail(String email){
+    public Usuario findByEmail(String email) {
         Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
         return usuario.orElse(null);
     }
@@ -89,22 +89,31 @@ public class UsuarioService {
         return usuarioRepository.save(novoUsuario);
     }
 
-    // O método antigo cadastrarUsuario(Usuario usuario) foi substituído por este,
-    // garantindo que NUNCA salvamos senha sem criptografar.
 
     public void deletar(Integer id) {
         usuarioRepository.deleteById(id);
     }
 
-    public Usuario update (Integer id, Usuario usuario){
+    public Usuario update(Integer id, UsuarioUpdateDTO updateDTO) {
         Usuario alterado = findById(id);
-        if(alterado!=null){
-            // Atenção: A senha deve ser criptografada se for alterada.
-            // Para manter o foco no cadastro, vamos ignorar a senha no update por enquanto.
-            alterado.setNome(usuario.getNome());
-            alterado.setEmail(usuario.getEmail());
-            alterado.setCpf(usuario.getCpf());
-            alterado.setDataNascimento(usuario.getDataNascimento());
+
+        if (alterado != null) {
+
+            alterado.setNome(updateDTO.getNome());
+            alterado.setSobrenome(updateDTO.getSobrenome());
+            alterado.setCep(updateDTO.getCep());
+            alterado.setCpf(updateDTO.getCpf());
+
+            if (updateDTO.getDataNascimento() != null && !updateDTO.getDataNascimento().isBlank()) {
+                try {
+                    SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd");
+                    Date dataConvertida = formatador.parse(updateDTO.getDataNascimento());
+                    alterado.setDataNascimento(dataConvertida);
+                } catch (ParseException e) {
+                    throw new RuntimeException("Formato de Data de Nascimento inválido. Use YYYY-MM-DD.", e);
+                }
+            }
+
 
             return usuarioRepository.save(alterado);
         }

@@ -2,11 +2,16 @@ package br.com.gymfy.resources;
 
 
 import br.com.gymfy.DTO.UsuarioCadastroDTO;
+import br.com.gymfy.DTO.UsuarioResponseDTO;
+import br.com.gymfy.DTO.UsuarioUpdateDTO;
 import br.com.gymfy.services.UsuarioService;
 import br.com.gymfy.entities.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,11 +39,15 @@ public class UsuarioResource {
 
 
 
-    // Listar todos
     @GetMapping
-    public List<Usuario> findAll() {
+    public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
+
         List<Usuario> usuarios = usuarioService.findAll();
-        return usuarios;
+
+        List<UsuarioResponseDTO> dtos = usuarios.stream()
+                .map(u -> new UsuarioResponseDTO(u.getNome(), u.getTipo()))
+                .toList();
+        return ResponseEntity.ok(dtos);
     }
 
 
@@ -65,8 +74,27 @@ public class UsuarioResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody Usuario usuario){
-        Usuario alterado = usuarioService.update(id,usuario);
-        return ResponseEntity.ok().body(alterado);
+    public ResponseEntity<Usuario> update(@PathVariable Integer id,
+                                          @RequestBody @Valid UsuarioUpdateDTO updateDTO){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String emailLogado = authentication.getName();
+
+        Usuario usuarioLogado = usuarioService.findByEmail(emailLogado);
+
+
+        if (!usuarioLogado.getId().equals(id)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+
+        Usuario alterado = usuarioService.update(id, updateDTO);
+
+        if(alterado != null){
+            alterado.setSenha(null);
+            return ResponseEntity.ok().body(alterado);
+        }
+        return ResponseEntity.notFound().build();
     }
 }
