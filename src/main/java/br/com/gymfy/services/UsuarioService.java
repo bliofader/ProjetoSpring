@@ -120,6 +120,10 @@ public class UsuarioService {
         return null;
     }
 
+    public List<Usuario> listarAlunosPorPersonalId(Integer personalId) {
+        return usuarioRepository.findByPersonalId(personalId);
+    }
+
     public List<Usuario> listarAlunosComPersonal() {
         return usuarioRepository.findByPersonalIsNotNull();
     }

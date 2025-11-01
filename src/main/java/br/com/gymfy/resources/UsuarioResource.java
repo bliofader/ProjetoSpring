@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,23 @@ public class UsuarioResource {
         List<Usuario> usuariosLinkados = usuarioService.listarAlunosComPersonal();
 
         List<UsuarioResponseDTO> dtos = usuariosLinkados.stream()
+                .map(u -> new UsuarioResponseDTO(u.getNome(), u.getTipo()))
+                .toList();
+
+        return ResponseEntity.ok(dtos);
+    }
+
+    @GetMapping("/meus-alunos")
+    @PreAuthorize("hasRole('PERSONAL')")
+    public ResponseEntity<List<UsuarioResponseDTO>> listarMeusAlunos(Authentication authentication) {
+
+        Usuario personalLogado = (Usuario) authentication.getPrincipal();
+
+        Integer personalId = personalLogado.getId();
+
+        List<Usuario> meusAlunos = usuarioService.listarAlunosPorPersonalId(personalId);
+
+        List<UsuarioResponseDTO> dtos = meusAlunos.stream()
                 .map(u -> new UsuarioResponseDTO(u.getNome(), u.getTipo()))
                 .toList();
 

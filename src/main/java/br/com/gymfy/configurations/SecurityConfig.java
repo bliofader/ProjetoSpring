@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/admin/linkagem").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/personais/*/alunos").hasAnyRole("ADMIN", "PERSONAL")
                         .requestMatchers(HttpMethod.GET, "/usuarios/linkados").hasAnyRole("ADMIN", "PERSONAL")
+                        .requestMatchers(HttpMethod.GET, "/usuarios/meus-alunos").hasAnyRole("PERSONAL", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
