@@ -1,11 +1,16 @@
 package br.com.gymfy.resources;
 
 import br.com.gymfy.DTO.PersonalCadastroDTO; // NOVO IMPORT: DTO de entrada
+import br.com.gymfy.DTO.UsuarioResponseDTO;
+import br.com.gymfy.entities.Usuario;
 import br.com.gymfy.services.PersonalService;
 import br.com.gymfy.entities.Personal;
 import jakarta.validation.Valid; // Necessário para validar o DTO
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,6 +39,29 @@ public class PersonalResource {
         List<Personal> personais = personalService.findAll();
         personais.forEach(p -> p.setSenha(null));
         return personais;
+    }
+
+    @GetMapping(value = "/{id}/alunos")
+    public ResponseEntity<List<UsuarioResponseDTO>> listarAlunos(@PathVariable Integer id) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (!isAdmin) {
+
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        List<Usuario> alunos = personalService.listarAlunos(id);
+
+        List<UsuarioResponseDTO> dtos = alunos.stream()
+                .map(u -> new UsuarioResponseDTO(u.getNome(), u.getTipo()))
+                .toList();
+
+        return ResponseEntity.ok(dtos);
     }
 
 

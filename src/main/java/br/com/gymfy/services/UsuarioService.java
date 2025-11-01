@@ -119,4 +119,8 @@ public class UsuarioService {
         }
         return null;
     }
+
+    public List<Usuario> listarAlunosComPersonal() {
+        return usuarioRepository.findByPersonalIsNotNull();
+    }
 }

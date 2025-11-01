@@ -1,6 +1,7 @@
 package br.com.gymfy.entities;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "Personais")
 public class Personal extends Usuario {
@@ -12,6 +13,9 @@ public class Personal extends Usuario {
 
     @Column(name = "Rede_Social")
     String redeSocial;
+
+    @OneToMany(mappedBy = "personal")
+    private List<Usuario> alunos;
 
     public Personal(){
     }
@@ -51,6 +55,14 @@ public class Personal extends Usuario {
 
     public void setRedeSocial(String redeSocial) {
         this.redeSocial = redeSocial;
+    }
+
+    public List<Usuario> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Usuario> alunos) {
+        this.alunos = alunos;
     }
 
     @Override

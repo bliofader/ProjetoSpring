@@ -50,6 +50,19 @@ public class UsuarioResource {
         return ResponseEntity.ok(dtos);
     }
 
+    @GetMapping("/linkados")
+    public ResponseEntity<List<UsuarioResponseDTO>> listarComPersonal() {
+
+        // 1. Busca usuários linkados (apenas aqueles com personal_id preenchido)
+        List<Usuario> usuariosLinkados = usuarioService.listarAlunosComPersonal();
+
+        List<UsuarioResponseDTO> dtos = usuariosLinkados.stream()
+                .map(u -> new UsuarioResponseDTO(u.getNome(), u.getTipo()))
+                .toList();
+
+        return ResponseEntity.ok(dtos);
+    }
+
 
     @PostMapping("/cadastro")
     public ResponseEntity<Usuario> CadastrarUsuario(

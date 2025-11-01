@@ -2,6 +2,7 @@ package br.com.gymfy.services;
 
 import br.com.gymfy.DTO.PersonalCadastroDTO;
 import br.com.gymfy.entities.Personal;
+import br.com.gymfy.entities.Usuario;
 import br.com.gymfy.repositories.PersonalRepository;
 import br.com.gymfy.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,23 @@ import java.util.Optional;
 
 @Service
 public class PersonalService {
+
+
+
+
+    public Personal findByEmail(String email) {
+        Optional<Personal> personal = personalRepository.findByEmail(email);
+
+        return personal.orElse(null);
+    }
+
+    public List<Usuario> listarAlunos(Integer personalId) {
+        Personal personal = personalRepository.findById(personalId)
+                .orElseThrow(() -> new RuntimeException("Personal Trainer não encontrado com ID: " + personalId));
+
+        return personal.getAlunos();
+    }
+
 
     @Autowired
     private PersonalRepository personalRepository;

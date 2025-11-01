@@ -20,6 +20,10 @@ public class Usuario implements Serializable, UserDetails {
     @Column(name = "ID")
     int id;
 
+    @ManyToOne
+    @JoinColumn(name = "PersonalId")
+    private Personal personal;
+
     @Column(name = "Nome")
     String nome;
 
@@ -132,6 +136,14 @@ public class Usuario implements Serializable, UserDetails {
     public void setSobrenome(String sobrenome) { this.sobrenome = sobrenome; }
     public String getCep() { return cep; }
     public void setCep(String cep) { this.cep = cep; }
+
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
