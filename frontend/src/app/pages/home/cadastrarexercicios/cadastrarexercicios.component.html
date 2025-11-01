@@ -1,1 +1,130 @@
-<p>cadastrarexercicios works!</p>
+<!-- Cabeçalho -->
+<header class="header">
+  <div class="logo">
+    <a href="/"><img src="assets/images/logo.png" alt="Gymfy" /></a>
+  </div>
+  <span class="welcome-text">Cadastrar Exercício</span>
+</header>
+
+<!-- Menu de navegação -->
+<nav class="navbar">
+  <ul>
+    <li>
+      <a routerLink="/" routerLinkActive="active">
+        <i class="fa-solid fa-house"></i> HOME
+      </a>
+    </li>
+    <li>
+      <a routerLink="/exercicios" routerLinkActive="active">
+        <i class="fa-solid fa-dumbbell"></i> EXERCÍCIOS
+      </a>
+    </li>
+    <li>
+      <a routerLink="/cadastrarusuario" routerLinkActive="active">
+        <i class="fa-solid fa-circle-plus"></i> CADASTRAR
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin" routerLinkActive="active">
+        <i class="fa-solid fa-users"></i> USUÁRIOS
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Formulário de Cadastro -->
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Cadastro de Exercícios</h2>
+  
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-cadastro">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        id="nome"
+        type="text"
+        maxlength="60"
+        formControlName="nome"
+        placeholder="Digite o nome do exercício(máx. 60 caracteres)"
+        />  
+    </div> 
+
+    <div class="form-group">
+      <label for="tipo">Tipo de Exercício</label>
+      <select id="tipo" formControlName="tipo">
+        <option value="Personal">Costas</option>
+        <option value="Comum">Panturrilha</option>
+        <option value="Comum">Peito</option>
+        <option value="Comum">Ombro</option>
+        <option value="Comum">Quadriceps</option>
+        <option value="Comum">ABS</option>
+        <option value="Comum">Tríceps</option>
+        <option value="Comum">Bíceps</option>
+        <option value="Comum">Pernas</option>
+         
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="Nivel">Nível do Exercício</label>
+      <select id="Nivel" formControlName="Nivel">
+        <option value="basico">Básico</option>
+        <option value="intermediario">Intermediário</option>
+        <option value="avancado">Avançado</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Descrição do exercício</label>
+      <input
+        id="exercício"
+        type="exercício"
+        maxlength="400"
+        formControlName="exercício"
+        placeholder="Digite a Descrição do exercício (máx. 400 caracteres)"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="exercícioURL">Incorpore a URL de vídeo do Exercício</label>
+      <input
+        id="exercícioURL"
+        type="exercícioURL"
+        maxlength="10000"
+        formControlName="exercícioURL"
+        placeholder="Insira aqui a URL do vídeo do exercício (máx. 10000 caracteres)"
+      />
+    </div>
+
+    <div class="form-group">
+  <label for="imagemexercicio">Faça o upload da imagem do exercício (.jpg, .jpeg, .png)</label>
+
+  <input
+    id="imagemexercicio"
+    type="file"
+    accept="image/png, image/jpeg"
+    (change)="onFileSelected($event)"
+  />
+
+  <div class="preview" *ngIf="selectedImage">
+    <p><strong>Pré-visualização:</strong></p>
+    <img [src]="selectedImage" alt="Preview da imagem" />
+  </div>
+</div>
+
+
+    <div class="botoes">
+      <button type="submit" class="btn-submit">
+        <i class="fa-solid fa-floppy-disk"></i> Cadastrar
+      </button>
+      <button type="reset" class="btn-cancelar">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</main>
+
+<!-- Rodapé -->
+<footer class="footer">
+  <p>Gymfy © 2025 - Todos os Direitos Reservados</p>
+</footer>

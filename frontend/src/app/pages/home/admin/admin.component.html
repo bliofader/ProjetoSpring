@@ -1,16 +1,16 @@
 <!-- Cabeçalho -->
 <header class="header">
   <div class="logo">
-    <img src="assets\images\logo.png" alt="Gymfy" />
+    <a href="/"><img src="assets\images\logo.png" alt="" /></a>
   </div>
-  <span class="welcome-text">Seja bem-vindo, Administrador!</span>
+  <span class="welcome-text">Seja bem-vindo, Personal!</span>
 </header>
 
 <!-- Menu de navegação -->
 <nav class="navbar">
   <ul>
     <li>
-      <a routerLink="/home" routerLinkActive="active">
+      <a routerLink="/" routerLinkActive="active">
         <i class="fa-solid fa-house"></i> HOME
       </a>
     </li>
@@ -25,7 +25,7 @@
       </a>
     </li>
     <li>
-      <a routerLink="/usuarios" routerLinkActive="active">
+      <a routerLink="/admin" routerLinkActive="active">
         <i class="fa-solid fa-users"></i> USUÁRIOS
       </a>
     </li>
@@ -42,38 +42,42 @@
 
 <!-- Lista de usuários -->
 <main class="user-list">
-  <h2><span class="highlight-bar"></span> Lista de usuários</h2>
+  <h2><span class="highlight-bar"></span> Lista de Usuários</h2>
 
   <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Tipo</th>
-        <th>DataDeNascimento</th>
-        <th>CPF</th>
-        <th>Email</th>
-        <th>Senha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <td>{{ usuario.ID }}</td>
-        <td>{{ usuario.Nome }}</td>
-        <td>{{ usuario.Tipo }}</td>
-        <td>{{ usuario.DataDeNascimento }}</td>
-        <td>{{ usuario.CPF }}</td>
-        <td>{{ usuario.Email }}</td>
-        <td>{{ usuario.Senha }}</td>
-        <td>
-          <i class="fa-solid fa-check-circle ativo" *ngIf="usuario.ativo"></i>
-        </td>
-        <td>
-          <button (click)="excluirUsuario(usuario)">
-            <i class="fa-solid fa-trash excluir"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Tipo</th>
+      <th>Data de Nascimento</th>
+      <th>CPF</th>
+      <th>Email</th>
+      <th>Senha</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.ID }}</td>
+      <td>{{ usuario.Nome }}</td>
+      <td>{{ usuario.Tipo }}</td>
+      <td>{{ usuario.DataDeNascimento }}</td>
+      <td>{{ usuario.CPF }}</td>
+      <td>{{ usuario.Email }}</td>
+      <td>{{ usuario.Senha }}</td>
+      <td class="acoes">
+        <i class="fa-solid fa-check-circle ativo" *ngIf="usuario.ativo"></i>
+        <i class="fa-solid fa-check-circle inativo" *ngIf="usuario.inativo"></i>
+        <button class="btn-editar" (click)="editarUsuario(usuario)">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="btn-excluir" (click)="excluirUsuario(usuario)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </main>
+

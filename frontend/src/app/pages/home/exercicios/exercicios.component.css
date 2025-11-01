@@ -79,6 +79,11 @@ td {
   font-size: 1.2rem;
 }
 
+.inativo {
+  color: #e90a0a;
+  font-size: 1.2rem;
+}
+
 .excluir {
   color: #222;
   cursor: pointer;

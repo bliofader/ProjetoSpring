@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.logo img {
+  width: 160px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c7da33;
+  padding: 10px 40px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #000;
+  font-size: 1.1rem;
+}
+
+.navbar a.active {
+  border-bottom: 2px solid #000;
+}
+
+.user-list {
+  margin: 30px auto;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.highlight-bar {
+  display: inline-block;
+  width: 5px;
+  height: 25px;
+  background-color: #c7da33;
+}
+
+/* Estilo do formulário central */
+.form-cadastro {
+  margin-top: 20px;
+  background-color: #f8f8f8;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+input,
+select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #c7da33;
+  outline: none;
+}
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.btn-submit,
+.btn-cancelar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-submit {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: #3d8b41;
+  transform: scale(1.05);
+}
+
+.btn-cancelar {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 15px;
+  font-size: 0.9rem;
+}

@@ -1,1 +1,111 @@
-<p>cadastrarusuario works!</p>
+<!-- Cabeçalho -->
+<header class="header">
+  <div class="logo">
+    <a href="/"><img src="assets/images/logo.png" alt="Gymfy" /></a>
+  </div>
+  <span class="welcome-text">Cadastrar Usuário</span>
+</header>
+
+<!-- Menu de navegação -->
+<nav class="navbar">
+  <ul>
+    <li>
+      <a routerLink="/" routerLinkActive="active">
+        <i class="fa-solid fa-house"></i> HOME
+      </a>
+    </li>
+    <li>
+      <a routerLink="/exercicios" routerLinkActive="active">
+        <i class="fa-solid fa-dumbbell"></i> EXERCÍCIOS
+      </a>
+    </li>
+    <li>
+      <a routerLink="/cadastrarusuario" routerLinkActive="active">
+        <i class="fa-solid fa-circle-plus"></i> CADASTRAR
+      </a>
+    </li>
+    <li>
+      <a routerLink="/admin" routerLinkActive="active">
+        <i class="fa-solid fa-users"></i> USUÁRIOS
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Formulário de Cadastro -->
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Cadastro de Usuário</h2>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-cadastro">
+    <div class="form-group">
+      <label for="nome">Nome Completo</label>
+      <input
+        id="nome"
+        type="text"
+        maxlength="60"
+        formControlName="nome"
+        placeholder="Digite o nome completo (máx. 60 caracteres)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="tipo">Tipo de Usuário</label>
+      <select id="tipo" formControlName="tipo">
+        <option value="Personal">Personal</option>
+        <option value="Comum">Comum</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dataNascimento">Data de Nascimento</label>
+      <input id="dataNascimento" type="date" formControlName="dataNascimento" />
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">CPF</label>
+      <input
+        id="cpf"
+        type="text"
+        maxlength="11"
+        formControlName="cpf"
+        placeholder="Apenas números (11 dígitos)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input
+        id="email"
+        type="email"
+        maxlength="50"
+        formControlName="email"
+        placeholder="exemplo@email.com"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input
+        id="senha"
+        type="password"
+        maxlength="40"
+        formControlName="senha"
+        placeholder="Digite uma senha (máx. 40 caracteres)"
+      />
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn-submit">
+        <i class="fa-solid fa-floppy-disk"></i> Cadastrar
+      </button>
+      <button type="reset" class="btn-cancelar">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</main>
+
+<!-- Rodapé -->
+<footer class="footer">
+  <p>Gymfy © 2025 - Todos os Direitos Reservados</p>
+</footer>

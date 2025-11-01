@@ -1,13 +1,16 @@
 import { Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginPersonalComponent } from './pages/login/login-personal/login-personal.component';
 import { LoginUsuarioComponent } from './pages/login/login-usuario/login-usuario.component';
 import { AdminCadastroUsuarioComponent } from './pages/home/admin/admin.component';
 import { AdminCadastroExercicioComponent } from './pages/home/exercicios/exercicios.component';
-import { CadastrarexerciciosComponent } from './pages/home/cadastrarexercicios/cadastrarexercicios.component';
-import { CadastrarusuarioComponent } from './pages/home/cadastrarusuario/cadastrarusuario.component';
+import { CadastrarExercicioComponent} from './pages/home/cadastrarexercicios/cadastrarexercicios.component';
+import { CadastrarUsuarioComponent } from './pages/home/cadastrarusuario/cadastrarusuario.component';
 import { SobreNosComponent } from './pages/nav/sobre-nos/sobre-nos.component';
 import { ContatoComponent } from './pages/nav/contato/contato.component';
+import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
+import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
 
 
 //link das paginas
@@ -19,7 +22,7 @@ export const routes: Routes = [
         title: 'Gymfy - Home', //titulo da pagina
     },
     {
-        //login Usuario
+        //login 
         path: 'login-personal',
         component: LoginPersonalComponent,
         title: 'Gymfy - Login Personal',
@@ -41,11 +44,28 @@ export const routes: Routes = [
         component: ContatoComponent,
         title: 'Gymfy - Contato',
     },
+
+
+    //pag exercicio 
     {
-        path: 'sobre-nos',
-        component: SobreNosComponent,
-        title: 'Gymfy - Sore Nos',
+        path: 'tela-exercicio',
+        component: TelaExercicioComponent,
+        title: 'Gymfy - Exercicios'
     },
+
+    {
+        path:  'detalhes/:nome',
+        component: TelaExercicioDetalhesComponent,
+        title: 'Gymfy - Detalhes dos Exercicios'
+    },
+
+    //pag criar lista de exercicio
+    // {
+    //     path: 'tela-criar-lista',
+    //     component: TelaCriarListaComponent,
+    //     title: 'Gymfy - Criar Lista de Exercicio'
+    // },
+
     // icaro
     {
         path: 'admin',
@@ -59,12 +79,12 @@ export const routes: Routes = [
     },
     {
         path: 'cadastrarexercicios',
-        component: CadastrarexerciciosComponent,
+        component: CadastrarExercicioComponent,
         title: 'Cad - Exercicios',
     },
     {
         path: 'cadastrarusuario',
-        component: CadastrarusuarioComponent,
+        component: CadastrarUsuarioComponent,
         title: 'Cad - Usuario',
     }
 ];

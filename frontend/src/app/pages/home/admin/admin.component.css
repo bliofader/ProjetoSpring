@@ -78,6 +78,10 @@ td {
   color: #4caf50;
   font-size: 1.2rem;
 }
+.inativo {
+  color: #e90a0a;
+  font-size: 1.2rem;
+}
 
 .excluir {
   color: #222;
@@ -89,4 +93,34 @@ td {
   margin-top: 60px;
   padding: 15px;
   font-size: 0.9rem;
+}
+
+.acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-editar i {
+  color: #1976d2; /* Azul do lápis */
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.btn-excluir i {
+  color: #e53935; /* Vermelho do X */
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.15);
 }

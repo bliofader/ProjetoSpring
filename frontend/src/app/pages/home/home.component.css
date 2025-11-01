@@ -260,6 +260,7 @@
     font-weight: 600;
     cursor: pointer;
     margin-top: 12px;
+    text-decoration: none;
 }
 
 .btn-ver:hover {
