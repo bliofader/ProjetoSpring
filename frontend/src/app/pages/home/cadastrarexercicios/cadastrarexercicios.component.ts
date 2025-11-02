@@ -1,78 +1,76 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from "../../../components/footer/footer.component";
-import { RouterLink } from '@angular/router';
-import { HeaderComponent } from "../../../components/header/header.component";
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
+import { FooterComponent } from '../../../components/footer/footer.component';
+import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
 
 @Component({
-  selector: 'app-cadastrarusuario',
+  selector: 'app-cadastrar-exercicio',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet, FooterComponent, RouterLink, HeaderComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, FooterComponent, HeaderTopComponent],
   templateUrl: './cadastrarexercicios.component.html',
   styleUrl: './cadastrarexercicios.component.css',
 })
-export class CadastrarExercicioComponent {
-  registrationForm!: FormGroup;
-  selectedImage: string | ArrayBuffer | null = null;
+export class CadastrarExerciciosComponent {
+  exercicioForm!: FormGroup;
+  previewImage: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder) {
-    this.registrationForm = this.fb.group({
+    this.exercicioForm = this.fb.group({
+      id: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
-      dataNascimento: ['', Validators.required],
-      cpf: ['', [Validators.required, Validators.maxLength(11)]],
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
-      foto: [null], // novo campo para imagem
+      nivel: ['', Validators.required],
+      descricao: ['', [Validators.required, Validators.maxLength(500)]],
+      videoUrl: ['', [Validators.pattern('^(https?:\\/\\/)?(www\\.)?(youtube\\.com|youtu\\.be)\\/.*$')]],
+      imagePath: [null, Validators.required]
     });
   }
 
-  // Captura o arquivo e gera preview
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    // Verifica se é uma imagem
-    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
-      alert('Por favor, selecione um arquivo de imagem (JPEG ou PNG).');
-      this.registrationForm.patchValue({ foto: null });
-      this.selectedImage = null;
-      return;
-    }
-
-    // Atualiza o campo "foto" do form
-    this.registrationForm.patchValue({ foto: file });
-
-    // Gera o preview
-    const reader = new FileReader();
-    reader.onload = () => (this.selectedImage = reader.result);
-    reader.readAsDataURL(file);
+  // Getter para facilitar acesso aos campos no HTML
+  get f() {
+    return this.exercicioForm.controls;
   }
 
-  onSubmit(): void {
-    if (this.registrationForm.invalid) {
-      alert('⚠️ Existem campos inválidos ou não preenchidos. Verifique o formulário.');
+  //  Método para capturar o arquivo selecionado
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      this.selectedFile = null;
+      this.previewImage = null;
       return;
     }
 
-    const confirmacao = confirm('Deseja realmente cadastrar este usuário?');
-    if (confirmacao) {
-      const formData = new FormData();
+    this.selectedFile = input.files[0];
+    this.exercicioForm.patchValue({ imagePath: this.selectedFile });
 
-      // Adiciona todos os campos do formulário
-      Object.entries(this.registrationForm.value).forEach(([key, value]) => {
-        if (value instanceof Blob || typeof value === 'string') {
-          formData.append(key, value);
-        }
-      });
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewImage = reader.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
+  }
 
-      console.log('✅ Dados enviados:', this.registrationForm.value);
-      alert('Usuário cadastrado com sucesso!');
-      this.registrationForm.reset();
-      this.selectedImage = null;
+  //  Envio do formulário
+  onSubmit(): void {
+    if (this.exercicioForm.invalid) {
+      this.exercicioForm.markAllAsTouched();
+      return;
+    }
+
+    console.log('Dados do exercício:', this.exercicioForm.value);
+
+    if (this.selectedFile) {
+      console.log('Arquivo selecionado:', this.selectedFile.name);
     }
   }
 }

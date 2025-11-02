@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from "../../../components/footer/footer.component";
+import { RouterLink } from '@angular/router';
+import { HomeComponent } from '../home.component';
+import { NavbarComponent } from "../../../components/navbar/navbar.component";
+import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [ HomeComponent, CommonModule, FormsModule, RouterOutlet, FooterComponent, RouterLink, NavbarComponent, HeaderTopComponent ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -21,10 +27,15 @@ export class AdminCadastroUsuarioComponent {
     console.log('Buscando por:', this.searchTerm);
   }
   editarUsuario(usuario: any) {
-    console.log('Editando usuário:', usuario);
-    // Aqui você pode abrir um modal, ou redirecionar para outra rota de edição
-  }
-  excluirUsuario(usuario: any) {
+  console.log('Editando usuário:', usuario);
+  // Aqui você pode abrir um modal, ou redirecionar para outra rota de edição
+}
+
+excluirUsuario(usuario: any) {
+  const confirmacao = confirm(`Deseja excluir o usuário ${usuario.Nome}?`);
+  if (confirmacao) {
     this.usuarios = this.usuarios.filter((u) => u !== usuario);
   }
 }
+}
+

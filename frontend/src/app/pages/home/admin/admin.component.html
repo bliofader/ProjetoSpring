@@ -1,45 +1,7 @@
 <!-- Cabeçalho -->
-<header class="header">
-  <div class="logo">
-    <a href="/"><img src="assets\images\logo.png" alt="" /></a>
-  </div>
-  <span class="welcome-text">Seja bem-vindo, Personal!</span>
-</header>
-
+<app-header-top></app-header-top>
 <!-- Menu de navegação -->
-<nav class="navbar">
-  <ul>
-    <li>
-      <a routerLink="/" routerLinkActive="active">
-        <i class="fa-solid fa-house"></i> HOME
-      </a>
-    </li>
-    <li>
-      <a routerLink="/exercicios" routerLinkActive="active">
-        <i class="fa-solid fa-dumbbell"></i> EXERCÍCIOS
-      </a>
-    </li>
-    <li>
-      <a routerLink="/cadastrar" routerLinkActive="active">
-        <i class="fa-solid fa-circle-plus"></i> CADASTRAR
-      </a>
-    </li>
-    <li>
-      <a routerLink="/admin" routerLinkActive="active">
-        <i class="fa-solid fa-users"></i> USUÁRIOS
-      </a>
-    </li>
-  </ul>
-
-  <div class="search-box">
-    <input type="text" placeholder="Buscar usuário" [(ngModel)]="searchTerm" />
-    <button (click)="onSearch()">
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-  </div>
-</nav>
-
-
+<app-navbar></app-navbar>
 <!-- Lista de usuários -->
 <main class="user-list">
   <h2><span class="highlight-bar"></span> Lista de Usuários</h2>
@@ -70,14 +32,15 @@
         <i class="fa-solid fa-check-circle ativo" *ngIf="usuario.ativo"></i>
         <i class="fa-solid fa-check-circle inativo" *ngIf="usuario.inativo"></i>
         <button class="btn-editar" (click)="editarUsuario(usuario)">
-          <i class="fa-solid fa-pen-to-square"></i>
+          <img src="assets/images/edit.png" alt="editar" />
         </button>
         <button class="btn-excluir" (click)="excluirUsuario(usuario)">
-          <i class="fa-solid fa-xmark"></i>
+          <img src="assets/images/excluir.png" alt="excluir" />
         </button>
       </td>
     </tr>
   </tbody>
 </table>
 </main>
-
+<!-- Rodapé -->
+<app-footer></app-footer>

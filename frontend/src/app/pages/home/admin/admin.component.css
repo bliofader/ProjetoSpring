@@ -42,12 +42,6 @@ body {
   border-bottom: 2px solid #000;
 }
 
-.search-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .user-list {
   margin: 30px auto;
   max-width: 900px;
@@ -102,16 +96,20 @@ td {
   gap: 10px;
 }
 
-.btn-editar i {
+.btn-editar img {
   color: #1976d2; /* Azul do lápis */
   font-size: 1.2rem;
   cursor: pointer;
+  width: 22px;
+  height: 22px;
 }
 
-.btn-excluir i {
+.btn-excluir img {
   color: #e53935; /* Vermelho do X */
   font-size: 1.4rem;
   cursor: pointer;
+  width: 22px;
+  height: 22px;
 }
 
 button {
@@ -124,3 +122,4 @@ button {
 button:hover {
   transform: scale(1.15);
 }
+

@@ -11,17 +11,17 @@ import { Router } from '@angular/router';
   styleUrl: './login-usuario.component.css'
 })
 export class LoginUsuarioComponent {
-email = '';
+  email = '';
   senha = '';
 
   // simulação de "usuários cadastrados"
   usuarios = [
-    { email: 'icaro.123@gmail.com', senha: 'icaro123' },
-    { email: 'maria.123@gmail.com', senha: 'maria123' },
-    { email: 'ellen.123@gmail.com', senha: 'ellen123' }
+    { nome: "icaro", email: 'icaro.123@gmail.com', senha: 'icaro123' },
+    { nome: "luiza", email: 'maria.123@gmail.com', senha: 'maria123' },
+    { nome: "ellen", email: 'ellen.123@gmail.com', senha: 'ellen123' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   onSubmit() {
     const usuarioValido = this.usuarios.find(
@@ -30,8 +30,8 @@ email = '';
 
     if (usuarioValido) {
       alert('Login realizado com sucesso!');
-      // Redireciona para a tela de admin
-      this.router.navigate(['/usuario']); 
+      localStorage.setItem('usuarioNome', usuarioValido.nome);
+      this.router.navigate(['/tela-personal']); //mudar caminho
     } else {
       alert('E-mail ou senha incorretos.');
     }

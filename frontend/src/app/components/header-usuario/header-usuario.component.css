@@ -1,0 +1,111 @@
+.section {
+  position: relative; /* Importante para permitir o absolute da navbar */
+}
+
+
+.navbar {
+  position: absolute;
+  width: 97%;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0 128px; */
+  ;
+
+}
+
+.navbar-logo {
+  text-decoration: none;
+
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+  margin-right: 125px;
+}
+
+.navbar-item a:hover {
+  color: var(--primary-color);
+
+}
+
+.navbar-item a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+img {
+  width: 150px;
+}
+
+/* login */
+
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo img {
+  width: 150px;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+  margin-right: 125px;
+}
+
+.navbar-item a {
+  text-decoration: none;
+  color: var(--text-color2);
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar-item a:hover {
+  color: var(--primary-color);
+}
+
+/* btn sair */
+.sair-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Poppins', sans-serif;
+  /* position: relative; */
+}
+
+.sair-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.sair-icon img {
+  width: 25px;
+  height: 25px;
+}
+
+.sair-icon button{
+  background: none;
+  border: none;  
+  cursor: pointer;
+}

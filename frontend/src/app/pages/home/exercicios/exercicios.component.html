@@ -1,44 +1,7 @@
 <!-- Cabeçalho -->
-<header class="header">
-  <div class="logo">
-    <img src="assets\images\logo.png" alt="Gymfy" />
-  </div>
-  <span class="welcome-text">Seja bem-vindo, Personal!</span>
-</header>
-
+<app-header-top></app-header-top>
 <!-- Menu de navegação -->
-<nav class="navbar">
-  <ul>
-    <li>
-      <a routerLink="/" routerLinkActive="active">
-        <i class="fa-solid fa-house"></i> HOME
-      </a>
-    </li>
-    <li>
-      <a routerLink="/exercicios" routerLinkActive="active">
-        <i class="fa-solid fa-dumbbell"></i> EXERCÍCIOS
-      </a>
-    </li>
-    <li>
-      <a routerLink="/cadastrar" routerLinkActive="active">
-        <i class="fa-solid fa-circle-plus"></i> CADASTRAR
-      </a>
-    </li>
-    <li>
-      <a routerLink="/admin" routerLinkActive="active">
-        <i class="fa-solid fa-users"></i> USUÁRIOS
-      </a>
-    </li>
-  </ul>
-
-  <div class="search-box">
-    <input type="text" placeholder="Buscar usuário" [(ngModel)]="searchTerm" />
-    <button (click)="onSearch()">
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-  </div>
-</nav>
-
+<app-navbar></app-navbar>
 <!-- Lista de exercícios -->
 <main class="user-list">
   <h2><span class="highlight-bar"></span> Lista de Exercícios</h2>
@@ -51,6 +14,7 @@
         <th>Tipo</th>
         <th>Nivel</th>
         <th>Descrição</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -60,20 +24,20 @@
         <td>{{ exercicios.Tipo }}</td>
         <td>{{ exercicios.Nivel }}</td>
         <td>{{ exercicios.Descricao }}</td>
-        <td>
-          <i class="fa-solid fa-check-circle ativo" *ngIf="exercicios.ativo"></i>
-          <i class="fa-solid fa-check-circle inativo" *ngIf="exercicios.inativo"></i>
-        </td>
-        <td>
-          <button class="btn-editar" (click)="editarExercicio(exercicios)">
-          <i class="fa-solid fa-pen-to-square"></i>
+        <td class="acoes">
+        <i class="fa-solid fa-check-circle ativo" *ngIf="exercicios.ativo"></i>
+        <i class="fa-solid fa-check-circle inativo" *ngIf="exercicios.inativo"></i>
+        <button class="btn-editar" (click)="editarExercicio(exercicios)">
+          <img src="assets/images/edit.png" alt="editar" />
         </button>
-          <button (click)="excluirExercicio(exercicios)">
-            <i class="fa-solid fa-trash excluir"></i>
-          </button>
-        </td>
+        <button class="btn-excluir" (click)="excluirExercicio(exercicios)">
+          <img src="assets/images/excluir.png" alt="excluir" />
+        </button>
+      </td>
       </tr>
     </tbody>
   </table>
 </main>
+<!-- Rodapé -->
+<app-footer></app-footer>
 

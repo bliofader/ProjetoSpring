@@ -5,12 +5,13 @@ import { LoginPersonalComponent } from './pages/login/login-personal/login-perso
 import { LoginUsuarioComponent } from './pages/login/login-usuario/login-usuario.component';
 import { AdminCadastroUsuarioComponent } from './pages/home/admin/admin.component';
 import { AdminCadastroExercicioComponent } from './pages/home/exercicios/exercicios.component';
-import { CadastrarExercicioComponent} from './pages/home/cadastrarexercicios/cadastrarexercicios.component';
+import { CadastrarExerciciosComponent} from './pages/home/cadastrarexercicios/cadastrarexercicios.component';
 import { CadastrarUsuarioComponent } from './pages/home/cadastrarusuario/cadastrarusuario.component';
 import { SobreNosComponent } from './pages/nav/sobre-nos/sobre-nos.component';
 import { ContatoComponent } from './pages/nav/contato/contato.component';
 import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
 import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
+import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial/tela-personal-inicial.component';
 
 
 //link das paginas
@@ -59,6 +60,13 @@ export const routes: Routes = [
         title: 'Gymfy - Detalhes dos Exercicios'
     },
 
+    //persongal
+    {
+        path: 'tela-personal',
+        component: TelaPersonalInicialComponent,
+        title: 'Gymfy - Personal'
+    },
+
     //pag criar lista de exercicio
     // {
     //     path: 'tela-criar-lista',
@@ -66,7 +74,7 @@ export const routes: Routes = [
     //     title: 'Gymfy - Criar Lista de Exercicio'
     // },
 
-    // icaro
+    // icaro admin
     {
         path: 'admin',
         component: AdminCadastroUsuarioComponent,
@@ -79,14 +87,21 @@ export const routes: Routes = [
     },
     {
         path: 'cadastrarexercicios',
-        component: CadastrarExercicioComponent,
+        component: CadastrarExerciciosComponent,
         title: 'Cad - Exercicios',
     },
     {
         path: 'cadastrarusuario',
         component: CadastrarUsuarioComponent,
         title: 'Cad - Usuario',
-    }
+    },
+
+    // {
+    //     path: 'cadastrarexercicios',
+    //     component: CadastrarExerciciosComponent,
+    //     title: 'Cad - Exercicios',
+    // }
+
 ];
 
 

@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "../../../components/footer/footer.component";
 import { RouterLink } from '@angular/router';
+import { NavbarComponent } from "../../../components/navbar/navbar.component";
+import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, FooterComponent, RouterLink ],
+  imports: [CommonModule, FormsModule, RouterOutlet, NavbarComponent, FooterComponent, RouterLink, HeaderTopComponent ],
   templateUrl: './exercicios.component.html',
   styleUrl: './exercicios.component.css'
 })
@@ -24,7 +26,7 @@ export class AdminCadastroExercicioComponent {
     console.log('Buscando por:', this.searchTerm);
   }
   editarExercicio(exercicio: any) {
-  console.log('Editando usuário:', exercicio);
+  console.log('Editando exercício:', exercicio);
   // Aqui você pode abrir um modal, ou redirecionar para outra rota de edição
 }
 

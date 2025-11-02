@@ -1,0 +1,80 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 10px 60px; /* Aumenta o espaço lateral */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.header-left .logo {
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+}
+
+/* Aqui o truque: criamos um espaçador flexível */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 80px; /* empurra levemente para o centro */
+}
+
+/* Ícone de perfil */
+.btn-profile {
+  background-color: #2f2f2f;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-profile:hover {
+  background-color: #c7da33;
+  color: #222;
+  transform: scale(1.1);
+}
+
+/* Botão de sair */
+.btn-logout {
+  background-color: #e53935;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
+}
+
+/* Ajuste de responsividade */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  .header-right {
+    margin-right: 0;
+    justify-content: center;
+  }
+}

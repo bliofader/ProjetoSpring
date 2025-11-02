@@ -2,9 +2,10 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
-
 .logo img {
-  width: 160px;
+  display: flex;
+  justify-content: space-between; 
+  width:  160px;
 }
 
 .header {
@@ -41,29 +42,36 @@ body {
   border-bottom: 2px solid #000;
 }
 
+/* Formulário */
 .user-list {
-  margin: 30px auto;
-  max-width: 900px;
-  padding: 0 20px;
+  width: 80%;
+  margin: 40px auto;
+  background: #f8f8f8;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-list h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 20px;
 }
 
 .highlight-bar {
   display: inline-block;
   width: 5px;
-  height: 25px;
+  height: 22px;
   background-color: #c7da33;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-/* Estilo do formulário central */
 .form-cadastro {
-  margin-top: 20px;
-  background-color: #f8f8f8;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
 .form-group {
@@ -77,20 +85,51 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
   border-radius: 6px;
-  transition: border-color 0.2s ease;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input:focus,
-select:focus {
-  border-color: #c7da33;
-  outline: none;
+textarea {
+  resize: none;
 }
 
+/* Feedback */
+.is-valid {
+  border-color: #28a745 !important;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
+}
+
+.feedback {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: #dc3545;
+}
+
+/* Imagem */
+.preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.preview img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #c7da33;
+}
+
+/* Botões */
 .botoes {
   display: flex;
   justify-content: center;
@@ -134,30 +173,23 @@ select:focus {
 
 .footer {
   text-align: center;
-  margin-top: 60px;
   padding: 15px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #333;
+  margin-top: 30px;
 }
-/* Upload de imagem */
-input[type="file"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.95rem;
+.btn-editar img {
+  color: #1976d2; /* Azul do lápis */
+  font-size: 1.2rem;
   cursor: pointer;
-}
-.preview {
-  margin-top: 10px;
-  text-align: center;
+  width: 22px;
+  height: 22px;
 }
 
-.preview img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid #c7da33;
-  margin-top: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+.btn-excluir img {
+  color: #e53935; /* Vermelho do X */
+  font-size: 1.4rem;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
 }
-
