@@ -1,0 +1,118 @@
+.container-fundo {
+    position: relative;
+    /*referência para o h1 */
+    width: 100vw;
+}
+
+.container-fundo img {
+    display: block;
+    width: 100%;
+}
+
+.container-fundo h1,
+h2 {
+    position: absolute;
+    text-align: center;
+    /* fica sobre a imagem */
+    font-family: 'Lexend', sans-serif;
+    color: var(--text-color);
+    z-index: 2;
+}
+
+.container-fundo h1 {
+    top: 12%;
+    left: 30%;
+    font-size: 50px;
+}
+
+.container-fundo h2 {
+    top: 20%;
+    left: 18%;
+    font-size: 30px;
+}
+
+.container-fundo p {
+    /* top: 55%; */
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* form */
+.container-form {
+    max-width: 650px;
+    margin: 34px auto;
+    padding: 40px;
+    text-align: center;
+    font-family: 'Lexend', sans-serif;
+}
+
+.container-form h3 {
+    font-size: 30px;
+    
+}
+
+.campos-obrigatorio p{
+    margin: 0;
+}
+
+
+/* campos */
+.form-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input {
+    display: flex;
+    gap: 20px;
+}
+
+.input div,
+.container-mensagem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+}
+
+
+label {
+    text-align: start;
+    margin-bottom: 2px;
+    font-size: 15px;
+    color: #7D7C7C;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    background-color: #dedede;
+}
+
+.container-mensagem input{
+    width: 90%;
+    height: 100px;
+}
+
+
+/* botão */
+button {
+    background-color: #000;
+    color: var(--text-color);
+    padding: 8px;
+    cursor: pointer;
+    width: 160px;
+    align-self: center;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: transparent;
+    border: 1px solid #000;
+    color: var(--text-color2);
+}

@@ -1,0 +1,46 @@
+<!-- Cabeçalho -->
+<app-header-top></app-header-top>
+<!-- Menu de navegação -->
+<app-navbar></app-navbar>
+<!-- Lista de usuários -->
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Lista de Usuários</h2>
+
+  <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Tipo</th>
+      <th>Data de Nascimento</th>
+      <th>CPF</th>
+      <th>Email</th>
+      <th>Senha</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.ID }}</td>
+      <td>{{ usuario.Nome }}</td>
+      <td>{{ usuario.Tipo }}</td>
+      <td>{{ usuario.DataDeNascimento }}</td>
+      <td>{{ usuario.CPF }}</td>
+      <td>{{ usuario.Email }}</td>
+      <td>{{ usuario.Senha }}</td>
+      <td class="acoes">
+        <i class="fa-solid fa-check-circle ativo" *ngIf="usuario.ativo"></i>
+        <i class="fa-solid fa-check-circle inativo" *ngIf="usuario.inativo"></i>
+        <button class="btn-editar" (click)="editarUsuario(usuario)">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="btn-excluir" (click)="excluirUsuario(usuario)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</main>
+<!-- Rodapé -->
+<app-footer></app-footer>

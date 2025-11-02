@@ -1,0 +1,90 @@
+.login-usuario {
+    background-color: #fff;
+    height: 100vh;
+    font-family: 'Lexend', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-geral {
+    display: flex;
+    width: 80%;
+    height: 80vh;
+
+}
+
+/* lado esquerdo */
+.container-esquerdo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-right: 2px solid #000;
+}
+
+.container-logo img {
+    width: 140px;
+    height: 120px;
+}
+
+.info p {
+    margin: 2px 0;
+}
+
+/* lado direito */
+.container-direito {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 385px;
+
+
+}
+
+.form h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 178px;
+}
+
+.input {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input input {
+    padding: 8px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    margin-bottom: 4px;
+}
+
+.input label {
+    font-size: 15px;
+    color: #7D7C7C;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid #000;
+    padding: 8px;
+    cursor: pointer;
+    width: 160px;
+    align-self: center;
+}
+
+button:hover {
+    background-color: #000;
+    color: #fff;
+}

@@ -1,0 +1,39 @@
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login-usuario',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './login-usuario.component.html',
+  styleUrl: './login-usuario.component.css'
+})
+export class LoginUsuarioComponent {
+email = '';
+  senha = '';
+
+  // simulação de "usuários cadastrados"
+  usuarios = [
+    { email: 'icaro.123@gmail.com', senha: 'icaro123' },
+    { email: 'maria.123@gmail.com', senha: 'maria123' },
+    { email: 'ellen.123@gmail.com', senha: 'ellen123' }
+  ];
+
+  constructor(private router: Router) {}
+
+  onSubmit() {
+    const usuarioValido = this.usuarios.find(
+      (u) => u.email === this.email && u.senha === this.senha
+    );
+
+    if (usuarioValido) {
+      alert('Login realizado com sucesso!');
+      // Redireciona para a tela de admin
+      this.router.navigate(['/usuario']); 
+    } else {
+      alert('E-mail ou senha incorretos.');
+    }
+  }
+}

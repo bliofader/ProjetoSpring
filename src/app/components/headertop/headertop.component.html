@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="header-left">
+    <img
+      src="assets/images/logo.png"
+      alt="Gymfy Logo"
+      class="logo"
+      (click)="goToHome()"
+    />
+  </div>
+
+  <div class="header-right">
+    <button class="btn-profile" (click)="onProfile()">
+      <i class="fa-solid fa-user-circle"></i>
+    </button>
+
+    <button class="btn-logout" (click)="onLogout()">
+      <i class="fa-solid fa-right-from-bracket"></i> Sair
+    </button>
+  </div>
+</header>

@@ -1,0 +1,62 @@
+<app-header></app-header>
+<section>
+    <div class="content-container">
+        <div class="container-fundo">
+            <div class="info">
+                <img src="assets/images/contato.png" alt="supino">
+                <h1>Entre em contato conosco</h1>
+                <h2>Tire todas as suas dúvidas ou envie suas sugestões para nossa equipe</h2>
+            </div>
+
+            <!-- form -->
+            <div class="container-form">
+                <h3>Formulário</h3>
+                <p class="campos-obrigatorio">*Itens obrigatórios</p>
+                <form class="form-contato">
+                    <div class="input">
+                        <div>
+                            <label for="">Nome*</label>
+                            <input type="text" id="nome" name="nome" maxlength="30" placeholder="Digite seu nome" required>
+                        </div>
+                        <div>
+                            <label for="">Sobrenome*</label>
+                            <input type="text" id="nome" name="nome" maxlength="30" placeholder="Digite seu sobrenome" required>
+                        </div>
+                    </div>
+
+                    <div class="input">
+                        <div>
+                            <label for="">E-mail*</label>
+                            <input type="email" id="email" name="email" maxlength="50" placeholder="Digite seu E-mail" required>
+                        </div>
+                        <div>
+                            <label for="">Confirmar E-mail*</label>
+                            <input type="email" id="confirmar-email" name="confirmar-email" maxlength="50" placeholder="Confirme seu E-mail" required>
+                        </div>
+                    </div>
+
+                    <div class="input">
+                        <div>
+                            <label for="">Telefone</label>
+                            <input type="text" id="telefone" name="telefone" maxlength="9" placeholder="Digite seu telefone" required>
+                        </div>
+                        <div>
+                            <label for="">Assunto*</label>
+                            <input type="text" id="assunto" name="assunto" maxlength="100" placeholder="Assunto" required>
+                        </div>
+                    </div>
+
+                    <div class="container-mensagem">
+                        <label for="mensagem">Mensagem*</label>
+                        <input type="text" name="mensagem" placeholder="Sua mensagem aqui">
+                    </div>
+
+                    <button type="submit">Enviar</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
