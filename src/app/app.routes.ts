@@ -23,11 +23,6 @@ export const routes: Routes = [
         title: 'Gymfy - Home', //titulo da pagina
     },
     {
-        path: '',
-        component: HeaderTopComponent,
-        title: 'Gymfy - Home', //titulo da pagina
-    },
-    {
         //login 
         path: 'login-personal',
         component: LoginPersonalComponent,

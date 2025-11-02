@@ -21,65 +21,56 @@ import { HeaderTopComponent } from '../../../components/headertop/headertop.comp
 export class CadastrarExerciciosComponent {
   exercicioForm!: FormGroup;
   previewImage: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
 
   constructor(private fb: FormBuilder) {
     this.exercicioForm = this.fb.group({
-      id: [
-        '',
-        [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.maxLength(10)],
-      ],
+      id: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
       nivel: ['', Validators.required],
-      descricao: ['', [Validators.required, Validators.maxLength(200)]],
-      imagePath: [null, Validators.required],
-      videoUrl: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/
-          ),
-        ],
-      ],
+      descricao: ['', [Validators.required, Validators.maxLength(500)]],
+      videoUrl: ['', [Validators.pattern('^(https?:\\/\\/)?(www\\.)?(youtube\\.com|youtu\\.be)\\/.*$')]],
+      imagePath: [null, Validators.required]
     });
   }
 
-  get f(): { [key: string]: AbstractControl } {
+  // Getter para facilitar acesso aos campos no HTML
+  get f() {
     return this.exercicioForm.controls;
   }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (!file) return;
+  //  Método para capturar o arquivo selecionado
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
 
-    const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-    if (!validTypes.includes(file.type)) {
-      alert('Por favor, selecione uma imagem válida (JPG ou PNG).');
-      this.exercicioForm.patchValue({ imagePath: null });
+    if (!input.files || input.files.length === 0) {
+      this.selectedFile = null;
       this.previewImage = null;
       return;
     }
 
-    this.exercicioForm.patchValue({ imagePath: file });
+    this.selectedFile = input.files[0];
+    this.exercicioForm.patchValue({ imagePath: this.selectedFile });
+
     const reader = new FileReader();
-    reader.onload = () => (this.previewImage = reader.result);
-    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.previewImage = reader.result;
+    };
+    reader.readAsDataURL(this.selectedFile);
   }
 
+  //  Envio do formulário
   onSubmit(): void {
     if (this.exercicioForm.invalid) {
       this.exercicioForm.markAllAsTouched();
-      alert('⚠️ Corrija os campos inválidos antes de continuar.');
       return;
     }
 
-    const confirmacao = confirm('Deseja cadastrar este exercício?');
-    if (confirmacao) {
-      console.log('✅ Exercício cadastrado:', this.exercicioForm.value);
-      alert('Exercício cadastrado com sucesso!');
-      this.exercicioForm.reset();
-      this.previewImage = null;
+    console.log('Dados do exercício:', this.exercicioForm.value);
+
+    if (this.selectedFile) {
+      console.log('Arquivo selecionado:', this.selectedFile.name);
     }
   }
 }

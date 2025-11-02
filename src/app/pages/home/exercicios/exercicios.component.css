@@ -96,17 +96,22 @@ td {
   gap: 10px;
 }
 
-.btn-editar i {
+.btn-editar img {
   color: #1976d2; /* Azul do lápis */
   font-size: 1.2rem;
   cursor: pointer;
+  width: 22px;
+  height: 22px;
 }
 
-.btn-excluir i {
+.btn-excluir img {
   color: #e53935; /* Vermelho do X */
   font-size: 1.4rem;
   cursor: pointer;
+  width: 22px;
+  height: 22px;
 }
+
 button {
   background: none;
   border: none;
