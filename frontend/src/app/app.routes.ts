@@ -12,96 +12,20 @@ import { ContatoComponent } from './pages/nav/contato/contato.component';
 import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
 import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
 import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial/tela-personal-inicial.component';
+import { UsuarioComponent } from './usuario/usuario.component'; // ✅ Adicionado
 
-
-//link das paginas
 export const routes: Routes = [
-    {
-        //rotas lading page
-        path: '',
-        component: HomeComponent,
-        title: 'Gymfy - Home', //titulo da pagina
-    },
-    {
-        //login 
-        path: 'login-personal',
-        component: LoginPersonalComponent,
-        title: 'Gymfy - Login Personal',
-    },
-    {
-        path: 'login-usuario',
-        component: LoginUsuarioComponent,
-        title: 'Gymfy - Login Usuario',
-    },
-
-    //barra de navegação
-    {
-        path: 'sobre-nos',
-        component: SobreNosComponent,
-        title: 'Gymfy - Sobre nos',
-    },
-    {
-        path: 'contato',
-        component: ContatoComponent,
-        title: 'Gymfy - Contato',
-    },
-
-
-    //pag exercicio 
-    {
-        path: 'tela-exercicio',
-        component: TelaExercicioComponent,
-        title: 'Gymfy - Exercicios'
-    },
-
-    {
-        path:  'detalhes/:nome',
-        component: TelaExercicioDetalhesComponent,
-        title: 'Gymfy - Detalhes dos Exercicios'
-    },
-
-    //persongal
-    {
-        path: 'tela-personal',
-        component: TelaPersonalInicialComponent,
-        title: 'Gymfy - Personal'
-    },
-
-    //pag criar lista de exercicio
-    // {
-    //     path: 'tela-criar-lista',
-    //     component: TelaCriarListaComponent,
-    //     title: 'Gymfy - Criar Lista de Exercicio'
-    // },
-
-    // icaro admin
-    {
-        path: 'admin',
-        component: AdminCadastroUsuarioComponent,
-        title: 'Gymfy - Admin',
-    },
-    {
-        path: 'exercicios',
-        component: AdminCadastroExercicioComponent,
-        title: 'Gymfy - Exercicios',
-    },
-    {
-        path: 'cadastrarexercicios',
-        component: CadastrarExerciciosComponent,
-        title: 'Cad - Exercicios',
-    },
-    {
-        path: 'cadastrarusuario',
-        component: CadastrarUsuarioComponent,
-        title: 'Cad - Usuario',
-    },
-
-    // {
-    //     path: 'cadastrarexercicios',
-    //     component: CadastrarExerciciosComponent,
-    //     title: 'Cad - Exercicios',
-    // }
-
+    { path: '', component: HomeComponent, title: 'Gymfy - Home' },
+    { path: 'login-personal', component: LoginPersonalComponent, title: 'Gymfy - Login Personal' },
+    { path: 'login-usuario', component: LoginUsuarioComponent, title: 'Gymfy - Login Usuario' },
+    { path: 'sobre-nos', component: SobreNosComponent, title: 'Gymfy - Sobre nos' },
+    { path: 'contato', component: ContatoComponent, title: 'Gymfy - Contato' },
+    { path: 'tela-exercicio', component: TelaExercicioComponent, title: 'Gymfy - Exercicios' },
+    { path: 'detalhes/:nome', component: TelaExercicioDetalhesComponent, title: 'Gymfy - Detalhes dos Exercicios' },
+    { path: 'tela-personal', component: TelaPersonalInicialComponent, title: 'Gymfy - Personal' },
+    { path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin' },
+    { path: 'exercicios', component: AdminCadastroExercicioComponent, title: 'Gymfy - Exercicios' },
+    { path: 'cadastrarexercicios', component: CadastrarExerciciosComponent, title: 'Cad - Exercicios' },
+    { path: 'cadastrarusuario', component: CadastrarUsuarioComponent, title: 'Cad - Usuario' },
+    { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' } // ✅ Nova rota
 ];
-
-
