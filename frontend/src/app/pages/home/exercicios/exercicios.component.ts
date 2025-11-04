@@ -10,7 +10,7 @@ import { HeaderTopComponent } from '../../../components/headertop/headertop.comp
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, NavbarComponent, FooterComponent, RouterLink, HeaderTopComponent ],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent, HeaderTopComponent ],
   templateUrl: './exercicios.component.html',
   styleUrl: './exercicios.component.css'
 })
