@@ -6,13 +6,15 @@ import { LoginUsuarioComponent } from './pages/login/login-usuario/login-usuario
 import { AdminCadastroUsuarioComponent } from './pages/home/admin/admin.component';
 import { AdminCadastroExercicioComponent } from './pages/home/exercicios/exercicios.component';
 import { CadastrarExerciciosComponent} from './pages/home/cadastrarexercicios/cadastrarexercicios.component';
-import { CadastrarUsuarioComponent } from './pages/home/cadastrarusuario/cadastrarusuario.component';
+import { CadastrarUsuarioComponent } from './pages/home/admin/cadastrarusuario/cadastrarusuario.component';
 import { SobreNosComponent } from './pages/nav/sobre-nos/sobre-nos.component';
 import { ContatoComponent } from './pages/nav/contato/contato.component';
 import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
 import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
 import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial/tela-personal-inicial.component';
 import { HeaderTopComponent } from './components/headertop/headertop.component';
+import { LoginCadastrarComponent } from './pages/login/login-cadastrar/login-cadastrar.component';
+import { CriarListaComponent } from './pages/login/criarlista/criarlista.component';
 
 //link das paginas
 export const routes: Routes = [
@@ -95,13 +97,16 @@ export const routes: Routes = [
         component: CadastrarUsuarioComponent,
         title: 'Cad - Usuario',
     },
-
-    // {
-    //     path: 'cadastrarexercicios',
-    //     component: CadastrarExerciciosComponent,
-    //     title: 'Cad - Exercicios',
-    // }
-
+    {
+        path: 'login-cadastrar',
+        component: LoginCadastrarComponent,
+        title: 'Login - Cadastrar',
+    },
+     {
+        path: 'criarlista',
+        component: CriarListaComponent,
+        title: 'Login - Cadastrar',
+    },
 ];
 
 

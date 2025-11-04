@@ -1,0 +1,20 @@
+/* ... (todo o seu CSS de 'cadastrarexercicios.component.css') ... */
+
+/* Estilo específico para o select multiple de exercícios */
+select[multiple] {
+  height: auto; /* Remove a altura fixa se houver */
+  min-height: 150px; /* Dá mais espaço para ver as opções */
+  padding: 10px;
+  background-color: #fff;
+}
+
+select[multiple] option {
+  padding: 5px 8px; /* Melhora a leitura das opções */
+  font-size: 0.95rem;
+}
+
+select[multiple] option:checked {
+  background-color: #c7da33; /* Cor de destaque */
+  color: #000;
+  font-weight: bold;
+}
