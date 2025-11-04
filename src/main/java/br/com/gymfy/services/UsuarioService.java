@@ -91,7 +91,12 @@ public class UsuarioService {
 
 
     public void deletar(Integer id) {
-        usuarioRepository.deleteById(id);
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        if (usuario.isPresent()) {
+            usuarioRepository.deleteById(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário com ID " + id + " não encontrado.");
+        }
     }
 
     public Usuario update(Integer id, UsuarioUpdateDTO updateDTO) {
