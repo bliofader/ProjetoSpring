@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login-usuario',
   standalone: true,
@@ -31,7 +32,7 @@ export class LoginUsuarioComponent {
     if (usuarioValido) {
       alert('Login realizado com sucesso!');
       localStorage.setItem('usuarioNome', usuarioValido.nome);
-      this.router.navigate(['/tela-personal']); //mudar caminho
+      this.router.navigate(['/user/home']); //mudar caminho
     } else {
       alert('E-mail ou senha incorretos.');
     }

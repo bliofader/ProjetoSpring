@@ -4,7 +4,6 @@
 
 
 .navbar {
-  position: absolute;
   width: 97%;
   background-color: transparent;
   z-index: 10;
@@ -108,4 +107,9 @@ img {
   background: none;
   border: none;  
   cursor: pointer;
+}
+
+.UserName{
+font-size: 18px;
+font-weight: bold;
 }

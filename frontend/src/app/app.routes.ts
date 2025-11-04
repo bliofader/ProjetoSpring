@@ -12,6 +12,8 @@ import { ContatoComponent } from './pages/nav/contato/contato.component';
 import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
 import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
 import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial/tela-personal-inicial.component';
+import { UserHomeComponent } from './pages/User/user-home/user-home.component';
+import { UserListComponent } from './pages/User/user-list/user-list.component';
 
 
 //link das paginas
@@ -95,6 +97,14 @@ export const routes: Routes = [
         component: CadastrarUsuarioComponent,
         title: 'Cad - Usuario',
     },
+
+    //Pedro Usuários
+
+    {
+        path:'user/home',
+        component: UserHomeComponent,
+        title:'Home - Usuários'
+    }
 
     // {
     //     path: 'cadastrarexercicios',
