@@ -18,9 +18,6 @@ public class ExercicioService {
         return exercicio.orElse(null);
     }
 
-
-
-
     public List<Exercicio> findByTipo(String tipo) {
         return exercicioRepository.findByTipo(tipo);
     }
@@ -29,14 +26,6 @@ public class ExercicioService {
         List<Exercicio> exercicios = exercicioRepository.findAll();
         return exercicios;
     }
-
-    
-
-
-
-
-
-
 
     public Exercicio CadastrarExecicio(Exercicio exercicio){
         return exercicioRepository.save(exercicio);
