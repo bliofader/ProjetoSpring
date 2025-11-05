@@ -16,7 +16,7 @@ h2{
 .navbar-list {
   list-style: none;
   margin-top: 7em;
-  
+  flex-grow: 1; 
 }
 
 .navbar-item a {

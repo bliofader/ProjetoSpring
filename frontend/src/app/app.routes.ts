@@ -13,7 +13,9 @@ import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercic
 import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
 import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial/tela-personal-inicial.component';
 import { UserHomeComponent } from './pages/User/user-home/user-home.component';
-import { UserListComponent } from './pages/User/user-list/user-list.component';
+import { UserTreinoComponent } from './pages/User/user-treino/user-treino.component';
+import { UserContaComponent } from './pages/User/user-conta/user-conta.component';
+import { UserPersonalComponent } from './pages/User/user-personal/user-personal.component';
 
 
 //link das paginas
@@ -104,6 +106,24 @@ export const routes: Routes = [
         path:'user/home',
         component: UserHomeComponent,
         title:'Home - Usuários'
+    },
+
+    {
+        path:'user/treinos',
+        component: UserTreinoComponent,
+        title:'Treino - Usuários'
+    },
+
+    {
+        path:'user/conta',
+        component:UserContaComponent,
+        title:'Conta - Usuário'
+    },
+
+    {
+        path:'user/personal',
+        component:UserPersonalComponent,
+        title:'Personal - Usuário'
     }
 
     // {

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-header-usuario',
@@ -11,13 +12,16 @@ import { Router } from '@angular/router';
 export class HeaderUsuarioComponent implements  OnInit {
   nomeUsuario: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
-    const nomeStorage = localStorage.getItem('usuarioNome');
+    if (isPlatformBrowser(this.platformId)) {
+      const nomeStorage = localStorage.getItem('usuarioNome');
 
-    if(nomeStorage){
-      this.nomeUsuario = this.NomeArrumado(nomeStorage);
+      if (nomeStorage) {
+        this.nomeUsuario = this.NomeArrumado(nomeStorage);
+      }
     }
    
   }
@@ -36,7 +40,9 @@ export class HeaderUsuarioComponent implements  OnInit {
    onLogout(): void {
     const confirmacao = confirm('Deseja realmente sair do sistema?');
     if (confirmacao) {
-      localStorage.clear()
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.clear();
+      }
       this.router.navigate(['/']);
     }
   }

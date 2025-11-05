@@ -4,12 +4,12 @@ import { UserSideabrComponent } from '../../../components/UserComponents/user-si
 import { FooterComponent } from '../../../components/footer/footer.component';
 
 @Component({
-  selector: 'app-user-home',
+  selector: 'app-user-treino',
   standalone: true,
-  imports: [HeaderUsuarioComponent, UserSideabrComponent, FooterComponent],
-  templateUrl: './user-home.component.html',
-  styleUrl: './user-home.component.css'
+  imports: [HeaderUsuarioComponent,UserSideabrComponent,FooterComponent],
+  templateUrl: './user-treino.component.html',
+  styleUrl: './user-treino.component.css'
 })
-export class UserHomeComponent {
+export class UserTreinoComponent {
 
 }

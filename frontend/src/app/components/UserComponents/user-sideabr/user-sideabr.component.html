@@ -1,19 +1,21 @@
-
 <main>
 <section>
-    <h2>Minha Conta</h2>
+    <h2>Minha Conta</h2>
 
-    <ul class="navbar-list">
-                <li class="navbar-item"> <img src="assets/images/UserSideBar/TreinosUser.png" alt=""> <a href="/user/treinos">Treinos</a></li>
-                <li class="navbar-item"> <img src="assets/images/UserSideBar/MinhaContaUser.png" alt=""> <a href="/user/conta">Conta</a></li>
-                <li class="navbar-item"> <img src="assets/images/UserSideBar/PersonalUser.png" alt=""> <a href="/user/personal">Meu personal</a></li>
-    </ul>
-
-
+    <ul class="navbar-list">
+                <li class="navbar-item"> 
+                    <img src="assets/images/UserSideBar/TreinosUser.png" alt=""> 
+                    <a [routerLink]="['/user/treinos']">Treinos</a>
+                </li>
+                <li class="navbar-item"> 
+                    <img src="assets/images/UserSideBar/MinhaContaUser.png" alt=""> 
+                    <a [routerLink]="['/user/conta']">Conta</a>
+                </li>
+                <li class="navbar-item"> 
+                    <img src="assets/images/UserSideBar/PersonalUser.png" alt=""> 
+                    <a [routerLink]="['/user/personal']">Meu personal</a>
+                </li>
+    </ul>
 </section>
-
-    <div></div>
- 
+    <div></div>
 </main>
-
-
