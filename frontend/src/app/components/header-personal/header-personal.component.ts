@@ -9,13 +9,29 @@ import { Router } from '@angular/router';
   styleUrl: './header-personal.component.css'
 })
 export class HeaderPersonalComponent implements  OnInit {
-  nomeUsuario: string | null = null;
+  nomePersonal: string | null = null;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.nomeUsuario = localStorage.getItem('usuarioNome');
+    const nomeStorage = localStorage.getItem('usuarioNome');
+
+    if(nomeStorage){
+      this.nomePersonal = this.NomeArrumado(nomeStorage);
+    }
+   
   }
+
+  NomeArrumado(str: string): string {
+  if (!str) {
+    return '';
+  }
+ 
+  str = str.toLowerCase();
+  
+  
+  return str.charAt(0).toLocaleUpperCase() + str.slice(1);
+}
 
    onLogout(): void {
     const confirmacao = confirm('Deseja realmente sair do sistema?');
@@ -26,3 +42,4 @@ export class HeaderPersonalComponent implements  OnInit {
 
 
 }
+

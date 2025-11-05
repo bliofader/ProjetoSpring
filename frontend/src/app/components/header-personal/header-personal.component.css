@@ -80,3 +80,8 @@ img {
     border: none;
     cursor: pointer;
 }
+
+.UserName{
+font-size: 18px;
+font-weight: bold;
+}

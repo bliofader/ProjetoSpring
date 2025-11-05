@@ -1,10 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
-import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-login-personal',
@@ -35,7 +33,7 @@ export class LoginPersonalComponent {
     if (usuarioValido) {
       alert('Login realizado com sucesso!');
       localStorage.setItem('usuarioNome', usuarioValido.nome); // salva o nome no navegador
-      this.router.navigate(['/usuario']);
+      this.router.navigate(['/tela-personal']);
     } else {
       alert('E-mail ou senha incorretos.');
     }

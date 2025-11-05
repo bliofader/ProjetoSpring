@@ -12,40 +12,39 @@
             <h2>Selecione um Exercício</h2>
             <div class="category-buttons">
                 <button class="category-btn" [class.active]="selectedCategory === 'all'"
-                    (click)="filterExercises('all')">
+                    (click)="filterExercicios('all')">
                     Todos
                 </button>
 
                 <button class="category-btn" [class.active]="selectedCategory === 'panturrilha'"
-                    (click)="filterExercises('panturrilha')">Panturrilha</button>
+                    (click)="filterExercicios('panturrilha')">Panturrilha</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'costas'"
-                    (click)="filterExercises('costas')">Costas</button>
+                    (click)="filterExercicios('costas')">Costas</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'peito'"
-                    (click)="filterExercises('peito')">Peito</button>
+                    (click)="filterExercicios('peito')">Peito</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'ombro'"
-                    (click)="filterExercises('ombro')">Ombro</button>
+                    (click)="filterExercicios('ombro')">Ombro</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'quadriceps'"
-                    (click)="filterExercises('quadriceps')">Quadríceps</button>
+                    (click)="filterExercicios('quadriceps')">Quadríceps</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'abs'"
-                    (click)="filterExercises('abs')">Abs</button>
+                    (click)="filterExercicios('abs')">Abs</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'triceps'"
-                    (click)="filterExercises('triceps')">Tríceps</button>
+                    (click)="filterExercicios('triceps')">Tríceps</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'biceps'"
-                    (click)="filterExercises('biceps')">Bíceps</button>
+                    (click)="filterExercicios('biceps')">Bíceps</button>
                 <button class="category-btn" [class.active]="selectedCategory === 'pernas'"
-                    (click)="filterExercises('pernas')">Pernas</button>
+                    (click)="filterExercicios('pernas')">Pernas</button>
             </div>
         </section>
 
         <section class="exercise-list">
-            <div *ngFor="let exercicio of filteredExercises" class="exercise-card">
+            <div *ngFor="let exercicio of filteredExercicios" class="exercise-card">
                 <img [src]="exercicio.imagePath" alt="{{exercicio.nome}}" class="exercise-img">
                 <h3>{{ exercicio.nome }}</h3>
                 <p>Agrupamento <br> <span>{{ exercicio.agrupamento| titlecase }}</span></p>
                 <a [routerLink]="['/detalhes', exercicio.nome.toLowerCase().split(' ').join('-')]" class="inspect-btn">INSPECIONAR</a>
             </div>
         </section>
-
 
     </div>
 </section>

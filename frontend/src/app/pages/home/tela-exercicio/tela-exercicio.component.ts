@@ -16,7 +16,7 @@ export class TelaExercicioComponent implements OnInit {
   selectedCategory: string = 'all';
 
   //banco temporario
-  exercises: Exercicio[] = [
+  exercicios: Exercicio[] = [
     { nome: 'Agachamento Livre', agrupamento: 'pernas', imagePath: 'assets/images/pernas.png', tipo: 'força', descricao: 'Exercício básico para o desenvolvimento dos músculos das pernas e glúteos.', nivel: 'básico', videoUrl: 'https://www.youtube.com/embed/86ZW7tmmLuU?si=H6zrJ3uIFWE0d6YQ' },
     { nome: 'Leg Press', agrupamento: 'quadriceps', imagePath: 'assets/images/pernas.png', tipo: 'força', descricao: 'Exercício básico para o desenvolvimento dos músculos das pernas e glúteos.', nivel: 'intermediário', videoUrl: 'https://www.youtube.com/embed/86ZW7tmmLuU?si=H6zrJ3uIFWE0d6YQ' },
     { nome: 'Panturrilha em Pé', agrupamento: 'panturrilha', imagePath: 'assets/images/pernas.png', tipo: 'resistência', descricao: 'Exercício básico para o desenvolvimento dos músculos das pernas e glúteos.', nivel: 'básico', videoUrl: 'https://www.youtube.com/embed/86ZW7tmmLuU?si=H6zrJ3uIFWE0d6YQ' },
@@ -32,16 +32,16 @@ export class TelaExercicioComponent implements OnInit {
 
 
 
-  filteredExercises = [...this.exercises];
+  filteredExercicios = [...this.exercicios];
 
   ngOnInit() { }
 
-  filterExercises(category: string) {
+  filterExercicios(category: string) {
     this.selectedCategory = category;
     if (category === 'all') {
-      this.filteredExercises = this.exercises;
+      this.filteredExercicios = this.exercicios;
     } else {
-      this.filteredExercises = this.exercises.filter(
+      this.filteredExercicios = this.exercicios.filter(
         (exercicio) => exercicio.agrupamento === category
       );
     }

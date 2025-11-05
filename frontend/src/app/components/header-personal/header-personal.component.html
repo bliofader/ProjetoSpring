@@ -8,10 +8,13 @@
                 </a>
             </div>
 
-            <p>Seja Bem vindo, <span>personal</span></p>
-
+            <div class="UserName">
+                <p>Seja Bem vindo, {{nomePersonal}}</p>
+                       
+               </div>
+            
             <div class="sair-menu">
-
+                
                 <div class="sair-icon">
                     <button  (click)="onLogout()">
                         <img src="assets/images/logout.png" alt="Sair">
