@@ -5,11 +5,11 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
+import { ExercicioService } from '../../../services/exercicio.service';
 
 @Component({
   selector: 'app-cadastrar-exercicio',
@@ -23,11 +23,12 @@ export class CadastrarExerciciosComponent {
   previewImage: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private exercicioService: ExercicioService) {
     this.exercicioForm = this.fb.group({
       id: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
+      agrupamento: ['', Validators.required],
       nivel: ['', Validators.required],
       descricao: ['', [Validators.required, Validators.maxLength(500)]],
       videoUrl: ['', [Validators.pattern('^(https?:\\/\\/)?(www\\.)?(youtube\\.com|youtu\\.be)\\/.*$')]],
@@ -35,15 +36,12 @@ export class CadastrarExerciciosComponent {
     });
   }
 
-  // Getter para facilitar acesso aos campos no HTML
   get f() {
     return this.exercicioForm.controls;
   }
 
-  //  Método para capturar o arquivo selecionado
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-
     if (!input.files || input.files.length === 0) {
       this.selectedFile = null;
       this.previewImage = null;
@@ -60,17 +58,33 @@ export class CadastrarExerciciosComponent {
     reader.readAsDataURL(this.selectedFile);
   }
 
-  //  Envio do formulário
   onSubmit(): void {
-    if (this.exercicioForm.invalid) {
+    console.log('Formulário enviado');
+
+    if (this.exercicioForm.invalid || !this.selectedFile) {
       this.exercicioForm.markAllAsTouched();
+      console.warn('Formulário inválido ou imagem não selecionada');
       return;
     }
 
-    console.log('Dados do exercício:', this.exercicioForm.value);
+    const formData = new FormData();
+    formData.append('id', this.exercicioForm.value.id);
+    formData.append('nome', this.exercicioForm.value.nome);
+    formData.append('tipo', this.exercicioForm.value.tipo);
+    formData.append('agrupamento', this.exercicioForm.value.agrupamento);
+    formData.append('nivel', this.exercicioForm.value.nivel);
+    formData.append('descricao', this.exercicioForm.value.descricao);
+    formData.append('videoUrl', this.exercicioForm.value.videoUrl || '');
+    formData.append('imagePath', this.selectedFile);
 
-    if (this.selectedFile) {
-      console.log('Arquivo selecionado:', this.selectedFile.name);
+    for (const pair of (formData as any).entries()) {
+      console.log(pair[0] + ':', pair[1]);
     }
+    
+
+    this.exercicioService.cadastrarExercicio(formData).subscribe({
+      next: res => console.log('Exercício cadastrado com sucesso!', res),
+      error: err => console.error('Erro ao cadastrar exercício', err)
+    });
   }
 }

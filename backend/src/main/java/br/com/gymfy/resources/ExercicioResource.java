@@ -4,12 +4,19 @@ package br.com.gymfy.resources;
 import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.services.ExercicioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
 
@@ -46,10 +53,38 @@ public class ExercicioResource {
         return exercicios;
     }
 
-    @PostMapping
-    public ResponseEntity<Exercicio> cadastrarExecicio(
-            @RequestBody Exercicio exercicio){
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Exercicio> cadastrarExercicio(
+            @RequestParam("id") Integer id,
+            @RequestParam("nome") String nome,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("agrupamento") String agrupamento,
+            @RequestParam("nivel") String nivel,
+            @RequestParam("descricao") String descricao,
+            @RequestParam(value = "videoUrl", required = false) String videoUrl,
+            @RequestParam("imagePath") MultipartFile imageFile
+    ) throws IOException {
+
+        // Salvar imagem no disco
+        String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+        Path imagePath = Paths.get("uploads/" + fileName);
+        Files.createDirectories(imagePath.getParent());
+        Files.write(imagePath, imageFile.getBytes());
+
+        // Criar entidade
+        Exercicio exercicio = new Exercicio();
+        exercicio.setId(id);
+        exercicio.setNome(nome);
+        exercicio.setTipo(tipo);
+        exercicio.setAgrupamento(agrupamento);
+        exercicio.setNivel(nivel);
+        exercicio.setDescricao(descricao);
+        exercicio.setImagePath(fileName);
+        exercicio.setVideoPath(videoUrl);
+
+
         exercicio = exercicioService.CadastrarExecicio(exercicio);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(exercicio.getId()).toUri();
         return ResponseEntity.created(uri).body(exercicio);

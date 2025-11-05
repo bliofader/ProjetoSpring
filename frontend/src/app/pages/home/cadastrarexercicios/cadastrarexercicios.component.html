@@ -67,6 +67,15 @@
         <small>Selecione um nível.</small>
       </div>
     </div>
+    <!-- Agrupamento -->
+<div class="form-group">
+  <label for="agrupamento">Agrupamento Muscular</label>
+  <input id="agrupamento" type="text" formControlName="agrupamento" placeholder="Ex: Inferiores, Superiores..."
+    [ngClass]="{'is-valid': f['agrupamento'].valid && f['agrupamento'].touched, 'is-invalid': f['agrupamento'].invalid && f['agrupamento'].touched}" />
+  <div class="feedback" *ngIf="f['agrupamento'].touched && f['agrupamento'].invalid">
+    <small>Campo obrigatório.</small>
+  </div>
+</div>
 
     <!-- Descrição -->
     <div class="form-group">
@@ -80,12 +89,13 @@
     </div>
 
     <!-- Imagem -->
-    <div class="form-group">
-  <label for="imagePath">Imagem(.png ou jpeg)</label>
+<div class="form-group">
+  <label for="imagePath">Imagem (.png ou .jpeg)</label>
   <input
     id="imagePath"
     type="file"
     accept="image/png, image/jpeg"
+    (change)="onFileSelected($event)" 
   />
   <div class="preview" *ngIf="previewImage">
     <img [src]="previewImage" alt="Pré-visualização da imagem" />
@@ -94,6 +104,7 @@
     <small>Selecione uma imagem.</small>
   </div>
 </div>
+
 
     <!-- Vídeo -->
     <div class="form-group">
@@ -107,9 +118,10 @@
 
     <!-- Botões -->
     <div class="botoes">
-      <button type="submit" class="btn-submit" [disabled]="exercicioForm.invalid">
+      <button type="submit" class="btn-submit">
         <i class="fa-solid fa-floppy-disk"></i> Cadastrar
       </button>
+      
       <button type="reset" class="btn-cancelar">
         <i class="fa-solid fa-xmark"></i> Cancelar
       </button>

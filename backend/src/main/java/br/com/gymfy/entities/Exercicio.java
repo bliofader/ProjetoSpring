@@ -26,22 +26,31 @@ public class Exercicio implements Serializable {
 
     @Column(name = "Descrição")
     String descricao;
+    @Column(name = "Imagem")
+    private String imagePath;
 
-    public Exercicio(int id, String nome, String tipo, String agrupamento, String nivel, String descricao) {
+    @Column(name = "Video")
+    private String videoPath;
+
+    public Exercicio(int id, String nome, String tipo, String agrupamento, String nivel, String descricao, String imagePath, String videoPath) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.agrupamento = agrupamento;
         this.nivel = nivel;
         this.descricao = descricao;
+        this.imagePath = imagePath;
+        this.videoPath = videoPath;
     }
 
-    public Exercicio(String nome, String tipo, String agrupamento, String nivel, String descricao) {
+    public Exercicio(String nome, String tipo, String agrupamento, String nivel, String descricao,String imagePath, String videoPath) {
         this.nome = nome;
         this.tipo = tipo;
         this.agrupamento = agrupamento;
         this.nivel = nivel;
         this.descricao = descricao;
+        this.imagePath = imagePath;
+        this.videoPath = videoPath;
     }
 
     public Exercicio() {
@@ -97,6 +106,22 @@ public class Exercicio implements Serializable {
         this.descricao = descricao;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
+    }
+
     @Override
     public String toString() {
         return "Exercicio{" +
@@ -106,6 +131,8 @@ public class Exercicio implements Serializable {
                 ", agrupamento='" + agrupamento + '\'' +
                 ", nivel='" + nivel + '\'' +
                 ", descricao='" + descricao + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", videoPath='" + videoPath + '\'' +
                 '}';
     }
 }
