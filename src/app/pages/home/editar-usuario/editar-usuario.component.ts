@@ -1,20 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl,} from '@angular/forms';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
+import { RouterOutlet, Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-editar-usuario',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, FooterComponent, HeaderTopComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, RouterModule, ReactiveFormsModule, NavbarComponent, FooterComponent, HeaderTopComponent],
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css',
 })
@@ -47,6 +42,7 @@ export class EditarUsuarioComponent {
   get f(): { [key: string]: AbstractControl } {
     return this.registrationForm.controls;
   }
+
 
   onSubmit(): void {
     if (this.registrationForm.invalid) {
