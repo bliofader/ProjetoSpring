@@ -99,9 +99,9 @@ public class UsuarioResource {
 
     //deletar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Usuario> deletar(@PathVariable Integer id){
+    public ResponseEntity<String> deletar(@PathVariable Integer id){
         usuarioService.deletar(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Usuário com ID " + id + " deletado com sucesso.");
     }
 
     @PutMapping(value = "/{id}")
