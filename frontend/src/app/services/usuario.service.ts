@@ -19,4 +19,8 @@ export class UsuarioService {
   findComuns(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.baseUrl + ''); // ✅ se tiver esse endpoint no backend
   }
+  create(usuario: Usuario): Observable<Usuario> {
+  return this.http.post<Usuario>(this.baseUrl, usuario);
+}
+
 }

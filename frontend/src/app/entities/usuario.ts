@@ -1,10 +1,8 @@
 export interface Usuario {
-    id?: number,
-    nome: string,
-    tipo: string,
-    dataNascimento: Date,
-    cpf: string,
-    email: string,
-    senha: string,
-    imagePath: string
+  nome: string;
+  tipo: string;
+  dataNascimento: string; // ou Date, dependendo do backend
+  cpf: string;
+  email: string;
+  senha: string;
 }
