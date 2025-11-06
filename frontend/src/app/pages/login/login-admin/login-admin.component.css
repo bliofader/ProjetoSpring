@@ -1,4 +1,4 @@
-.login-personal {
+.login-admin {
     background-image: url('/assets/images/tela-personal/fundo-login.png');
     background-size: cover;
     background-position: center;
@@ -21,7 +21,7 @@
     flex-direction: column;
 }
 
-.form-personal {
+.form-admin {
     display: flex;
     justify-content: center;
     align-items: center;

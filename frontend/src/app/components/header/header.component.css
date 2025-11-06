@@ -28,7 +28,7 @@
   list-style: none;
   display: flex;
   gap: 4rem;
-  margin-right: 125px;
+  margin-left: 125px;
 }
 
 .navbar-item a:hover {

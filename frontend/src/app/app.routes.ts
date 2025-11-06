@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { LoginPersonalComponent } from './pages/login/login-personal/login-personal.component';
 import { LoginUsuarioComponent } from './pages/login/login-usuario/login-usuario.component';
 import { AdminCadastroUsuarioComponent } from './pages/home/admin/admin.component';
 import { AdminCadastroExercicioComponent } from './pages/home/exercicios/exercicios.component';
@@ -18,6 +17,7 @@ import { UserContaComponent } from './pages/User/user-conta/user-conta.component
 import { UserPersonalComponent } from './pages/User/user-personal/user-personal.component';
 import { ListaPersonaisComponent } from './pages/home/personal/lista-personais/lista-personais.component';
 import { ListaPersonaisDetalhesComponent } from './pages/home/personal/lista-personais-detalhes/lista-personais-detalhes.component';
+import { LoginAdminComponent } from './pages/login/login-admin/login-admin.component';
 
 
 //link das paginas
@@ -30,9 +30,9 @@ export const routes: Routes = [
     },
     {
         //login 
-        path: 'login-personal',
-        component: LoginPersonalComponent,
-        title: 'Gymfy - Login Personal',
+        path: 'login-admin',
+        component: LoginAdminComponent,
+        title: 'Gymfy - Login Admin',
     },
     {
         path: 'login-usuario',

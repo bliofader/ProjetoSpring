@@ -8,21 +8,38 @@
                 </a>
             </div>
 
-            <div class="UserName">
-                <p>Seja Bem vindo, {{nomePersonal}}</p>
-                       
-               </div>
             
-            <div class="sair-menu">
-                
-                <div class="sair-icon">
-                    <button  (click)="onLogout()">
-                        <img src="assets/images/logout.png" alt="Sair">
-                    </button>
-                </div>
+            <ul class="navbar-list">
+            <li class="navbar-item">
+                <a href="/sobre-nos">Sobre nós</a>
+            </li>
+            <li class="navbar-item">
+                <a href="#planos">Planos</a>
+            </li>
+            <li class="navbar-item">
+                <a href="/contato">Contato</a>
+            </li>
+            <!-- <li class="navbar-item">
+                <a href="">Loja</a>
+            </li> -->
+            <li class="navbar-item">
+                <a href="/tela-personal">Personais</a>
+            </li>
+        </ul>
 
+        <div class="login-menu">
+            <div class="login-icon">
+                <img src="assets/images/user.png" alt="Login">
+                <span>Login</span>
             </div>
 
+            <div class="login-options">
+                <a href="/login-usuario">Usuário</a>
+                <hr>
+                 <a href="/login-admin">Administrador</a>
+            </div>
+        </div>
+        
         </div>
     </nav>
 </section>

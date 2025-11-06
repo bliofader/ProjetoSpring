@@ -30,7 +30,7 @@
     list-style: none;
     display: flex;
     gap: 4rem;
-    margin-right: 125px;
+    margin-left: 125px;
 }
 
 .navbar-item a:hover {
@@ -40,48 +40,72 @@
 
 .navbar-item a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-color2);
     font-size: 18px;
     font-weight: bold;
     transition: color 0.3s;
+}
+
+.navbar-item a:hover {
+  color: var(--primary-color);
 }
 
 img {
     width: 150px;
 }
 
-
-/* btn sair */
-.sair-menu {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-family: 'Poppins', sans-serif;
-    /* position: relative; */
+/* LOGIN FIXO */
+.login-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 15px;
+  font-family: 'Poppins', sans-serif;
+  /* position: relative; */
+  /* border: 1px red solid; */
 }
 
-.sair-icon {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #000;
-    font-weight: 600;
-    font-size: 18px;
-    text-decoration: none;
+.login-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.sair-icon img {
-    width: 25px;
-    height: 25px;
+.login-icon img {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
 }
 
-.sair-icon button {
-    background: none;
-    border: none;
-    cursor: pointer;
+.login-options {
+  border-radius: 8px;
+  /* background-color: #fff; */
+  text-align: center;
+  /* align-items: center;
+  justify-content: center; */
+  /* border: 1px solid red; */
 }
 
-.UserName{
-font-size: 18px;
-font-weight: bold;
+.login-options hr {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 2px auto;
+  width: 80%;
 }
+
+.login-options a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+
+.login-options a:hover {
+  color: var(--primary-color);
+}
+
