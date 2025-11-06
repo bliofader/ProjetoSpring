@@ -1,0 +1,21 @@
+<app-header-personal></app-header-personal>
+<section class="personal-section">
+    <div class="content-container">
+
+    <h2>Conheça Nossos Personais</h2>
+
+    <div class="personal-list">
+        <div *ngFor="let personal of personais" class="personal-card">
+            <img [src]="personal.imagePath" [alt]="personal.nome" class="personal-img">
+
+            <h3>{{ personal.nome }}</h3>
+            <p>Especialidade <br> <span>{{ personal.especialidade }}</span></p>
+
+            <a [routerLink]="['/personal-detalhes', personal.nome]" class="inspect-btn">
+                INSPECIONAR
+            </a>
+        </div>
+    </div>
+    </div>F
+</section>
+<app-footer></app-footer>

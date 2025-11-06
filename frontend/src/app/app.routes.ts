@@ -16,6 +16,8 @@ import { UserHomeComponent } from './pages/User/user-home/user-home.component';
 import { UserTreinoComponent } from './pages/User/user-treino/user-treino.component';
 import { UserContaComponent } from './pages/User/user-conta/user-conta.component';
 import { UserPersonalComponent } from './pages/User/user-personal/user-personal.component';
+import { ListaPersonaisComponent } from './pages/home/personal/lista-personais/lista-personais.component';
+import { ListaPersonaisDetalhesComponent } from './pages/home/personal/lista-personais-detalhes/lista-personais-detalhes.component';
 
 
 //link das paginas
@@ -64,12 +66,28 @@ export const routes: Routes = [
         title: 'Gymfy - Detalhes dos Exercicios'
     },
 
-    //persongal
+    //personal
     {
         path: 'tela-personal',
         component: TelaPersonalInicialComponent,
-        title: 'Gymfy - Personal'
+        title: 'Home - Personal'
     },
+
+    {
+        path: 'personal',
+        component: ListaPersonaisComponent,
+        title: 'Lista - Personal'
+    },
+
+    {
+        path: 'personal-detalhes/:nome',
+        component: ListaPersonaisDetalhesComponent,
+        title: 'Detalhes - Personal'
+    },
+
+    
+
+    
 
     //pag criar lista de exercicio
     // {

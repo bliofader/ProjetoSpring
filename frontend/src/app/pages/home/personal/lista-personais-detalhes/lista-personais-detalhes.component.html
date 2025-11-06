@@ -1,0 +1,28 @@
+<app-header-personal></app-header-personal>
+<div class="content-container">
+    <div class="detalhes-container" *ngIf="personal">
+        <h2>{{ personal.nome }}</h2>
+        <div class="personal-visual">
+            <img [src]="personal.imagePath" alt="{{ personal.nome }}" class="personal-img" />
+            <p class="agrupamento">
+                Especialidade <br />
+                <span>{{ personal.especialidade| titlecase }}</span>
+            </p>
+        </div>
+
+        <div class="descricao">
+            <h1>Informações do Personal:</h1>
+            <p><strong>Nome:</strong></p>
+            <p>{{ personal.nome }}</p>
+            <p><strong>Especialidade:</strong></p>
+            <p>{{ personal.especialidade }}</p>
+            <p><strong>Descrição:</strong></p>
+            <p>{{ personal.descricao }}</p>
+            <p><Strong>Rede Social:</Strong></p>
+            <p>{{ personal.redeSocial }}</p>
+
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
