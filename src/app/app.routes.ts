@@ -15,6 +15,7 @@ import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial
 import { HeaderTopComponent } from './components/headertop/headertop.component';
 import { LoginCadastrarComponent } from './pages/login/login-cadastrar/login-cadastrar.component';
 import { CriarListaComponent } from './pages/login/criarlista/criarlista.component';
+import { ListarListaComponent } from './pages/login/listar-listas/listar-listas.component';
 
 //link das paginas
 export const routes: Routes = [
@@ -105,7 +106,12 @@ export const routes: Routes = [
      {
         path: 'criarlista',
         component: CriarListaComponent,
-        title: 'Login - Cadastrar',
+        title: 'Cadastrar - Lista',
+    },
+         {
+        path: 'listar-listas',
+        component: ListarListaComponent,
+        title: 'Listar - Lista',
     },
 ];
 

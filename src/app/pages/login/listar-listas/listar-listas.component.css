@@ -1,0 +1,125 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.logo img {
+  display: flex;
+  justify-content: space-between; 
+  width:  160px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c7da33;
+  padding: 10px 40px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #000;
+  font-size: 1.1rem;
+}
+
+.navbar a.active {
+  border-bottom: 2px solid #000;
+}
+
+.list-list {
+  margin: 30px auto;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.highlight-bar {
+  display: inline-block;
+  width: 5px;
+  height: 25px;
+  background-color: #c7da33;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.ativo {
+  color: #4caf50;
+  font-size: 1.2rem;
+}
+.inativo {
+  color: #e90a0a;
+  font-size: 1.2rem;
+}
+
+.excluir {
+  color: #222;
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 15px;
+  font-size: 0.9rem;
+}
+
+.acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-editar img {
+  color: #1976d2; /* Azul do lápis */
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+}
+
+.btn-excluir img {
+  color: #e53935; /* Vermelho do X */
+  font-size: 1.4rem;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.15);
+}
+
