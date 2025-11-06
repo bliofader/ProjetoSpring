@@ -5,7 +5,7 @@
 
 <!-- Conteúdo -->
 <main class="user-list">
-  <h2><span class="highlight-bar"></span> Cadastro de Exercício</h2>
+  <h2><span class="highlight-bar"></span> Edite seu Exercício</h2>
 
   <form [formGroup]="exercicioForm" (ngSubmit)="onSubmit()" class="form-cadastro">
 
@@ -97,7 +97,7 @@
     <!-- Botões -->
     <div class="botoes">
       <button type="submit" class="btn-submit" [disabled]="exercicioForm.invalid">
-        <i class="fa-solid fa-floppy-disk"></i> Cadastrar
+        <i class="fa-solid fa-floppy-disk"></i> Salvar Dados
       </button>
       <button type="reset" class="btn-cancelar">
         <i class="fa-solid fa-xmark"></i> Cancelar

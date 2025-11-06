@@ -1,0 +1,114 @@
+<app-header-top></app-header-top>
+<app-navbar></app-navbar>
+
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Edite sua Lista de Treino</h2>
+
+  <form
+    [formGroup]="listaForm"
+    (ngSubmit)="onSubmit()"
+    class="form-cadastro"
+  >
+    <div class="form-group">
+      <label for="nome">Nome da Lista</label>
+      <input
+        id="nome"
+        type="text"
+        maxlength="100"
+        formControlName="nome"
+        placeholder="Ex: Treino A - Peito e Tríceps"
+        [ngClass]="{
+          'is-valid': f['nome'].valid && f['nome'].touched,
+          'is-invalid': f['nome'].invalid && f['nome'].touched
+        }"
+      />
+      <div class="feedback" *ngIf="f['nome'].touched && f['nome'].invalid">
+        <small *ngIf="f['nome'].errors?.['required']">Campo obrigatório.</small>
+        <small *ngIf="f['nome'].errors?.['maxlength']"
+          >Máximo de 100 caracteres.</small
+        >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="data">Data</label>
+      <input
+        id="data"
+        type="date"
+        formControlName="data"
+        [ngClass]="{
+          'is-valid': f['data'].valid && f['data'].touched,
+          'is-invalid': f['data'].invalid && f['data'].touched
+        }"
+      />
+      <div class="feedback" *ngIf="f['data'].touched && f['data'].invalid">
+        <small>Campo obrigatório.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dia">Dia da Semana</label>
+      <select
+        id="dia"
+        formControlName="dia"
+        [ngClass]="{
+          'is-valid': f['dia'].valid && f['dia'].touched,
+          'is-invalid': f['dia'].invalid && f['dia'].touched
+        }"
+      >
+        <option value="">Selecione o dia</option>
+        <option value="Segunda">Segunda-feira</option>
+        <option value="Terça">Terça-feira</option>
+        <option value="Quarta">Quarta-feira</option>
+        <option value="Quinta">Quinta-feira</option>
+        <option value="Sexta">Sexta-feira</option>
+        <option value="Sábado">Sábado</option>
+        <option value="Domingo">Domingo</option>
+      </select>
+      <div class="feedback" *ngIf="f['dia'].touched && f['dia'].invalid">
+        <small>Selecione um dia.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="exerciciosIds"
+        >Exercícios (Segure Ctrl/Cmd para selecionar vários)</label
+      >
+      <select
+        id="exerciciosIds"
+        formControlName="exerciciosIds"
+        multiple
+        size="8"
+        [ngClass]="{
+          'is-valid': f['exerciciosIds'].valid && f['exerciciosIds'].touched,
+          'is-invalid': f['exerciciosIds'].invalid && f['exerciciosIds'].touched
+        }"
+      >
+        <option *ngFor="let ex of todosExercicios" [value]="ex.id">
+          {{ ex.nome }} ({{ ex.tipo }})
+        </option>
+      </select>
+      <div
+        class="feedback"
+        *ngIf="f['exerciciosIds'].touched && f['exerciciosIds'].invalid"
+      >
+        <small>Selecione pelo menos um exercício.</small>
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="listaForm.invalid"
+      >
+        <i class="fa-solid fa-floppy-disk"></i> Cadastrar Lista
+      </button>
+      <button type="reset" class="btn-cancelar">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</main>
+
+<app-footer></app-footer>

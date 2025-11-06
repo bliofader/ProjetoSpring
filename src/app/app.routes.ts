@@ -16,6 +16,9 @@ import { HeaderTopComponent } from './components/headertop/headertop.component';
 import { LoginCadastrarComponent } from './pages/login/login-cadastrar/login-cadastrar.component';
 import { CriarListaComponent } from './pages/login/criarlista/criarlista.component';
 import { ListarListaComponent } from './pages/login/listar-listas/listar-listas.component';
+import { EditarExercicioComponent } from './pages/home/editar-exercicio/editar-exercicio.component';
+import { EditarListaComponent } from './pages/home/editar-lista/editar-lista.component';
+import { EditarUsuarioComponent } from './pages/home/editar-usuario/editar-usuario.component';
 
 //link das paginas
 export const routes: Routes = [
@@ -112,6 +115,21 @@ export const routes: Routes = [
         path: 'listar-listas',
         component: ListarListaComponent,
         title: 'Listar - Lista',
+    },
+    {
+        path: 'editar-exercicio',
+        component: EditarExercicioComponent,
+        title: 'Editar - Exercício',
+    },
+    {
+        path: 'editar-lista',
+        component: EditarListaComponent,
+        title: 'Editar - Lista',
+    },
+    {
+        path: 'editar-usuario',
+        component: EditarUsuarioComponent,
+        title: 'Editar - Usuario',
     },
 ];
 
