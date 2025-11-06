@@ -33,8 +33,10 @@ public class AuthService {
         Usuario usuarioAutenticado = (Usuario) auth.getPrincipal();
 
         String token = tokenService.gerarToken(usuarioAutenticado);
+        String nome = usuarioAutenticado.getNome();
 
 
-        return new TokenResponseDTO(token, usuarioAutenticado.getTipo());
+
+        return new TokenResponseDTO(token, usuarioAutenticado.getTipo(), nome);
     }
 }
