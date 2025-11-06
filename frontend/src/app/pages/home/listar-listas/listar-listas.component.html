@@ -1,0 +1,41 @@
+<!-- Cabeçalho -->
+<app-header-top></app-header-top>
+<!-- Menu de navegação -->
+<app-navbar></app-navbar>
+<!-- Lista de listas -->
+<main class="list-list">
+  <h2><span class="highlight-bar"></span> Listagem de Listas</h2>
+
+  <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Data</th>
+      <th>Dia da Semana</th>
+      <th>Exercícios</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lista of listas">
+      <td>{{ lista.ID }}</td>
+      <td>{{ lista.Nome }}</td>
+      <td>{{ lista.Data }}</td>
+      <td>{{ lista.Dia }}</td>
+      <td>{{ lista.Exercicios }}</td>
+
+      <td class="acoes">
+        <button class="btn-editar" (click)="editarLista(lista)">
+          <img src="assets/images/edit.png" alt="editar" />
+        </button>
+        <button class="btn-excluir" (click)="editarLista(lista)">
+          <img src="assets/images/excluir.png" alt="excluir" />
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</main>
+<!-- Rodapé -->
+<app-footer></app-footer>

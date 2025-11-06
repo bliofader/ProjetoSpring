@@ -2,10 +2,14 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
+
+/* Estilos de layout globais 
+  (Provavelmente já estão no seu styles.css, mas incluídos para referência) 
+*/
 .logo img {
   display: flex;
-  justify-content: space-between; 
-  width:  160px;
+  justify-content: space-between;
+  width: 160px;
 }
 
 .header {
@@ -42,9 +46,12 @@ body {
   border-bottom: 2px solid #000;
 }
 
-/* Formulário */
+/* Estilo do "card" de formulário centralizado 
+  (Baseado no seu cadastrarexercicios.component.css)
+*/
 .user-list {
   width: 80%;
+  max-width: 900px; /* Adicionado para consistência com o layout de lista */
   margin: 40px auto;
   background: #f8f8f8;
   padding: 30px;
@@ -68,6 +75,7 @@ body {
   vertical-align: middle;
 }
 
+/* Estilos do formulário */
 .form-cadastro {
   display: flex;
   flex-direction: column;
@@ -91,14 +99,16 @@ textarea {
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  font-family: Arial, sans-serif; /* Garante consistência da fonte */
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 textarea {
   resize: none;
+  min-height: 80px;
 }
 
-/* Feedback */
+/* Feedback de Validação */
 .is-valid {
   border-color: #28a745 !important;
   box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
@@ -115,18 +125,24 @@ textarea {
   color: #dc3545;
 }
 
-/* Imagem */
-.preview {
-  margin-top: 10px;
-  text-align: center;
+/* NOVO ESTILO: Campo de seleção de exercícios 
+*/
+select[multiple] {
+  height: auto;
+  min-height: 150px; /* Dá mais espaço para ver as opções */
+  padding: 10px;
+  background-color: #fff;
 }
 
-.preview img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid #c7da33;
+select[multiple] option {
+  padding: 5px 8px; /* Melhora a leitura das opções */
+  font-size: 0.95rem;
+}
+
+select[multiple] option:checked {
+  background-color: #c7da33; /* Cor de destaque */
+  color: #000;
+  font-weight: bold;
 }
 
 /* Botões */
@@ -171,25 +187,11 @@ textarea {
   transform: scale(1.05);
 }
 
+/* Rodapé */
 .footer {
   text-align: center;
   padding: 15px;
   font-size: 0.85rem;
   color: #333;
   margin-top: 30px;
-}
-.btn-editar img {
-  color: #1976d2; /* Azul do lápis */
-  font-size: 1.2rem;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
-}
-
-.btn-excluir img {
-  color: #e53935; /* Vermelho do X */
-  font-size: 1.4rem;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
 }

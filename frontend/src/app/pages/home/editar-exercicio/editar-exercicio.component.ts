@@ -12,13 +12,13 @@ import { FooterComponent } from '../../../components/footer/footer.component';
 import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
 
 @Component({
-  selector: 'app-cadastrar-exercicio',
+  selector: 'app-editar-exercicio',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, NavbarComponent, FooterComponent, HeaderTopComponent],
-  templateUrl: './cadastrarexercicios.component.html',
-  styleUrl: './cadastrarexercicios.component.css',
+  templateUrl: './editar-exercicio.component.html',
+  styleUrl: './editar-exercicio.component.css',
 })
-export class CadastrarExerciciosComponent {
+export class EditarExercicioComponent {
   exercicioForm!: FormGroup;
   previewImage: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;

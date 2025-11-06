@@ -18,6 +18,12 @@ import { UserPersonalComponent } from './pages/User/user-personal/user-personal.
 import { ListaPersonaisComponent } from './pages/home/personal/lista-personais/lista-personais.component';
 import { ListaPersonaisDetalhesComponent } from './pages/home/personal/lista-personais-detalhes/lista-personais-detalhes.component';
 import { LoginAdminComponent } from './pages/login/login-admin/login-admin.component';
+import { LoginCadastrarComponent } from './pages/login/login-cadastrar/login-cadastrar.component';
+import { CriarListaComponent } from './pages/home/criarlista/criarlista.component';
+import { ListarListaComponent } from './pages/home/listar-listas/listar-listas.component';
+import { EditarExercicioComponent } from './pages/home/editar-exercicio/editar-exercicio.component';
+import { EditarListaComponent } from './pages/home/editar-lista/editar-lista.component';
+import { EditarUsuarioComponent } from './pages/home/editar-usuario/editar-usuario.component';
 
 
 //link das paginas
@@ -87,14 +93,6 @@ export const routes: Routes = [
 
     
 
-    
-
-    //pag criar lista de exercicio
-    // {
-    //     path: 'tela-criar-lista',
-    //     component: TelaCriarListaComponent,
-    //     title: 'Gymfy - Criar Lista de Exercicio'
-    // },
 
     // icaro admin
     {
@@ -116,6 +114,36 @@ export const routes: Routes = [
         path: 'cadastrarusuario',
         component: CadastrarUsuarioComponent,
         title: 'Cad - Usuario',
+    },
+    {
+        path: 'login-cadastrar',
+        component: LoginCadastrarComponent,
+        title: 'Login - Cadastrar',
+    },
+    {
+        path: 'criarlista',
+        component: CriarListaComponent,
+        title: 'Cadastrar - Lista',
+    },
+    {
+        path: 'listar-listas',
+        component: ListarListaComponent,
+        title: 'Listar - Lista',
+    },
+    {
+        path: 'editar-exercicio',
+        component: EditarExercicioComponent,
+        title: 'Editar - Exercício',
+    },
+    {
+        path: 'editar-lista',
+        component: EditarListaComponent,
+        title: 'Editar - Lista',
+    },
+     {
+        path: 'editar-usuario',
+        component: EditarUsuarioComponent,
+        title: 'Editar - Usuario',
     },
 
     //Pedro Usuários

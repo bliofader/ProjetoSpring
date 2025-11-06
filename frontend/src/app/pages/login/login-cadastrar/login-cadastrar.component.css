@@ -42,7 +42,7 @@ body {
   border-bottom: 2px solid #000;
 }
 
-/* Formulário */
+/* Formulário central */
 .user-list {
   width: 80%;
   margin: 40px auto;
@@ -85,8 +85,7 @@ label {
 }
 
 input,
-select,
-textarea {
+select {
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -94,11 +93,13 @@ textarea {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-textarea {
-  resize: none;
+input:focus,
+select:focus {
+  border-color: #c7da33;
+  outline: none;
 }
 
-/* Feedback */
+/* Feedback visual de validação */
 .is-valid {
   border-color: #28a745 !important;
   box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
@@ -113,20 +114,6 @@ textarea {
   margin-top: 4px;
   font-size: 0.85rem;
   color: #dc3545;
-}
-
-/* Imagem */
-.preview {
-  margin-top: 10px;
-  text-align: center;
-}
-
-.preview img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid #c7da33;
 }
 
 /* Botões */
@@ -171,25 +158,11 @@ textarea {
   transform: scale(1.05);
 }
 
+/* Rodapé */
 .footer {
   text-align: center;
   padding: 15px;
   font-size: 0.85rem;
   color: #333;
   margin-top: 30px;
-}
-.btn-editar img {
-  color: #1976d2; /* Azul do lápis */
-  font-size: 1.2rem;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
-}
-
-.btn-excluir img {
-  color: #e53935; /* Vermelho do X */
-  font-size: 1.4rem;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
 }
