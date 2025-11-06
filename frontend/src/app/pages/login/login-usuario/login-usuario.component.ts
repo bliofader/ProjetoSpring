@@ -2,39 +2,88 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { AlertDialogComponent, AlertDialogData } from '../../../components/alert-dialog/alert-dialog.component'; 
 
+// Adicione as importações do serviço e modelo:
+import { AuthService } from '../../../services/auth.service';
+import { LoginRequest } from '../../../Models/login-request.model';
 
 @Component({
-  selector: 'app-login-usuario',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './login-usuario.component.html',
-  styleUrl: './login-usuario.component.css'
+  selector: 'app-login-usuario',
+  standalone: true,
+  imports: [CommonModule, FormsModule, MatDialogModule, MatButtonModule, AlertDialogComponent],
+  templateUrl: './login-usuario.component.html',
+  styleUrl: './login-usuario.component.css'
 })
 export class LoginUsuarioComponent {
-  email = '';
-  senha = '';
+ 
+  credenciais: LoginRequest = { email: '', senha: '', nome: ''};  
 
-  // simulação de "usuários cadastrados"
-  usuarios = [
-    { nome: "icaro", email: 'icaro.123@gmail.com', senha: 'icaro123' },
-    { nome: "luiza", email: 'maria.123@gmail.com', senha: 'maria123' },
-    { nome: "ellen", email: 'ellen.123@gmail.com', senha: 'ellen123' }
-  ];
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private authService: AuthService 
+  ) { }
 
-  constructor(private router: Router) { }
+  openAlertDialog(data: AlertDialogData): void {
+    // Lógica mantida
+    const dialogRef = this.dialog.open(AlertDialogComponent, {
+      width: '350px',
+      data: data, 
+      disableClose: true, 
+    });
 
-  onSubmit() {
-    const usuarioValido = this.usuarios.find(
-      (u) => u.email === this.email && u.senha === this.senha
-    );
+    dialogRef.afterClosed().subscribe(() => {
+        if (data.type === 'success') {
+          this.router.navigate(['/user/home']);
+        }
+    });
+  }
 
-    if (usuarioValido) {
-      alert('Login realizado com sucesso!');
-      localStorage.setItem('usuarioNome', usuarioValido.nome);
-      this.router.navigate(['/user/home']); //mudar caminho
-    } else {
-      alert('E-mail ou senha incorretos.');
-    }
-  }
+  onSubmit() {
+    const payload: LoginRequest = {
+    email: this.credenciais.email, 
+    senha: this.credenciais.senha,
+    nome: this.credenciais.nome,
+};
+
+    this.authService.login(payload).subscribe({
+        next: (response) => {
+           
+            this.authService.salvarToken(response.token);
+            
+        
+            const nomeUsuario = response.nome || 'Usuário'; 
+            localStorage.setItem('usuarioNome', nomeUsuario);
+
+            this.openAlertDialog({
+                title: 'Sucesso!',
+                message: `Login realizado com sucesso! Bem-vindo(a), ${nomeUsuario}.`,
+                icon: 'check_circle',
+                type: 'success'
+            });
+        },
+        error: (error) => {
+             
+            console.error('Erro de Login:', error);
+
+            let mensagem = 'Erro desconhecido. Tente novamente mais tarde.';
+
+            if (error.status === 401 || error.status === 403) {
+                mensagem = 'E-mail ou senha incorretos. Verifique suas credenciais.';
+            } else if (error.status === 0) {
+                 mensagem = 'Não foi possível conectar ao servidor. Verifique sua conexão ou status da API.';
+            }
+
+            this.openAlertDialog({
+                title: 'Acesso Negado',
+                message: mensagem,
+                icon: 'error_outline',
+                type: 'error'
+            });
+        }
+    });
+  }
 }

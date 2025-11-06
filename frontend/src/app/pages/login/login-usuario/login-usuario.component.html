@@ -1,7 +1,6 @@
 <section class="login-usuario">
     <div class="container-geral">
 
-        <!-- div esquerda -->
         <div class="container-esquerdo">
             <div class="container-logo">
                 <img src="assets/images/logo.png" class="logo" alt="logo">
@@ -12,26 +11,23 @@
             </div>
         </div>
 
-        <!-- div direita -->
         <div class="container-direito">
-            <form class="form"  (ngSubmit)="onSubmit()">
+            <form class="form" (ngSubmit)="onSubmit()" #loginForm="ngForm"> 
                 <h2>Login</h2>
 
                 <div class="input">
-                    <input type="email" id="email" name="email"  [(ngModel)]="email" required placeholder="E-mail">
+                    <input type="email" id="email" name="email" [(ngModel)]="credenciais.email" required placeholder="E-mail">
                     <label for="email">*E-mail cadastrado na criação da sua assinatura</label>
                 </div>
 
                 <div class="input">
-                    <input type="password" id="password" name="password"  [(ngModel)]="senha" required placeholder="Senha">
+                    <input type="password" id="password" name="password" [(ngModel)]="credenciais.senha" required placeholder="Senha">
                     <label for="password">*Senha definida na criação da sua assinatura</label>
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit" [disabled]="!loginForm.valid">Login</button> 
                 <p>Não tem uma conta? <a href="/cadastro">Cadastra-se</a></p>
-
             </form>
         </div>
     </div>
-
 </section>

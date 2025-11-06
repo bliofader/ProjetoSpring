@@ -73,7 +73,8 @@
               "buildTarget": "Gymfy:build:production"
             },
             "development": {
-              "buildTarget": "Gymfy:build:development"
+              "buildTarget": "Gymfy:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
