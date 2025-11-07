@@ -9,16 +9,7 @@
 
   <form [formGroup]="exercicioForm" (ngSubmit)="onSubmit()" class="form-cadastro">
 
-    <!-- ID -->
-    <div class="form-group">
-      <label for="id">ID</label>
-      <input id="id" type="text" formControlName="id" placeholder="Ex: 101"
-        [ngClass]="{'is-valid': f['id'].valid && f['id'].touched, 'is-invalid': f['id'].invalid && f['id'].touched}" />
-      <div class="feedback" *ngIf="f['id'].touched && f['id'].invalid">
-        <small *ngIf="f['id'].errors?.['required']">O ID é obrigatório.</small>
-        <small *ngIf="f['id'].errors?.['pattern']">Somente números são permitidos.</small>
-      </div>
-    </div>
+
 
     <!-- Nome -->
     <div class="form-group">
@@ -88,7 +79,8 @@
       </div>
     </div>
 
-    <!-- Imagem -->
+
+<!-- Imagem -->
 <div class="form-group">
   <label for="imagePath">Imagem (.png ou .jpeg)</label>
   <input
@@ -100,10 +92,11 @@
   <div class="preview" *ngIf="previewImage">
     <img [src]="previewImage" alt="Pré-visualização da imagem" />
   </div>
-  <div class="feedback" *ngIf="f['imagePath'].touched && f['imagePath'].invalid">
+  <div class="feedback" *ngIf="imagemInvalida">
     <small>Selecione uma imagem.</small>
   </div>
 </div>
+
 
 
     <!-- Vídeo -->

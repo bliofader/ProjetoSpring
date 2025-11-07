@@ -12,15 +12,33 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
+  // LISTAR TODOS
   findAll(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.baseUrl);
   }
 
+  // LISTAR POR TIPO (ex: Comum ou Personal)
   findComuns(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.baseUrl + ''); // ✅ se tiver esse endpoint no backend
+    return this.http.get<Usuario[]>(`${this.baseUrl}/tipo/Comum`);
   }
-  create(usuario: Usuario): Observable<Usuario> {
-  return this.http.post<Usuario>(this.baseUrl, usuario);
-}
 
+  // BUSCAR POR ID
+  findById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.baseUrl}/${id}`);
+  }
+
+  // CADASTRAR
+  create(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(this.baseUrl, usuario);
+  }
+
+  // ATUALIZAR
+  update(id: number, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.baseUrl}/${id}`, usuario);
+  }
+
+  // EXCLUIR
+  delete(id: number): Observable<string> {
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  }
 }

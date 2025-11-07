@@ -55,25 +55,24 @@ public class ExercicioResource {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Exercicio> cadastrarExercicio(
-            @RequestParam("id") Integer id,
             @RequestParam("nome") String nome,
             @RequestParam("tipo") String tipo,
             @RequestParam("agrupamento") String agrupamento,
             @RequestParam("nivel") String nivel,
             @RequestParam("descricao") String descricao,
             @RequestParam(value = "videoUrl", required = false) String videoUrl,
-            @RequestParam("imagePath") MultipartFile imageFile
+            @RequestParam("imagem") MultipartFile imagem
     ) throws IOException {
 
-        // Salvar imagem no disco
-        String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+        // Gerar nome único para a imagem
+        String fileName = UUID.randomUUID() + "_" + imagem.getOriginalFilename();
+
+        // Caminho onde a imagem será salva
         Path imagePath = Paths.get("uploads/" + fileName);
         Files.createDirectories(imagePath.getParent());
-        Files.write(imagePath, imageFile.getBytes());
+        Files.write(imagePath, imagem.getBytes());
 
-        // Criar entidade
         Exercicio exercicio = new Exercicio();
-        exercicio.setId(id);
         exercicio.setNome(nome);
         exercicio.setTipo(tipo);
         exercicio.setAgrupamento(agrupamento);
@@ -82,13 +81,13 @@ public class ExercicioResource {
         exercicio.setImagePath(fileName);
         exercicio.setVideoPath(videoUrl);
 
-
         exercicio = exercicioService.CadastrarExecicio(exercicio);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(exercicio.getId()).toUri();
         return ResponseEntity.created(uri).body(exercicio);
     }
+
 
 
     //deletar

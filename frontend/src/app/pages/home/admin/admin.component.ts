@@ -7,6 +7,10 @@ import { RouterLink } from '@angular/router';
 import { HomeComponent } from '../home.component';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../entities/usuario';
+import { OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-admin',
@@ -15,27 +19,38 @@ import { HeaderTopComponent } from '../../../components/headertop/headertop.comp
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
-export class AdminCadastroUsuarioComponent {
+export class AdminCadastroUsuarioComponent implements OnInit {
   searchTerm = '';
-  usuarios = [
-    { ID: '1', Nome: 'Icaro', Tipo: 'Usuario', DataDeNascimento: '06/06/1993', CPF: '448.875.485-77', Email: 'icaro.123@gmail.com', Senha: 'icaro123', ativo: true },
-    { ID: '2', Nome: 'Maria', Tipo: 'Personal', DataDeNascimento: '12/12/2005', CPF: '265.875.485-76', Email: 'maria.123@gmail.com', Senha: 'maria123', inativo: true },
-    { ID: '3', Nome: 'Ellen', Tipo: 'Personal', DataDeNascimento: '13/04/2003', CPF: '328.875.665-54', Email: 'ellen.123@gmail.com', Senha: 'ellen123', ativo: true },
-  ];
+  usuarios: Usuario[] = [];
+
+  constructor(private usuarioService: UsuarioService) {}
+
+  ngOnInit(): void {
+    this.usuarioService.findAll().subscribe({
+      next: (res) => this.usuarios = res,
+      error: () => alert('Erro ao carregar usuários.')
+    });
+  }
 
   onSearch() {
     console.log('Buscando por:', this.searchTerm);
   }
-  editarUsuario(usuario: any) {
-  console.log('Editando usuário:', usuario);
-  // Aqui você pode abrir um modal, ou redirecionar para outra rota de edição
-}
 
-excluirUsuario(usuario: any) {
-  const confirmacao = confirm(`Deseja excluir o usuário ${usuario.Nome}?`);
-  if (confirmacao) {
-    this.usuarios = this.usuarios.filter((u) => u !== usuario);
+  editarUsuario(usuario: Usuario) {
+    console.log('Editando usuário:', usuario);
+    // redirecionar ou abrir modal
+  }
+
+  excluirUsuario(usuario: Usuario) {
+    const confirmacao = confirm(`Deseja excluir o usuário ${usuario.nome}?`);
+    if (confirmacao) {
+      this.usuarioService.delete(usuario.id!).subscribe({
+        next: () => {
+          alert('Usuário excluído com sucesso!');
+          this.usuarios = this.usuarios.filter(u => u.id !== usuario.id);
+        },
+        error: () => alert('Erro ao excluir usuário.')
+      });
+    }
   }
 }
-}
-
