@@ -18,4 +18,8 @@ export class ExercicioService {
   listarExercicios(): Observable<Exercicio[]> {
     return this.http.get<Exercicio[]>(this.apiUrl);
   }
+  buscarPorId(id: number): Observable<Exercicio> {
+  return this.http.get<Exercicio>(`${this.apiUrl}/${id}`);
+}
+
 }
