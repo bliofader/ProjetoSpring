@@ -10,26 +10,24 @@ import { AuthService } from '../../../services/auth.service';
 import { LoginRequest } from '../../../Models/login-request.model';
 import { LoadingService } from '../../../services/loading.service';
 
-
 @Component({
     selector: 'app-login-usuario',
     standalone: true,
     imports: [CommonModule, FormsModule, MatDialogModule, MatButtonModule, AlertDialogComponent],
     templateUrl: './login-usuario.component.html',
-    styleUrl: './login-usuario.component.css'
+    styleUrls: ['./login-usuario.component.css'] 
 })
 export class LoginUsuarioComponent {
 
-    credenciais: LoginRequest = { email: '', senha: ''};
+    credenciais: LoginRequest = { email: '', senha: '' };
 
-    // 1. O LoadingService é injetado aqui
     private loadingService: LoadingService = inject(LoadingService);
 
     constructor(
         private router: Router,
         private dialog: MatDialog,
         private authService: AuthService
-    ) { }
+    ) {}
 
     openAlertDialog(data: AlertDialogData): void {
         const dialogRef = this.dialog.open(AlertDialogComponent, {
@@ -46,38 +44,38 @@ export class LoginUsuarioComponent {
     }
 
     onSubmit() {
-        
-        this.loadingService.setLoading(true); 
+        this.loadingService.setLoading(true);
 
         const payload: LoginRequest = {
             email: this.credenciais.email,
-            senha: this.credenciais.senha,
-            nomeUsuario: this.credenciais.nomeUsuario, 
+            senha: this.credenciais.senha
         };
 
         this.authService.login(payload).subscribe({
             next: (response) => {
-                
-                this.authService.salvarToken(response.token);
-                const nomeUsuario = response.nome || 'Usuário'; 
-                localStorage.setItem('usuarioNome', nomeUsuario); 
+                this.authService.salvarToken(
+                    response.token,
+                    response.usuarioId,
+                    response.nomeUsuario,
+                    response.perfil
+                );
+
+                localStorage.setItem('usuarioNome', response.nomeUsuario || 'Usuário');
+                localStorage.setItem('usuarioTipo', response.perfil || 'Comum');
+
                 setTimeout(() => {
-                this.loadingService.setLoading(false); 
-                this.openAlertDialog({
-                    title: 'Sucesso!',
-                    message: `Login realizado com sucesso! Bem-vindo(a), ${nomeUsuario}.`,
-                    icon: 'check_circle',
-                    type: 'success'
-                });
+                    this.loadingService.setLoading(false);
+                    this.openAlertDialog({
+                        title: 'Sucesso!',
+                        message: `Login realizado com sucesso! Bem-vindo(a), ${response.nomeUsuario || 'Usuário'}.`,
+                        icon: 'check_circle',
+                        type: 'success'
+                    });
                 }, 1000);
-
-                
-
             },
-            error: (error) => {
-                
-                console.error('Erro de Login:', error);
 
+            error: (error) => {
+                console.error('Erro de Login:', error);
                 let mensagem = 'Erro desconhecido. Tente novamente mais tarde.';
 
                 if (error.status === 401 || error.status === 403) {
@@ -87,15 +85,14 @@ export class LoginUsuarioComponent {
                 }
 
                 setTimeout(() => {
-                this.loadingService.setLoading(false); 
-                this.openAlertDialog({
-                    title: 'Acesso Negado',
-                    message: mensagem,
-                    icon: 'error_outline',
-                    type: 'error'
-                });
-                }, 500); 
-                
+                    this.loadingService.setLoading(false);
+                    this.openAlertDialog({
+                        title: 'Acesso Negado',
+                        message: mensagem,
+                        icon: 'error_outline',
+                        type: 'error'
+                    });
+                }, 500);
             }
         });
     }

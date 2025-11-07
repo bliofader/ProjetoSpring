@@ -1,14 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserSideabrComponent } from '../../../components/UserComponents/user-sideabr/user-sideabr.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { HeaderUsuarioComponent } from '../../../components/header-usuario/header-usuario.component';
 import { AlertDialogComponent, AlertDialogData } from '../../../components/alert-dialog/alert-dialog.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'; 
+import { MatDialog } from '@angular/material/dialog'; 
 import { MatButtonModule } from '@angular/material/button'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoadingService } from '../../../services/loading.service';
-
+import { UsuarioService, Usuario } from '../../../services/UsuarioService';
 
 @Component({
   selector: 'app-user-conta',
@@ -18,64 +18,83 @@ import { LoadingService } from '../../../services/loading.service';
     FooterComponent, 
     HeaderUsuarioComponent,
     AlertDialogComponent,
-    MatDialogModule,
     MatButtonModule,
     CommonModule,
     FormsModule
   ],
   templateUrl: './user-conta.component.html',
-  styleUrl: './user-conta.component.css'
+  styleUrls: ['./user-conta.component.css']
 })
-export class UserContaComponent {
+export class UserContaComponent implements OnInit {
 
-  private loadingService: LoadingService = inject(LoadingService);
+  private loadingService = inject(LoadingService);
+  private usuarioService = inject(UsuarioService);
+  private dialog = inject(MatDialog);
 
-  dados = {
-    nome: 'Icaro Souza',
-    email: 'icaro.123@gmail.com',
-    cpf: '123.456.789-00',
-    nascimento: '1990-01-01'
+  dados: Partial<Usuario> = {};
+  usuarioId!: number;
+
+  ngOnInit(): void {
+    const storedId = localStorage.getItem('usuarioId');
+    if (storedId) {
+      this.usuarioId = +storedId;
+      this.usuarioService.getUsuarioById(this.usuarioId).subscribe({
+        next: (res: Usuario) => {
+          console.log("🧠 Dados do usuário:", res);
+          this.dados = res;
+        },
+        error: (err: any) => {
+          console.error("Erro ao buscar dados do usuário:", err);
+        }
+      });
+    } else {
+      console.error("ID do usuário não encontrado na storage.");
+    }
   }
-  
- 
-  constructor(private dialog: MatDialog) {}
 
-  
   onAlterar(): void {
     const dialogData: AlertDialogData = {
       title: 'Confirmar Alterações',
-      message: 'Você tem certeza que deseja salvar as novas informações da sua conta? Esta ação é irreversível.',
-      icon: 'warning', 
-      type: 'error' 
+      message: 'Deseja realmente salvar as novas informações?',
+      icon: 'warning',
+      type: 'error'
     };
 
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       width: '400px',
-      data: dialogData,
-      disableClose: false, 
+      data: dialogData
     });
 
-    
-    dialogRef.afterClosed().subscribe(confirmado => {
-      
+    dialogRef.afterClosed().subscribe((confirmado: boolean) => {
       if (confirmado) {
         this.salvarDados();
-      } else {
-        console.log('Alteração cancelada pelo usuário.');
       }
     });
   }
-  
-  
+
   private salvarDados(): void {
-      
-      this.loadingService.setLoading(true);
-      setTimeout(() => {
-        
-        console.log('✅ Dados Salvos no Backend (Simulação)!', this.dados);
-        
-        this.loadingService.setLoading(false); 
-        
+    if (!this.usuarioId) {
+      console.error("ID do usuário indefinido.");
+      return;
+    }
+
+    this.loadingService.setLoading(true);
+
+    const dadosAlteraveis: Partial<Usuario> = {
+      nome: this.dados.nome,
+      email: this.dados.email,
+      cpf: this.dados.cpf,
+      dataNascimento: this.dados.dataNascimento
+    };
+
+    this.usuarioService.atualizarUsuario(this.usuarioId, dadosAlteraveis).subscribe({
+      next: (res: Usuario) => {
+        this.loadingService.setLoading(false);
+
+        localStorage.setItem('usuarioNome', res.nome);
+
+        this.dados = res;
+
         this.dialog.open(AlertDialogComponent, {
           width: '350px',
           data: {
@@ -85,7 +104,11 @@ export class UserContaComponent {
             type: 'success'
           } as AlertDialogData
         });
-
-      }, 1000); 
+      },
+      error: (err: any) => {
+        this.loadingService.setLoading(false);
+        console.error('Erro ao salvar dados', err);
+      }
+    });
   }
 }

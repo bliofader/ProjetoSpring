@@ -1,5 +1,4 @@
 <main>
-
   <header>
     <app-header-usuario></app-header-usuario>
   </header>
@@ -13,10 +12,10 @@
       <h4>Gerencie Sua Conta</h4>
 
       <div class="ContainerDetalhes">
-        <input type="text" placeholder="Nome">
-        <input type="text" placeholder="Email">
-        <input type="text" placeholder="CPF">
-        <input type="date" placeholder="Data de nascimento">
+        <input type="text" placeholder="Nome" [(ngModel)]="dados.nome">
+        <input type="text" placeholder="Email" [(ngModel)]="dados.email">
+        <input type="text" placeholder="CPF" [(ngModel)]="dados.cpf">
+        <input type="date" placeholder="Data de nascimento" [(ngModel)]="dados.dataNascimento">
         <button class="BotaoAlterar" (click)="onAlterar()">Alterar</button>
       </div>
     </div>
@@ -25,5 +24,4 @@
   <footer>
     <app-footer></app-footer>
   </footer>
-
 </main>

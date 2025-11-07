@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginRequest } from '../Models/login-request.model';
+import { JwtHelperService } from '@auth0/angular-jwt'; 
 
-interface LoginResponse {
+export interface LoginResponse {
   token: string;
-  nome: string;  
+  tipo: string;
+  nomeUsuario: string;
   perfil: string;
+  usuarioId: number;
 }
 
 @Injectable({
@@ -14,8 +17,7 @@ interface LoginResponse {
 })
 export class AuthService {
   private apiUrl = '/auth';
-
-
+  private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient) {}
 
@@ -23,15 +25,21 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credenciais);
   }
 
-  salvarToken(token: string): void {
+  salvarToken(token: string, idUsuario: number, nome?: string, tipo?: string): void {
+
     localStorage.setItem('jwt_token', token);
+
+    localStorage.setItem('usuarioId', idUsuario.toString());
+
+    if (nome) localStorage.setItem('usuarioNome', nome);
+    if (tipo) localStorage.setItem('usuarioTipo', tipo);
   }
 
   getToken(): string | null {
     return localStorage.getItem('jwt_token');
-}
+  }
 
   isLoggedIn(): boolean {
-    return !!this.getToken(); 
-}
+    return !!this.getToken();
+  }
 }
