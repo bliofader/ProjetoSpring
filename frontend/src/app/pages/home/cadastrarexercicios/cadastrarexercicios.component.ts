@@ -44,6 +44,7 @@ export class CadastrarExerciciosComponent {
     if (!input.files || input.files.length === 0) {
       this.selectedFile = null;
       this.previewImage = null;
+      this.imagemInvalida = true;
       return;
     }
 
@@ -60,24 +61,22 @@ export class CadastrarExerciciosComponent {
   onSubmit(): void {
     this.imagemInvalida = !this.selectedFile;
 
-    if (this.exercicioForm.invalid || !this.selectedFile) {
-  this.exercicioForm.markAllAsTouched();
-  this.imagemInvalida = true;
-  return;
-}
+    if (this.exercicioForm.invalid || this.imagemInvalida) {
+      this.exercicioForm.markAllAsTouched();
+      return;
+    }
 
-const formData = new FormData();
-formData.append('nome', this.exercicioForm.value.nome);
-formData.append('tipo', this.exercicioForm.value.tipo);
-formData.append('agrupamento', this.exercicioForm.value.agrupamento);
-formData.append('nivel', this.exercicioForm.value.nivel);
-formData.append('descricao', this.exercicioForm.value.descricao);
-formData.append('videoUrl', this.exercicioForm.value.videoUrl || '');
+    const formData = new FormData();
+    formData.append('nome', this.exercicioForm.value.nome);
+    formData.append('tipo', this.exercicioForm.value.tipo);
+    formData.append('agrupamento', this.exercicioForm.value.agrupamento);
+    formData.append('nivel', this.exercicioForm.value.nivel);
+    formData.append('descricao', this.exercicioForm.value.descricao);
+    formData.append('videoUrl', this.exercicioForm.value.videoUrl || '');
 
-if (this.selectedFile) {
-  formData.append('imagem', this.selectedFile);
-}
-
+    if (this.selectedFile) {
+      formData.append('imagem', this.selectedFile);
+    }
 
     this.exercicioService.cadastrarExercicio(formData).subscribe({
       next: res => {

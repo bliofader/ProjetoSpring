@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Exercicio } from '../entities/exercicio'; // ajuste o caminho se necessário
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,9 @@ export class ExercicioService {
 
   cadastrarExercicio(formData: FormData): Observable<any> {
     return this.http.post(this.apiUrl, formData);
+  }
+
+  listarExercicios(): Observable<Exercicio[]> {
+    return this.http.get<Exercicio[]>(this.apiUrl);
   }
 }
