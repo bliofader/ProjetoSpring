@@ -42,7 +42,7 @@
     <img [src]="'http://localhost:8080/uploads/' + exercicio.imagePath" alt="{{exercicio.nome}}" class="exercise-img">
     <h3>{{ exercicio.nome }}</h3>
     <p>Agrupamento <br> <span>{{ exercicio.agrupamento | titlecase }}</span></p>
-    <a [routerLink]="['/detalhes', exercicio.nome.toLowerCase().split(' ').join('-')]" class="inspect-btn">INSPECIONAR</a>
+    <a [routerLink]="['/detalhes', exercicio.id]" class="inspect-btn">INSPECIONAR</a>
   </div>
 </section>
 

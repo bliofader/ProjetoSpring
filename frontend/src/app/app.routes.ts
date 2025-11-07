@@ -21,11 +21,19 @@ export const routes: Routes = [
     { path: 'sobre-nos', component: SobreNosComponent, title: 'Gymfy - Sobre nos' },
     { path: 'contato', component: ContatoComponent, title: 'Gymfy - Contato' },
     { path: 'tela-exercicio', component: TelaExercicioComponent, title: 'Gymfy - Exercicios' },
-    { path: 'detalhes/:nome', component: TelaExercicioDetalhesComponent, title: 'Gymfy - Detalhes dos Exercicios' },
     { path: 'tela-personal', component: TelaPersonalInicialComponent, title: 'Gymfy - Personal' },
     { path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin' },
     { path: 'exercicios', component: AdminCadastroExercicioComponent, title: 'Gymfy - Exercicios' },
     { path: 'cadastrarexercicios', component: CadastrarExerciciosComponent, title: 'Cad - Exercicios' },
     { path: 'cadastrarusuario', component: CadastrarUsuarioComponent, title: 'Cad - Usuario' },
-    { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' } // ✅ Nova rota
+    { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' }, 
+{ 
+  path: 'detalhes/:id', 
+  loadComponent: () => import('./pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component')
+    .then(m => m.TelaExercicioDetalhesComponent),
+  title: 'Gymfy - Detalhes dos Exercícios'
+}
+
+
+
 ];
