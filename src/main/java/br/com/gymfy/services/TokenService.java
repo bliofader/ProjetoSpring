@@ -27,6 +27,7 @@ public class TokenService {
                     .withIssuer("gymfy-api")
                     .withSubject(usuario.getEmail())
                     .withClaim("tipo", usuario.getTipo())
+                    .withClaim("nome", usuario.getNome())
                     .withExpiresAt(gerarDataExpiracao())
                     .sign(algorithm);
 

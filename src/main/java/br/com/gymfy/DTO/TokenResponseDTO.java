@@ -3,14 +3,15 @@ package br.com.gymfy.DTO;
 public class TokenResponseDTO {
     private String token;
     private String tipo = "Bearer";
-
+    private String nomeUsuario;
     private String perfil;
 
     public TokenResponseDTO(){}
 
-    public TokenResponseDTO(String token, String perfil){
+    public TokenResponseDTO(String token, String perfil, String nomeUsuario){
         this.token = token;
         this.perfil = perfil;
+        this.nomeUsuario = nomeUsuario;
     }
 
     public String getToken() {
@@ -36,4 +37,7 @@ public class TokenResponseDTO {
     public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
+    public String getNome() { return nomeUsuario; }
+    public void setNomeUsuario(String nomeUsuario) { this.nomeUsuario = nomeUsuario; }
+
 }
