@@ -35,6 +35,6 @@ public class AuthService {
         String token = tokenService.gerarToken(usuarioAutenticado);
 
 
-        return new TokenResponseDTO(token, usuarioAutenticado.getTipo(),usuarioAutenticado.getNome());
+        return new TokenResponseDTO(token, usuarioAutenticado.getTipo(), usuarioAutenticado.getNome(), usuarioAutenticado.getId().longValue());
     }
 }

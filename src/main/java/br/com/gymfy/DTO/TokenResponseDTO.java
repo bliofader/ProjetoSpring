@@ -5,13 +5,15 @@ public class TokenResponseDTO {
     private String tipo = "Bearer";
     private String nomeUsuario;
     private String perfil;
+    private Long usuarioId;
 
-    public TokenResponseDTO(){}
+    public TokenResponseDTO() {}
 
-    public TokenResponseDTO(String token, String perfil, String nomeUsuario){
+    public TokenResponseDTO(String token, String perfil, String nomeUsuario, Long usuarioId) {
         this.token = token;
         this.perfil = perfil;
         this.nomeUsuario = nomeUsuario;
+        this.usuarioId = usuarioId;
     }
 
     public String getToken() {
@@ -26,6 +28,14 @@ public class TokenResponseDTO {
         return perfil;
     }
 
+    public String getNomeUsuario() { //
+        return nomeUsuario;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
     public void setToken(String token) {
         this.token = token;
     }
@@ -37,7 +47,12 @@ public class TokenResponseDTO {
     public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
-    public String getNome() { return nomeUsuario; }
-    public void setNomeUsuario(String nomeUsuario) { this.nomeUsuario = nomeUsuario; }
 
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
 }
