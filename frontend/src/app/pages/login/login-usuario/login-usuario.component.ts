@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AlertDialogComponent, AlertDialogData } from '../../../components/alert-dialog/alert-dialog.component';
 
-// Adicione as importações do serviço e modelo:
 import { AuthService } from '../../../services/auth.service';
 import { LoginRequest } from '../../../Models/login-request.model';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
     selector: 'app-login-usuario',
@@ -19,7 +20,10 @@ import { LoginRequest } from '../../../Models/login-request.model';
 })
 export class LoginUsuarioComponent {
 
-    credenciais: LoginRequest = { email: '', senha: '', nome: '' };
+    credenciais: LoginRequest = { email: '', senha: ''};
+
+    // 1. O LoadingService é injetado aqui
+    private loadingService: LoadingService = inject(LoadingService);
 
     constructor(
         private router: Router,
@@ -28,7 +32,6 @@ export class LoginUsuarioComponent {
     ) { }
 
     openAlertDialog(data: AlertDialogData): void {
-        // Lógica mantida
         const dialogRef = this.dialog.open(AlertDialogComponent, {
             width: '350px',
             data: data,
@@ -43,30 +46,36 @@ export class LoginUsuarioComponent {
     }
 
     onSubmit() {
+        
+        this.loadingService.setLoading(true); 
+
         const payload: LoginRequest = {
             email: this.credenciais.email,
             senha: this.credenciais.senha,
-            nome: this.credenciais.nome,
+            nomeUsuario: this.credenciais.nomeUsuario, 
         };
 
         this.authService.login(payload).subscribe({
             next: (response) => {
-
+                
                 this.authService.salvarToken(response.token);
-
-
-                const nomeUsuario = response.nome || 'Usuário';
-                localStorage.setItem('usuarioNome', nomeUsuario);
-
+                const nomeUsuario = response.nome || 'Usuário'; 
+                localStorage.setItem('usuarioNome', nomeUsuario); 
+                setTimeout(() => {
+                this.loadingService.setLoading(false); 
                 this.openAlertDialog({
                     title: 'Sucesso!',
                     message: `Login realizado com sucesso! Bem-vindo(a), ${nomeUsuario}.`,
                     icon: 'check_circle',
                     type: 'success'
                 });
+                }, 1000);
+
+                
+
             },
             error: (error) => {
-
+                
                 console.error('Erro de Login:', error);
 
                 let mensagem = 'Erro desconhecido. Tente novamente mais tarde.';
@@ -77,12 +86,16 @@ export class LoginUsuarioComponent {
                     mensagem = 'Não foi possível conectar ao servidor. Verifique sua conexão ou status da API.';
                 }
 
+                setTimeout(() => {
+                this.loadingService.setLoading(false); 
                 this.openAlertDialog({
                     title: 'Acesso Negado',
                     message: mensagem,
                     icon: 'error_outline',
                     type: 'error'
                 });
+                }, 500); 
+                
             }
         });
     }

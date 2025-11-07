@@ -24,7 +24,11 @@ import { ListarListaComponent } from './pages/home/listar-listas/listar-listas.c
 import { EditarExercicioComponent } from './pages/home/editar-exercicio/editar-exercicio.component';
 import { EditarListaComponent } from './pages/home/editar-lista/editar-lista.component';
 import { EditarUsuarioComponent } from './pages/home/editar-usuario/editar-usuario.component';
+import { ListaUsuarioComponent } from './pages/User/lista-usuario/lista-usuario.component';
 
+//Rotas para autenticar usuario, deixar ou nao deixar ver
+import { noAuthGuard } from './guards/no-auth.guard';
+import { authGuard } from './guards/auth.guard';
 
 //link das paginas
 export const routes: Routes = [
@@ -44,6 +48,7 @@ export const routes: Routes = [
         path: 'login-usuario',
         component: LoginUsuarioComponent,
         title: 'Gymfy - Login Usuario',
+        canActivate: [noAuthGuard]
     },
 
     //barra de navegação
@@ -151,25 +156,35 @@ export const routes: Routes = [
     {
         path:'user/home',
         component: UserHomeComponent,
-        title:'Home - Usuários'
+        title:'Home - Usuários',
+        canActivate: [authGuard]
     },
 
     {
         path:'user/treinos',
         component: UserTreinoComponent,
-        title:'Treino - Usuários'
+        title:'Treino - Usuários',
+        canActivate: [authGuard]
     },
 
     {
         path:'user/conta',
         component:UserContaComponent,
-        title:'Conta - Usuário'
+        title:'Conta - Usuário',
+        canActivate: [authGuard]
     },
 
     {
         path:'user/personal',
         component:UserPersonalComponent,
-        title:'Personal - Usuário'
+        title:'Personal - Usuário',
+        canActivate: [authGuard]
+    },
+    {
+        path:'user/lista/detalhes',
+        component:ListaUsuarioComponent,
+        title:'Lista - Usuário',
+        canActivate: [authGuard]
     }
 
     // {

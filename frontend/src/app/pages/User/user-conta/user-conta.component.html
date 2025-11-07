@@ -1,24 +1,29 @@
 <main>
 
-    <header>
-        <app-header-usuario></app-header-usuario>
-    </header>
+  <header>
+    <app-header-usuario></app-header-usuario>
+  </header>
 
-    <section>
-        
-        <div class="SideBar">
-            <app-user-sideabr></app-user-sideabr>
-        </div>
+  <section>
+    <div class="SideBar">
+      <app-user-sideabr></app-user-sideabr>
+    </div>
 
-        <div class="containerMae">
-            <h4> Detalhes da sua Conta </h4>
-        </div>
+    <div class="ContainerListas">
+      <h4>Gerencie Sua Conta</h4>
 
-    </section>
+      <div class="ContainerDetalhes">
+        <input type="text" placeholder="Nome">
+        <input type="text" placeholder="Email">
+        <input type="text" placeholder="CPF">
+        <input type="date" placeholder="Data de nascimento">
+        <button class="BotaoAlterar" (click)="onAlterar()">Alterar</button>
+      </div>
+    </div>
+  </section>
 
-    
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 
 </main>
