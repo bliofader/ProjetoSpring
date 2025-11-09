@@ -1,6 +1,7 @@
 package br.com.gymfy.resources;
 
 
+import br.com.gymfy.services.TokenService;
 import br.com.gymfy.services.UsuarioService;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value="/usuarios")
 public class UsuarioResource {
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private TokenService tokenService;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Usuario> findById(@PathVariable Integer id) {
@@ -24,6 +27,16 @@ public class UsuarioResource {
         return ResponseEntity.ok().body(usuario);
 
     }
+
+    @GetMapping(value = "/nome/{nome}")
+    public ResponseEntity<Usuario> findByNome(@PathVariable String nome) {
+        Usuario usuario = usuarioService.findByNome(nome);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     @GetMapping(value = "/tipo/{tipo}")
     public ResponseEntity<List<Usuario>> findByTipo(@PathVariable String tipo) {
@@ -52,9 +65,9 @@ public class UsuarioResource {
 
     //deletar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deletar(@PathVariable Integer id){
+    public ResponseEntity<Usuario> deletar(@PathVariable Integer id){
         usuarioService.deletar(id);
-        return ResponseEntity.ok("Usuário com ID " + id + " deletado com sucesso.");
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")

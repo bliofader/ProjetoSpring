@@ -1,6 +1,5 @@
 package br.com.gymfy.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,49 +10,38 @@ public class Exercicio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private int id;
+    int id;
 
     @Column(name = "Nome")
-    private String nome;
+    String nome;
 
     @Column(name = "Tipo")
-    private String tipo;
+    String tipo;
 
     @Column(name = "Agrupamento")
-    private String agrupamento;
+    String agrupamento;
 
     @Column(name = "Nivel")
-    private String nivel;
+    String nivel;
 
     @Column(name = "Descrição")
-    private String descricao;
+    String descricao;
 
-    @Column(name = "Imagem")
-    private String imagePath;
-
-    @Column(name = "Video")
-    @JsonProperty("videoUrl")
-    private String videoPath;
-
-    public Exercicio(int id, String nome, String tipo, String agrupamento, String nivel, String descricao, String imagePath, String videoPath) {
+    public Exercicio(int id, String nome, String tipo, String agrupamento, String nivel, String descricao) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.agrupamento = agrupamento;
         this.nivel = nivel;
         this.descricao = descricao;
-        this.imagePath = imagePath;
-        this.videoPath = videoPath;
     }
 
-    public Exercicio(String nome, String tipo, String agrupamento, String nivel, String descricao,String imagePath, String videoPath) {
+    public Exercicio(String nome, String tipo, String agrupamento, String nivel, String descricao) {
         this.nome = nome;
         this.tipo = tipo;
         this.agrupamento = agrupamento;
         this.nivel = nivel;
         this.descricao = descricao;
-        this.imagePath = imagePath;
-        this.videoPath = videoPath;
     }
 
     public Exercicio() {
@@ -109,22 +97,6 @@ public class Exercicio implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public String getVideoPath() {
-        return videoPath;
-    }
-
-    public void setVideoPath(String videoPath) {
-        this.videoPath = videoPath;
-    }
-
     @Override
     public String toString() {
         return "Exercicio{" +
@@ -134,8 +106,6 @@ public class Exercicio implements Serializable {
                 ", agrupamento='" + agrupamento + '\'' +
                 ", nivel='" + nivel + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", videoPath='" + videoPath + '\'' +
                 '}';
     }
 }

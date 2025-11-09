@@ -4,11 +4,9 @@ package br.com.gymfy.services;
 import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.gymfy.repositories.UsuarioRepository;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +14,9 @@ import java.util.Optional;
 public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Usuario findById(Integer id) {
         Optional<Usuario> usuario= usuarioRepository.findById(id);
@@ -45,17 +46,21 @@ public class UsuarioService {
         return usuarios.orElse(null);
     }
 
+    public Usuario findByEmail(String email){
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        return usuario.orElse(null);
+    }
+
     public Usuario cadastrarUsuario(Usuario usuario){
+
+        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+        usuario.setSenha(senhaCriptografada);
+
         return usuarioRepository.save(usuario);
     }
 
     public void deletar(Integer id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if (usuario.isPresent()) {
-            usuarioRepository.deleteById(id);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário com ID " + id + " não encontrado.");
-        }
+        usuarioRepository.deleteById(id);
     }
 
     public Usuario update (Integer id, Usuario usuario){
@@ -71,5 +76,3 @@ public class UsuarioService {
         return null;
     }
 }
-
-
