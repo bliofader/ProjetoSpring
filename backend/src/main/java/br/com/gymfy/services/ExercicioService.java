@@ -14,10 +14,9 @@ public class ExercicioService {
     ExercicioRepository exercicioRepository;
 
     public Exercicio findById(Integer id) {
-        return exercicioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Exercício não encontrado"));
+        Optional<Exercicio> exercicio = exercicioRepository.findById(id);
+        return exercicio.orElse(null);
     }
-
 
 
 
