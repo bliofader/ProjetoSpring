@@ -1,113 +1,106 @@
 .content-container {
-    background-color: #000;
-    width: 100%;
-    /* position: relative; */
-    font-family: 'Lexend', sans-serif;
+  background-color: #000;
+  width: 100%;
+  font-family: 'Lexend', sans-serif;
 }
 
 .container-fundo {
-    position: relative;
-    /*referência para o h1 */
-    width: 100vw;
-
+  position: relative;
+  width: 100vw;
 }
 
 .container-fundo img {
-    display: block;
-    width: 100%;
-    height: 450px;
+  display: block;
+  width: 100%;
+  height: 450px;
 }
 
-/* Centraliza o conteúdo sobre a imagem */
 .container-fundo .info {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    /* centraliza o texto */
-    z-index: 2;
-    width: 80%;
-    /* evita texto muito largo em telas grandes */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 80%;
 }
 
 .container-fundo h1,
-h2 {
-    /* position: absolute; */
-    /* fica sobre a imagem */
-    font-family: 'Lexend', sans-serif;
-    color: var(--text-color);
-    text-align: center;
+.container-fundo h2 {
+  font-family: 'Lexend', sans-serif;
+  color: var(--text-color);
+  text-align: center;
 }
 
 .container-fundo h1 {
-    top: 150px;
-    left: 15%;
-    font-size: 40px;
-
+  font-size: 40px;
 }
 
 .container-fundo h2 {
-    top: 150px;
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .container-fundo span {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
-/* exercicio */
+/* Detalhes do exercício */
 
-.detalhes-container h2{
-    text-align: center;
-    color: var(--text-color);
-    font-size: 40px;
+.detalhes-container {
+  padding: 0 20px;
+}
+
+.detalhes-container h2 {
+  text-align: center;
+  color: var(--text-color);
+  font-size: 40px;
 }
 
 .exercicio-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .exercicio-visual img {
-    width: 600px;
-    border-bottom: 3px solid #fff;
-
+  max-width: 90%;
+  width: 600px;
+  height: auto;
+  border-bottom: 3px solid #fff;
 }
 
 .exercicio-visual p {
-    font-size: 20px;
-    margin: 5px 0 15px 0;
-    color: var(--text-color);
+  font-size: 20px;
+  margin: 5px 0 15px 0;
+  color: var(--text-color);
 }
 
 .exercicio-visual span {
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 30px;
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 30px;
 }
 
-/* --- */
+/* Descrição */
 
 .descricao {
-    font-family: 'Lexend', sans-serif;
-    color: var(--text-color);
-    margin: 40px 167px;
-
+  font-family: 'Lexend', sans-serif;
+  color: var(--text-color);
+  margin: 40px 167px 60px 167px;
 }
 
-.descricao h1{
-    font-size: 30Px;
-    border-bottom: 2px solid #fff
+.descricao h1 {
+  font-size: 30px;
+  border-bottom: 2px solid #fff;
 }
 
-/* video */
+/* Vídeo */
 
 .video-wrapper {
   margin-top: 20px;
-
 }
 
 .video-container {
@@ -116,15 +109,50 @@ h2 {
   height: 0;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .video-container iframe {
   position: absolute;
   top: 0;
-  left: 25%;
-  width: 50%;
-  height:50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
   border: 0;
+}
+
+/* Botão Voltar */
+
+.voltar-wrapper {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.voltar-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.voltar-btn:hover {
+  background-color: #ff6b6b;
+}
+
+/* Mensagens de carregamento e erro */
+
+.loading,
+.erro {
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+  color: var(--text-color);
+}
+
+.erro {
+  color: #ff6b6b;
 }

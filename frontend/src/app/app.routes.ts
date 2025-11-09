@@ -26,6 +26,8 @@ import { EditarListaComponent } from './pages/home/editar-lista/editar-lista.com
 import { EditarUsuarioComponent } from './pages/home/editar-usuario/editar-usuario.component';
 import { ListaUsuarioComponent } from './pages/User/lista-usuario/lista-usuario.component';
 
+
+
 //Rotas para autenticar usuario, deixar ou nao deixar ver
 import { noAuthGuard } from './guards/no-auth.guard';
 import { authGuard } from './guards/auth.guard';
@@ -185,7 +187,14 @@ export const routes: Routes = [
         component:ListaUsuarioComponent,
         title:'Lista - Usuário',
         canActivate: [authGuard]
-    }
+    },
+  { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' }, 
+  { 
+  path: 'detalhes/:id', 
+  loadComponent: () => import('./pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component')
+    .then(m => m.TelaExercicioDetalhesComponent),
+  title: 'Gymfy - Detalhes dos Exercícios'
+}
 
     // {
     //     path: 'cadastrarexercicios',
@@ -194,5 +203,6 @@ export const routes: Routes = [
     // }
 
 ];
+
 
 

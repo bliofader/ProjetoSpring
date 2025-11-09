@@ -1,0 +1,18 @@
+background-color: rgb(248, 241,232);
+}
+.container{
+width: 90%;
+}
+.conteudo{
+width: 90%;
+}
+.novo{
+width: 90%;
+margin-top: 1rem;
+}
+.acoes{
+text-align: end;
+}
+mat-card, mat-card-subtitle{
+color: blue;
+}

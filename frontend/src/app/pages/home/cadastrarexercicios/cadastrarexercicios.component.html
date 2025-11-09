@@ -9,6 +9,8 @@
 
   <form [formGroup]="exercicioForm" (ngSubmit)="onSubmit()" class="form-cadastro">
 
+
+
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome</label>
@@ -56,33 +58,46 @@
         <small>Selecione um nível.</small>
       </div>
     </div>
+    <!-- Agrupamento -->
+<div class="form-group">
+  <label for="agrupamento">Agrupamento Muscular</label>
+  <input id="agrupamento" type="text" formControlName="agrupamento" placeholder="Ex: Inferiores, Superiores..."
+    [ngClass]="{'is-valid': f['agrupamento'].valid && f['agrupamento'].touched, 'is-invalid': f['agrupamento'].invalid && f['agrupamento'].touched}" />
+  <div class="feedback" *ngIf="f['agrupamento'].touched && f['agrupamento'].invalid">
+    <small>Campo obrigatório.</small>
+  </div>
+</div>
 
     <!-- Email  -->
     <div class="form-group">
       <label for="descricao">Descrição</label>
       <textarea id="descricao" rows="3" maxlength="200" formControlName="descricao" placeholder="Descreva o exercício...(máx. 500 caracteres)"
-        [ngClass]="{'is-valid': f['descricao'].valid && f['descricao'].touched, 'is-invalid': f['descricao'].invalid && f['descricao'].touched}">
-      </textarea>
+  [ngClass]="{'is-valid': f['descricao'].valid && f['descricao'].touched, 'is-invalid': f['descricao'].invalid && f['descricao'].touched}"></textarea>
+
       <div class="feedback" *ngIf="f['descricao'].touched && f['descricao'].invalid">
         <small>Campo obrigatório (máx. 500 caracteres).</small>
       </div>
     </div>
 
-    <!-- Imagem -->
-    <div class="form-group">
-  <label for="imagePath">Imagem(.png ou jpeg)</label>
+
+<!-- Imagem -->
+<div class="form-group">
+  <label for="imagePath">Imagem (.png ou .jpeg)</label>
   <input
     id="imagePath"
     type="file"
     accept="image/png, image/jpeg"
+    (change)="onFileSelected($event)" 
   />
   <div class="preview" *ngIf="previewImage">
     <img [src]="previewImage" alt="Pré-visualização da imagem" />
   </div>
-  <div class="feedback" *ngIf="f['imagePath'].touched && f['imagePath'].invalid">
+  <div class="feedback" *ngIf="imagemInvalida">
     <small>Selecione uma imagem.</small>
   </div>
 </div>
+
+
 
     <!-- Vídeo -->
     <div class="form-group">
@@ -96,9 +111,10 @@
 
     <!-- Botões -->
     <div class="botoes">
-      <button type="submit" class="btn-submit" [disabled]="exercicioForm.invalid">
+      <button type="submit" class="btn-submit">
         <i class="fa-solid fa-floppy-disk"></i> Cadastrar
       </button>
+      
       <button type="reset" class="btn-cancelar">
         <i class="fa-solid fa-xmark"></i> Cancelar
       </button>

@@ -15,30 +15,27 @@
       <th>Data de Nascimento</th>
       <th>CPF</th>
       <th>Email</th>
-      <th>Senha</th>
       <th>Ações</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let usuario of usuarios">
-      <td>{{ usuario.ID }}</td>
-      <td>{{ usuario.Nome }}</td>
-      <td>{{ usuario.Tipo }}</td>
-      <td>{{ usuario.DataDeNascimento }}</td>
-      <td>{{ usuario.CPF }}</td>
-      <td>{{ usuario.Email }}</td>
-      <td>{{ usuario.Senha }}</td>
-      <td class="acoes">
-        <i class="fa-solid fa-check-circle ativo" *ngIf="usuario.ativo"></i>
-        <i class="fa-solid fa-check-circle inativo" *ngIf="usuario.inativo"></i>
-        <button class="btn-editar" (click)="editarUsuario(usuario)">
-          <img src="assets/images/edit.png" alt="editar" />
-        </button>
-        <button class="btn-excluir" (click)="excluirUsuario(usuario)">
-          <img src="assets/images/excluir.png" alt="excluir" />
-        </button>
-      </td>
-    </tr>
+ <tr *ngFor="let usuario of usuarios">
+  <td>{{ usuario.id }}</td>
+  <td>{{ usuario.nome }}</td>
+  <td>{{ usuario.tipo }}</td>
+  <td>{{ usuario.dataNascimento }}</td>
+  <td>{{ usuario.cpf }}</td>
+  <td>{{ usuario.email }}</td>
+  <td class="acoes">
+    <button class="btn-editar" (click)="editarUsuario(usuario)">
+      <img src="assets/images/edit.png" alt="editar" />
+    </button>
+    <button class="btn-excluir" (click)="excluirUsuario(usuario)">
+      <img src="assets/images/excluir.png" alt="excluir" />
+    </button>
+  </td>
+</tr>
+
   </tbody>
 </table>
 </main>

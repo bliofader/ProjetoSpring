@@ -3,6 +3,7 @@ import { HeaderComponent } from "../../../components/header/header.component";
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from "../../../components/footer/footer.component";
 import { RouterModule } from '@angular/router';
+import { ExercicioService } from '../../../services/exercicio.service';
 import { Exercicio } from '../../../entities/exercicio';
 
 @Component({
@@ -14,6 +15,22 @@ import { Exercicio } from '../../../entities/exercicio';
 })
 export class TelaExercicioComponent implements OnInit {
   selectedCategory: string = 'all';
+  exercises: Exercicio[] = [];
+  filteredExercises: Exercicio[] = [];
+
+  constructor(private exercicioService: ExercicioService) {}
+
+  ngOnInit(): void {
+    this.exercicioService.listarExercicios().subscribe({
+      next: (res) => {
+        this.exercises = res;
+        this.filteredExercises = res;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar exercícios', err);
+      }
+    });
+  }
 
   //banco temporario
   exercicios: Exercicio[] = [
@@ -36,18 +53,14 @@ export class TelaExercicioComponent implements OnInit {
 
   ngOnInit() { }
 
-  filterExercicios(category: string) {
+ filterExercises(category: string): void {
     this.selectedCategory = category;
     if (category === 'all') {
       this.filteredExercicios = this.exercicios;
     } else {
-      this.filteredExercicios = this.exercicios.filter(
-        (exercicio) => exercicio.agrupamento === category
+      this.filteredExercises = this.exercises.filter(
+        (exercicio) => exercicio.agrupamento.toLowerCase() === category.toLowerCase()
       );
     }
-  }
-
-  findAll(): void { //nome do metodo(findAll) e tipo de retorno (void)
-
   }
 }

@@ -15,7 +15,7 @@ import { HeaderUsuarioComponent } from './components/header-usuario/header-usuar
   standalone: true,
   imports: [RouterOutlet,RouterModule,FooterComponent, NavbarComponent, GlobalLoadingBarComponent, HeaderUsuarioComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // ✅ corrigido
 })
 export class AppComponent {
   title = 'Gymfy';
