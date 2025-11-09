@@ -1,0 +1,17 @@
+<div class="alert-header" [ngClass]="data.type">
+  <mat-icon>{{ data.icon }}</mat-icon>
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+</div>
+
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-raised-button 
+          [color]="data.type === 'error' ? 'warn' : 'primary'"
+          [mat-dialog-close]="true" 
+          cdkFocusInitial>
+    OK
+  </button>
+</div>

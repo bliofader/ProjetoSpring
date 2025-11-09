@@ -1,5 +1,5 @@
-.login-personal {
-    background-image: url('/assets/images/fundo-login.png');
+.login-admin {
+    background-image: url('/assets/images/tela-personal/fundo-login.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@
     flex-direction: column;
 }
 
-.form-personal {
+.form-admin {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,6 +69,20 @@
     font-size: 15px;
 }
 
+.form p{
+    text-align: center;
+    margin-top: 5px;
+}
+
+a:link{
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:visited {
+  color: var(--primary-color);
+}
+
 input {
     padding: 8px 4px;
     border: none;
@@ -80,7 +94,7 @@ input {
 button {
     width: 176px;
     padding: 10px 0;
-    margin: 20px auto;
+    margin: 15px auto;
     border: none;
     border-radius: 25px;
     background-color: var(--primary-color);

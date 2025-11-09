@@ -1,0 +1,110 @@
+<!-- Cabeçalho -->
+<app-header-top></app-header-top>
+<!-- Menu de navegação -->
+<app-navbar></app-navbar>
+
+<!-- Conteúdo -->
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Edite seu Exercício</h2>
+
+  <form [formGroup]="exercicioForm" (ngSubmit)="onSubmit()" class="form-cadastro">
+
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" type="text" maxlength="60" formControlName="nome" placeholder="Nome do exercício"
+        [ngClass]="{'is-valid': f['nome'].valid && f['nome'].touched, 'is-invalid': f['nome'].invalid && f['nome'].touched}" />
+      <div class="feedback" *ngIf="f['nome'].touched && f['nome'].invalid">
+        <small *ngIf="f['nome'].errors?.['required']">Campo obrigatório.</small>
+        <small *ngIf="f['nome'].errors?.['maxlength']">Máximo de 60 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Nível -->
+    <div class="form-group">
+      <label for="tipo">Tipo do Exercício</label>
+      <select id="tipo" formControlName="tipo"
+        [ngClass]="{'is-valid': f['tipo'].valid && f['tipo'].touched, 'is-invalid': f['nivel'].invalid && f['nivel'].touched}">
+        <option value="">Selecione</option>
+        <option value="Panturrilha">Panturrílha</option>
+        <option value="Costas">Costas</option>
+        <option value="Peito">Peito</option>
+        <option value="Ombro">Ombro</option>
+        <option value="Quadriceps">Quadríceps</option>
+        <option value="ABS">ABS</option>
+        <option value="Triceps">Tríceps</option>
+        <option value="Biceps">Bíceps</option>
+        <option value="Pernas">Pernas</option>
+
+      </select>
+      <div class="feedback" *ngIf="f['tipo'].touched && f['tipo'].invalid">
+        <small>Selecione um nível.</small>
+      </div>
+    </div>
+
+    <!-- Nível -->
+    <div class="form-group">
+      <label for="nivel">Nível do Exercício</label>
+      <select id="nivel" formControlName="nivel"
+        [ngClass]="{'is-valid': f['nivel'].valid && f['nivel'].touched, 'is-invalid': f['nivel'].invalid && f['nivel'].touched}">
+        <option value="">Selecione</option>
+        <option value="Iniciante">Iniciante</option>
+        <option value="Intermediário">Intermediário</option>
+        <option value="Avançado">Avançado</option>
+      </select>
+      <div class="feedback" *ngIf="f['nivel'].touched && f['nivel'].invalid">
+        <small>Selecione um nível.</small>
+      </div>
+    </div>
+
+    <!-- Email  -->
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" rows="3" maxlength="200" formControlName="descricao" placeholder="Descreva o exercício...(máx. 500 caracteres)"
+        [ngClass]="{'is-valid': f['descricao'].valid && f['descricao'].touched, 'is-invalid': f['descricao'].invalid && f['descricao'].touched}">
+      </textarea>
+      <div class="feedback" *ngIf="f['descricao'].touched && f['descricao'].invalid">
+        <small>Campo obrigatório (máx. 500 caracteres).</small>
+      </div>
+    </div>
+
+    <!-- Imagem -->
+    <div class="form-group">
+  <label for="imagePath">Imagem(.png ou jpeg)</label>
+  <input
+    id="imagePath"
+    type="file"
+    accept="image/png, image/jpeg"
+  />
+  <div class="preview" *ngIf="previewImage">
+    <img [src]="previewImage" alt="Pré-visualização da imagem" />
+  </div>
+  <div class="feedback" *ngIf="f['imagePath'].touched && f['imagePath'].invalid">
+    <small>Selecione uma imagem.</small>
+  </div>
+</div>
+
+    <!-- Vídeo -->
+    <div class="form-group">
+      <label for="videoUrl">URL do Vídeo (YouTube)</label>
+      <input id="videoUrl" type="text" formControlName="videoUrl" placeholder="https://youtube.com/..."
+        [ngClass]="{'is-valid': f['videoUrl'].valid && f['videoUrl'].touched, 'is-invalid': f['videoUrl'].invalid && f['videoUrl'].touched}" />
+      <div class="feedback" *ngIf="f['videoUrl'].touched && f['videoUrl'].invalid">
+        <small>Informe uma URL válida do YouTube.</small>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="botoes">
+      <button type="submit" class="btn-submit" [disabled]="exercicioForm.invalid">
+        <i class="fa-solid fa-floppy-disk"></i> Salvar Dados
+      </button>
+      <button type="reset" class="btn-cancelar">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</main>
+
+<!-- Rodapé -->
+<app-footer></app-footer>

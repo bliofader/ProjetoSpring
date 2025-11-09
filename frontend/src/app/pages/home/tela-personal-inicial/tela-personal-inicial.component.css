@@ -1,0 +1,92 @@
+.tela-personal {
+    background-color: #fff;
+    height: 100vh;
+    font-family: 'Lexend', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container-geral {
+    display: flex;
+    width: 95%;
+    height: 80vh;
+    /* border: 2px solid blue; */
+    margin-top: 70px;
+
+}
+
+/*  lado esquerdo */
+.container-esquerdo {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items:baseline; */
+    border-right: 2px solid #000;
+    /* border: 2px solid red; */
+}
+
+
+.info {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid red; */
+    margin-right: 30px;
+}
+
+
+.info a {
+    margin: 0 40px;
+    text-decoration: none;
+    color: var(--text-color2);
+    font-weight: bold;
+    padding: 20px 0;
+}
+
+.container-esquerdo h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+/* lado direito */
+.container-direito {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: 2px solid red; */
+    background-image: url('/assets/images/tela-personal/fundo-personal.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.item img {
+  width: 40px; 
+  height: 40px;
+}
+
+.item a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.item a:hover{
+    color:var(--primary-color)
+}

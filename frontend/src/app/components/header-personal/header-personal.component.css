@@ -1,0 +1,111 @@
+.section {
+    position: relative;
+    /* Importante para permitir o absolute da navbar */
+    font-family: 'Lexend', sans-serif;
+}
+
+
+.navbar {
+    position: absolute;
+    width: 97%;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 0 128px; */
+    ;
+
+}
+
+.navbar-logo {
+    text-decoration: none;
+
+}
+
+.navbar-list {
+    list-style: none;
+    display: flex;
+    gap: 4rem;
+    margin-left: 125px;
+}
+
+.navbar-item a:hover {
+    color: var(--primary-color);
+
+}
+
+.navbar-item a {
+    text-decoration: none;
+    color: var(--text-color2);
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar-item a:hover {
+  color: var(--primary-color);
+}
+
+img {
+    width: 150px;
+}
+
+/* LOGIN FIXO */
+.login-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 15px;
+  font-family: 'Poppins', sans-serif;
+  /* position: relative; */
+  /* border: 1px red solid; */
+}
+
+.login-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.login-icon img {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+}
+
+.login-options {
+  border-radius: 8px;
+  /* background-color: #fff; */
+  text-align: center;
+  /* align-items: center;
+  justify-content: center; */
+  /* border: 1px solid red; */
+}
+
+.login-options hr {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 2px auto;
+  width: 80%;
+}
+
+.login-options a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+
+.login-options a:hover {
+  color: var(--primary-color);
+}
+
