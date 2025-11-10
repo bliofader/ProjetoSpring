@@ -2,12 +2,14 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
 }
+
+/* Logo */
 .logo img {
-  display: flex;
-  justify-content: space-between; 
-  width:  160px;
+  width: 160px;
+  display: block; /* ✅ corrigido: img não aceita flex */
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -15,6 +17,7 @@ body {
   padding: 10px 40px;
 }
 
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -36,6 +39,11 @@ body {
   font-weight: bold;
   color: #000;
   font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.navbar a:hover {
+  color: #444; /* ✅ feedback visual */
 }
 
 .navbar a.active {
@@ -68,6 +76,7 @@ body {
   vertical-align: middle;
 }
 
+/* Formulário */
 .form-cadastro {
   display: flex;
   flex-direction: column;
@@ -110,10 +119,20 @@ select:focus {
   box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
 }
 
+.error-message,
 .feedback {
   margin-top: 4px;
   font-size: 0.85rem;
   color: #dc3545;
+}
+
+/* Preview da imagem */
+.preview img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
 }
 
 /* Botões */

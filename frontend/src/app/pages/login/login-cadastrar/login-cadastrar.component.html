@@ -7,6 +7,8 @@
     <!-- Campos de texto -->
     <div class="form-group" *ngFor="let campo of ['nome', 'tipo', 'dataNascimento', 'cpf', 'email', 'senha']">
       <label [for]="campo">{{ campo === 'dataNascimento' ? 'Data de Nascimento' : campo | titlecase }}</label>
+      
+      <!-- Input comum -->
       <input
         *ngIf="campo !== 'tipo'"
         [id]="campo"
@@ -18,6 +20,8 @@
           'is-invalid': f[campo].invalid && f[campo].touched
         }"
       />
+
+      <!-- Select para tipo -->
       <select
         *ngIf="campo === 'tipo'"
         id="tipo"
@@ -30,9 +34,18 @@
         <option value="Personal">Personal</option>
         <option value="Comum">Comum</option>
       </select>
+
+      <!-- Mensagens de erro -->
+      <div class="error-message" *ngIf="f[campo].invalid && f[campo].touched">
+        <small *ngIf="f[campo].errors?.['required']">Este campo é obrigatório.</small>
+        <small *ngIf="f[campo].errors?.['maxlength']">Máximo de caracteres excedido.</small>
+        <small *ngIf="f[campo].errors?.['pattern']">Formato inválido.</small>
+        <small *ngIf="f[campo].errors?.['email']">E-mail inválido.</small>
+        <small *ngIf="f[campo].errors?.['minlength']">Mínimo de caracteres não atingido.</small>
+      </div>
     </div>
 
-    <!-- Imagem -->
+    <!-- Upload de imagem -->
     <div class="form-group">
       <label for="imagePath">Imagem (.png ou .jpeg)</label>
       <input id="imagePath" type="file" accept="image/png, image/jpeg" (change)="onFileSelected($event)" />

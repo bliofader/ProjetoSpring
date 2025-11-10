@@ -3,16 +3,14 @@ import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const token = authService.getToken();
-  const tipo = localStorage.getItem('usuarioTipo');
-
-  if (token && tipo === 'ADMIN') {
+  if (authService.isLoggedIn() && authService.isAdmin()) {
     return true;
   }
 
-  return router.parseUrl('/login-admin');
+  // ✅ redireciona para /admin em vez de /login-admin
+  return router.parseUrl('/admin');
 };

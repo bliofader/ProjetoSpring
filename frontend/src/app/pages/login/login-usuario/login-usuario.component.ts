@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // ✅ importar RouterModule
 import { AuthService } from '../../../services/auth.service';
 import { LoginRequest } from '../../../Models/login-request.model';
+
 @Component({
   selector: 'app-login-usuario',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule], // ✅ incluir RouterModule
   templateUrl: './login-usuario.component.html',
   styleUrls: ['./login-usuario.component.css']
 })

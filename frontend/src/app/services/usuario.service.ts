@@ -1,3 +1,4 @@
+// usuario.service.ts
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 import { Injectable } from '@angular/core';
@@ -12,12 +13,10 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ CADASTRAR SEM IMAGEM
   createSemImagem(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.baseUrl, usuario);
   }
 
-  // ✅ CADASTRAR COM IMAGEM
   createComImagem(usuario: Usuario, imagem: File): Observable<Usuario> {
     const formData = new FormData();
     formData.append('usuario', new Blob([JSON.stringify(usuario)], { type: 'application/json' }));
@@ -26,15 +25,21 @@ export class UsuarioService {
     return this.http.post<Usuario>(this.baseUrl, formData);
   }
 
-  // RESTANTE DOS MÉTODOS
+  create(usuario: Usuario, imagem?: File): Observable<Usuario> {
+    if (imagem) {
+      return this.createComImagem(usuario, imagem);
+    }
+    return this.createSemImagem(usuario);
+  }
+
   getUsuarioById(id: number): Observable<Usuario> {
-    const token = localStorage.getItem('jwt_token');
+    const token = sessionStorage.getItem('jwt_token');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return this.http.get<Usuario>(`${this.baseUrl}/${id}`, { headers });
   }
 
   atualizarUsuario(id: number, dados: Partial<Usuario>): Observable<Usuario> {
-    const token = localStorage.getItem('jwt_token');
+    const token = sessionStorage.getItem('jwt_token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
@@ -43,7 +48,7 @@ export class UsuarioService {
   }
 
   getUsuarioLogado(): Observable<Usuario> {
-    const token = localStorage.getItem('jwt_token');
+    const token = sessionStorage.getItem('jwt_token');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return this.http.get<Usuario>(`${this.baseUrl}/me`, { headers });
   }

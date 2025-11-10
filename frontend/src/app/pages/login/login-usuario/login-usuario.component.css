@@ -88,3 +88,18 @@ button:hover {
     background-color: #000;
     color: #fff;
 }
+.cadastro-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.link-button {
+  color: var(--primary-color);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}

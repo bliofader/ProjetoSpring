@@ -1,7 +1,6 @@
 .section {
-  position: relative; /* Importante para permitir o absolute da navbar */
+  position: relative;
 }
-
 
 .navbar {
   position: absolute;
@@ -9,47 +8,6 @@
   background-color: transparent;
   z-index: 10;
 }
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* padding: 0 128px; */
-  ;
-
-}
-
-.navbar-logo {
-  text-decoration: none;
-
-}
-
-.navbar-list {
-  list-style: none;
-  display: flex;
-  gap: 4rem;
-  margin-right: 125px;
-}
-
-.navbar-item a:hover {
-  color: var(--primary-color);
-
-}
-
-.navbar-item a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-size: 18px;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-img {
-  width: 150px;
-}
-
-/* login */
-
 
 .navbar-container {
   display: flex;
@@ -80,13 +38,12 @@ img {
   color: var(--primary-color);
 }
 
-/* LOGIN FIXO */
+/* LOGIN */
 .login-menu {
   display: flex;
   align-items: center;
   gap: 20px;
   font-family: 'Poppins', sans-serif;
-  /* position: relative; */
 }
 
 .login-icon {
@@ -107,9 +64,6 @@ img {
   border-radius: 8px;
   background-color: #fff;
   text-align: center;
-  /* align-items: center;
-  justify-content: center; */
-  /* border: 1px solid red; */
 }
 
 .login-options hr {
@@ -126,4 +80,25 @@ img {
   font-weight: 600;
   padding: 10px 10px;
   transition: 0.3s;
+}
+
+/* LOGOUT */
+.logout-menu {
+  margin-left: 20px; /* deixa ao lado dos links */
+}
+
+.btn-logout {
+  background-color: #e53935;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: #c62828;
+  transform: scale(1.05);
 }

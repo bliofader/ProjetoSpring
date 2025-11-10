@@ -12,25 +12,31 @@
             </div>
         </div>
 
-        <!-- div direita -->
         <div class="container-direito">
-            <form class="form"  (ngSubmit)="onSubmit()">
-                <h2>Login</h2>
+  <form class="form" (ngSubmit)="onSubmit()">
+    <h2>Login</h2>
 
-                <div class="input">
-                    <input type="email" id="email" name="email"  [(ngModel)]="email" required placeholder="E-mail">
-                    <label for="email">*E-mail cadastrado na criação da sua assinatura</label>
-                </div>
-
-                <div class="input">
-                    <input type="password" id="password" name="password"  [(ngModel)]="senha" required placeholder="Senha">
-                    <label for="password">*Senha definida na criação da sua assinatura</label>
-                </div>
-
-                <button type="submit">Login</button>
-
-            </form>
-        </div>
+    <div class="input">
+      <input type="email" id="email" name="email" [(ngModel)]="email" required placeholder="E-mail">
+      <label for="email">*E-mail cadastrado na criação da sua assinatura</label>
     </div>
+
+    <div class="input">
+      <input type="password" id="password" name="password" [(ngModel)]="senha" required placeholder="Senha">
+      <label for="password">*Senha definida na criação da sua assinatura</label>
+    </div>
+
+    <button type="submit">Login</button>
+
+    <!-- ✅ link abaixo do botão -->
+    <p class="cadastro-text">
+      Não tem uma conta?
+      <a routerLink="/login-cadastrar" class="link-button">Cadastre-se</a>
+    </p>
+  </form>
+</div>
+
+        
+</div>
 
 </section>

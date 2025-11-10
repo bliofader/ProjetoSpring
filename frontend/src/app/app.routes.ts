@@ -71,16 +71,16 @@ export const routes: Routes = [
 
 
 
-  // Admin (protegidas)
-  { path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin', canActivate: [adminGuard] },
-  { path: 'exercicios', component: AdminCadastroExercicioComponent, title: 'Gymfy - Exercícios', },
-  { path: 'cadastrarexercicios', component: CadastrarExerciciosComponent, title: 'Cad - Exercícios', canActivate: [adminGuard] },
-  { path: 'cadastrarusuario', component: CadastrarUsuarioComponent, title: 'Cad - Usuário', canActivate: [adminGuard] },
-  { path: 'criarlista', component: CriarListaComponent, title: 'Cadastrar - Lista', canActivate: [adminGuard] },
-  { path: 'listar-listas', component: ListarListaComponent, title: 'Listar - Lista', canActivate: [adminGuard] },
-  { path: 'editar-exercicio', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
-  { path: 'editar-lista', component: EditarListaComponent, title: 'Editar - Lista', canActivate: [adminGuard] },
-  { path: 'editar-usuario', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
+ // Admin (protegidas)
+{ path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin', canActivate: [adminGuard] },
+{ path: 'exercicios', component: AdminCadastroExercicioComponent, title: 'Gymfy - Exercícios', canActivate: [adminGuard] },
+{ path: 'cadastrarexercicios', component: CadastrarExerciciosComponent, title: 'Cad - Exercícios', canActivate: [adminGuard] },
+{ path: 'cadastrarusuario', component: CadastrarUsuarioComponent, title: 'Cad - Usuário', canActivate: [adminGuard] },
+{ path: 'criarlista', component: CriarListaComponent, title: 'Cadastrar - Lista', canActivate: [adminGuard] },
+{ path: 'listar-listas', component: ListarListaComponent, title: 'Listar - Lista', canActivate: [adminGuard] },
+{ path: 'editar-exercicio', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
+{ path: 'editar-lista', component: EditarListaComponent, title: 'Editar - Lista', canActivate: [adminGuard] },
+{ path: 'editar-usuario', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
 
 
 

@@ -19,21 +19,23 @@ public class AuthService {
     private TokenService tokenService;
 
     public TokenResponseDTO realizarLogin(LoginRequestDTO loginDTO) {
-
         var usernamePassword = new UsernamePasswordAuthenticationToken(
                 loginDTO.getEmail(),
                 loginDTO.getSenha()
         );
 
-
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
-
 
         Usuario usuarioAutenticado = (Usuario) auth.getPrincipal();
 
         String token = tokenService.gerarToken(usuarioAutenticado);
 
-
-        return new TokenResponseDTO(token, usuarioAutenticado.getTipo(), usuarioAutenticado.getNome(), usuarioAutenticado.getId().longValue());
+        // ✅ retorna o perfil do usuário junto com o token
+        return new TokenResponseDTO(
+                token,
+                usuarioAutenticado.getTipo(),   // Admin, Comum, Personal
+                usuarioAutenticado.getNome(),
+                usuarioAutenticado.getId().longValue()
+        );
     }
 }

@@ -17,7 +17,7 @@ import { Usuario } from '../../../entities/usuario';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FooterComponent, HeaderTopComponent],
   templateUrl: './login-cadastrar.component.html',
-  styleUrl: './login-cadastrar.component.css',
+  styleUrls: ['./login-cadastrar.component.css'], // ✅ corrigido
 })
 export class LoginCadastrarComponent {
   registrationForm!: FormGroup;
@@ -67,7 +67,7 @@ export class LoginCadastrarComponent {
     const confirmacao = confirm('Deseja realmente cadastrar este usuário?');
     if (!confirmacao) return;
 
-    const usuario: Usuario = this.registrationForm.value;
+    const usuario: Usuario = this.registrationForm.getRawValue() as Usuario;
 
     const request = this.selectedFile
       ? this.usuarioService.createComImagem(usuario, this.selectedFile)
