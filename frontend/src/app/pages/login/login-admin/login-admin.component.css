@@ -1,0 +1,111 @@
+.login-admin {
+    background-image: url('/assets/images/tela-personal/fundo-login.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    font-family: 'Lexend', sans-serif;
+}
+
+.container-logo img {
+    width: 140px;
+    height: 120px;
+    margin-top: -15px;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+
+.form-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    width: 768px;
+    height: 322px;
+    border: 1px solid #ccc;
+    border-radius: 56px;
+    padding: 40px;
+    box-shadow: 20px 20px 20px rgba(20, 61, 197, 0.178);
+}
+
+.info {
+    font-size: 18px;
+    /* border: 1px solid #000; */
+    margin-top: -25px;
+    margin-bottom: 25px;
+    /* color: #7D7C7C; */
+}
+
+.info p {
+    /* border: 1px solid #000; */
+    margin: 5px;
+    padding: 2px;
+    text-align: center;
+}
+
+.info p:not(:has(strong)) {
+    /*muda a cor somente aos <p> que nao possuem <strong> dentro*/
+    color: #7D7C7C;
+    font-weight: 400;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+}
+
+.form label {
+    color: #7D7C7C;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.form p{
+    text-align: center;
+    margin-top: 5px;
+}
+
+a:link{
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+a:visited {
+  color: var(--primary-color);
+}
+
+input {
+    padding: 8px 4px;
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 400px;
+}
+
+/* Estilo do botão */
+button {
+    width: 176px;
+    padding: 10px 0;
+    margin: 15px auto;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+button:hover {
+    background-color: #000;
+}

@@ -1,0 +1,17 @@
+main{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1; 
+}
+
+.ContainerFoto{
+    width: 474px;
+    height: 474px;
+    opacity: 10%;
+}

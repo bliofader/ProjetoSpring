@@ -1,0 +1,56 @@
+<app-header-top></app-header-top>
+
+<main class="user-list">
+  <h2><span class="highlight-bar"></span> Cadastro de Usuário</h2>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-cadastro">
+    <!-- Campos de texto -->
+    <div class="form-group" *ngFor="let campo of ['nome', 'tipo', 'dataNascimento', 'cpf', 'email', 'senha']">
+      <label [for]="campo">{{ campo === 'dataNascimento' ? 'Data de Nascimento' : campo | titlecase }}</label>
+      <input
+        *ngIf="campo !== 'tipo'"
+        [id]="campo"
+        [type]="campo === 'senha' ? 'password' : campo === 'email' ? 'email' : campo === 'dataNascimento' ? 'date' : 'text'"
+        [formControlName]="campo"
+        [placeholder]="campo === 'email' ? 'exemplo@email.com' : 'Digite ' + campo"
+        [ngClass]="{
+          'is-valid': f[campo].valid && f[campo].touched,
+          'is-invalid': f[campo].invalid && f[campo].touched
+        }"
+      />
+      <select
+        *ngIf="campo === 'tipo'"
+        id="tipo"
+        formControlName="tipo"
+        [ngClass]="{
+          'is-valid': f['tipo'].valid && f['tipo'].touched,
+          'is-invalid': f['tipo'].invalid && f['tipo'].touched
+        }"
+      >
+        <option value="Personal">Personal</option>
+        <option value="Comum">Comum</option>
+      </select>
+    </div>
+
+    <!-- Imagem -->
+    <div class="form-group">
+      <label for="imagePath">Imagem (.png ou .jpeg)</label>
+      <input id="imagePath" type="file" accept="image/png, image/jpeg" (change)="onFileSelected($event)" />
+      <div class="preview" *ngIf="previewImage">
+        <img [src]="previewImage" alt="Pré-visualização da imagem" />
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="botoes">
+      <button type="submit" class="btn-submit" [disabled]="registrationForm.invalid">
+        <i class="fa-solid fa-floppy-disk"></i> Cadastrar
+      </button>
+      <button type="reset" class="btn-cancelar" (click)="onReset()">
+        <i class="fa-solid fa-xmark"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</main>
+
+<app-footer></app-footer>

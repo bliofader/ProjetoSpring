@@ -1,0 +1,27 @@
+<main>
+  <header>
+    <app-header-usuario></app-header-usuario>
+  </header>
+
+  <section>
+    <div class="SideBar">
+      <app-user-sideabr></app-user-sideabr>
+    </div>
+
+    <div class="ContainerListas">
+      <h4>Gerencie Sua Conta</h4>
+
+      <div class="ContainerDetalhes">
+        <input type="text" placeholder="Nome" [(ngModel)]="dados.nome">
+        <input type="text" placeholder="Email" [(ngModel)]="dados.email">
+        <input type="text" placeholder="CPF" [(ngModel)]="dados.cpf">
+        <input type="date" placeholder="Data de nascimento" [(ngModel)]="dados.dataNascimento">
+        <button class="BotaoAlterar" (click)="onAlterar()">Alterar</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+</main>

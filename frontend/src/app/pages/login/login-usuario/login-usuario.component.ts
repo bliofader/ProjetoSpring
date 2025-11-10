@@ -2,38 +2,36 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../../services/auth.service';
+import { LoginRequest } from '../../../Models/login-request.model';
 @Component({
   selector: 'app-login-usuario',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login-usuario.component.html',
-  styleUrl: './login-usuario.component.css'
+  styleUrls: ['./login-usuario.component.css']
 })
 export class LoginUsuarioComponent {
   email = '';
   senha = '';
 
-  // simulação de "usuários cadastrados"
-  usuarios = [
-    { nome: "icaro", email: 'icaro.123@gmail.com', senha: 'icaro123' },
-    { nome: "luiza", email: 'maria.123@gmail.com', senha: 'maria123' },
-    { nome: "ellen", email: 'ellen.123@gmail.com', senha: 'ellen123' }
-  ];
-
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    const usuarioValido = this.usuarios.find(
-      (u) => u.email === this.email && u.senha === this.senha
-    );
+    const credenciais: LoginRequest = {
+      email: this.email,
+      senha: this.senha
+    };
 
-    if (usuarioValido) {
-      alert('Login realizado com sucesso!');
-      localStorage.setItem('usuarioNome', usuarioValido.nome);
-      this.router.navigate(['/tela-personal']); //mudar caminho
-    } else {
-      alert('E-mail ou senha incorretos.');
-    }
+    this.authService.login(credenciais).subscribe({
+      next: (res) => {
+        this.authService.salvarToken(res.token, res.usuarioId, res.nomeUsuario, res.tipo);
+        alert('Login realizado com sucesso!');
+        this.router.navigate(['/tela-personal']);
+      },
+      error: () => {
+        alert('E-mail ou senha incorretos.');
+      }
+    });
   }
 }

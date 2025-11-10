@@ -2,12 +2,18 @@ package br.com.gymfy.entities;
 
 import jakarta.persistence.*;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "Usuarios")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,18 +37,11 @@ public class Usuario implements Serializable {
 
     @Column(name = "Senha")
     String senha;
+    @Column(name = "Imagem")
+    private String imagem;
 
 
-    public Usuario(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha) {
-        this.nome = nome;
-        this.tipo = tipo;
-        this.dataNascimento = dataNascimento;
-        this.cpf = cpf;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha) {
+    public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String imagem) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
@@ -50,6 +49,17 @@ public class Usuario implements Serializable {
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.imagem = imagem;
+    }
+
+    public Usuario(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String imagem) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.dataNascimento = dataNascimento;
+        this.cpf = cpf;
+        this.email = email;
+        this.senha = senha;
+        this.imagem = imagem;
     }
 
     public Usuario() {
@@ -111,6 +121,51 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + tipo.toUpperCase()));
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -121,7 +176,7 @@ public class Usuario implements Serializable {
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
+                ", imagem='" + imagem + '\'' +
                 '}';
     }
-
 }

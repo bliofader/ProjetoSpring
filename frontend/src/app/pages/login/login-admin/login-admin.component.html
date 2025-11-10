@@ -1,0 +1,43 @@
+<section class="login-admin">
+  <div class="content-container">
+    <div class="form-admin">
+      <div class="container-logo">
+        <img src="assets/images/logo.png" class="logo" alt="logo" />
+      </div>
+
+      <div class="info">
+        <p><strong>Portal do Admin</strong></p>
+        <p>Gerencie suas informações</p>
+      </div>
+
+      <form class="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <label for="email">*E-mail definido na criação da sua conta</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          placeholder="E-mail"
+        />
+
+        <label for="password">*Senha definida na criação da sua conta</label>
+        <input
+          type="password"
+          id="password"
+          name="senha"
+          [(ngModel)]="senha"
+          required
+          placeholder="Senha"
+        />
+
+        <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+        <p>Não tem uma conta?
+ <a routerLink="/login-cadastrar" class="link-button">Cadastre-se</a>
+
+</p>
+
+      </form>
+    </div>
+  </div>
+</section>

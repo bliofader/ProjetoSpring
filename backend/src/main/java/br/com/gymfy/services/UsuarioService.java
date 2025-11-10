@@ -5,6 +5,7 @@ import br.com.gymfy.entities.Exercicio;
 import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.com.gymfy.repositories.UsuarioRepository;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,6 +17,8 @@ import java.util.Optional;
 public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Usuario findById(Integer id) {
         Optional<Usuario> usuario= usuarioRepository.findById(id);
@@ -45,7 +48,9 @@ public class UsuarioService {
         return usuarios.orElse(null);
     }
 
+
     public Usuario cadastrarUsuario(Usuario usuario){
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); // ✅ Criptografando
         return usuarioRepository.save(usuario);
     }
 

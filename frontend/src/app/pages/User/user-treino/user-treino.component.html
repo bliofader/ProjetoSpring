@@ -1,0 +1,38 @@
+<main>
+
+    <header>
+        <app-header-usuario></app-header-usuario>
+    </header>
+
+    <section>
+        
+        <div class="SideBar">
+            <app-user-sideabr></app-user-sideabr>
+        </div>
+
+            <div class="ContainerListas">
+
+                     <div>
+                        <h4> Meus treinos </h4>
+                     </div>
+
+                     <div class="Card" (click)="goToDetalhesLista()">
+
+                        <h5>Lista1</h5>
+
+                     </div>
+
+                     <div class="BotaoCriarLista">
+                        <button> Criar Lista </button>
+                     </div>
+
+              </div>
+
+    </section>
+
+    
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+
+</main>

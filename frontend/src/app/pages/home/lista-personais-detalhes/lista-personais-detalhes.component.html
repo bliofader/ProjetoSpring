@@ -1,0 +1,36 @@
+<app-header-personal></app-header-personal>
+
+<div class="content-container">
+
+    <div *ngIf="isLoading" class="loading">
+        <p>Carregando informações do personal...</p>
+    </div>
+
+    <div *ngIf="hasError && !isLoading" class="error">
+        <p>Não foi possível carregar os dados do personal. Tente novamente mais tarde.</p>
+    </div>
+    <div class="detalhes-container" *ngIf="!isLoading && !hasError && personal">
+        <h2>{{ personal.nome }}</h2>
+        <div class="personal-visual">
+            <img [src]="personal.imagePath" alt="{{ personal.nome }}" class="personal-img" />
+            <p class="agrupamento">
+                Especialidade <br />
+                <span>{{ personal.especialidade | titlecase }}</span>
+            </p>
+        </div>
+
+        <div class="descricao">
+            <h1>Informações do Personal:</h1>
+            <p><strong>Nome:</strong></p>
+            <p>{{ personal.nome }}</p>
+            <p><strong>Especialidade:</strong></p>
+            <p>{{ personal.especialidade }}</p>
+            <p><strong>Descrição:</strong></p>
+            <p>{{ personal.descricao }}</p>
+            <p><strong>Rede Social:</strong></p>
+            <p>{{ personal.redeSocial }}</p>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

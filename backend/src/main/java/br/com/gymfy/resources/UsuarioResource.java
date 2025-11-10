@@ -6,6 +6,7 @@ import br.com.gymfy.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -41,15 +42,27 @@ public class UsuarioResource {
     }
 
 
-    @PostMapping
-    public ResponseEntity<Usuario> CadastrarUsuario(
-            @RequestBody Usuario usuario){
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<Usuario> cadastrarUsuarioComImagem(
+            @RequestPart("usuario") Usuario usuario,
+            @RequestPart(value = "imagem", required = false) MultipartFile imagem) {
+
+        if (imagem != null && !imagem.isEmpty()) {
+            try {
+                String nomeArquivo = System.currentTimeMillis() + "_" + imagem.getOriginalFilename();
+                String caminho = "uploads/" + nomeArquivo; // pasta local
+                imagem.transferTo(new java.io.File(caminho));
+                usuario.setImagem(nomeArquivo);
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao salvar imagem: " + e.getMessage());
+            }
+        }
+
         usuario = usuarioService.cadastrarUsuario(usuario);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(usuario.getId()).toUri();
         return ResponseEntity.created(uri).body(usuario);
     }
-
     //deletar
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deletar(@PathVariable Integer id){
