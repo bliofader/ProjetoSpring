@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service'; // ajuste o caminho conforme sua estrutura
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-header',
@@ -10,10 +10,13 @@ import { AuthService } from '../../services/auth.service'; // ajuste o caminho c
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) {
+    console.log('Perfil:', sessionStorage.getItem('usuarioPerfil'));
+    console.log('É admin?', this.authService.isAdmin());
+  }
 
   logout(): void {
     this.authService.logout();
-    window.location.href = '/login-usuario'; // redireciona para login
+    window.location.href = '/login-usuario';
   }
 }

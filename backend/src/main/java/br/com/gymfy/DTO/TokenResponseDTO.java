@@ -2,19 +2,13 @@ package br.com.gymfy.DTO;
 
 public class TokenResponseDTO {
     private String token;
-    private String tipo = "Bearer"; // tipo do token
+    private String tipo = "Bearer"; // tipo do token (fixo)
     private String nomeUsuario;
     private String perfil;          // perfil do usuário (Admin, Comum, Personal)
     private Long usuarioId;
 
     public TokenResponseDTO() {}
 
-    public TokenResponseDTO(String token, String perfil, String nomeUsuario, Long usuarioId) {
-        this.token = token;
-        this.perfil = perfil;
-        this.nomeUsuario = nomeUsuario;
-        this.usuarioId = usuarioId;
-    }
 
     public String getToken() { return token; }
     public String getTipo() { return tipo; }

@@ -39,15 +39,16 @@ export class UserContaComponent implements OnInit {
     const storedId = localStorage.getItem('usuarioId');
     if (storedId) {
       this.usuarioId = +storedId;
-      this.usuarioService.getUsuarioById(this.usuarioId).subscribe({
-        next: (res: Usuario) => {
-          console.log("🧠 Dados do usuário:", res);
-          this.dados = res;
-        },
-        error: (err: any) => {
-          console.error("Erro ao buscar dados do usuário:", err);
-        }
-      });
+    this.usuarioService.findById(this.usuarioId).subscribe({
+  next: (res: Usuario) => {
+    console.log("🧠 Dados do usuário:", res);
+    this.dados = res;
+  },
+  error: (err: any) => {
+    console.error("Erro ao buscar dados do usuário:", err);
+  }
+});
+
     } else {
       console.error("ID do usuário não encontrado na storage.");
     }

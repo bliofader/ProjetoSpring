@@ -63,18 +63,26 @@ public class UsuarioService {
         }
     }
 
-    public Usuario update (Integer id, Usuario usuario){
+    public Usuario update(Integer id, Usuario usuario) {
         Usuario alterado = findById(id);
-        if(alterado!=null){
+        if (alterado != null) {
+            Optional<Usuario> existente = usuarioRepository.findByEmail(usuario.getEmail());
+            if (existente.isPresent() && !existente.get().getId().equals(id)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail já está em uso por outro usuário.");
+            }
+
             alterado.setNome(usuario.getNome());
             alterado.setEmail(usuario.getEmail());
-            alterado.setCpf(usuario.getCpf());
             alterado.setDataNascimento(usuario.getDataNascimento());
+            alterado.setTipo(usuario.getTipo());
+            alterado.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
             return usuarioRepository.save(alterado);
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário com ID " + id + " não encontrado.");
     }
+
+
 }
 
 

@@ -1,4 +1,3 @@
-// src/app/guards/admin.guard.ts
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
@@ -11,6 +10,6 @@ export const adminGuard: CanActivateFn = () => {
     return true;
   }
 
-  // ✅ redireciona para /admin em vez de /login-admin
-  return router.parseUrl('/admin');
+  // ✅ redireciona para login ou página de acesso negado
+  return router.parseUrl('/login-cadastrar'); // ou '/acesso-negado'
 };

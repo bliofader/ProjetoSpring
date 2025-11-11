@@ -84,25 +84,28 @@
       </div>
     </div>
 
-    <!-- Email -->
-    <div class="form-group">
-      <label for="email">E-mail</label>
-      <input
-        id="email"
-        type="email"
-        maxlength="50"
-        formControlName="email"
-        placeholder="exemplo@email.com"
-        [ngClass]="{
-          'is-valid': f['email'].valid && f['email'].touched,
-          'is-invalid': f['email'].invalid && f['email'].touched
-        }"
-      />
-      <div class="feedback" *ngIf="f['email'].touched && f['email'].invalid">
-        <small *ngIf="f['email'].errors?.['required']">Obrigatório.</small>
-        <small *ngIf="f['email'].errors?.['email']">Formato inválido.</small>
-      </div>
-    </div>
+   <!-- Email -->
+<div class="form-group">
+  <label for="email">E-mail</label>
+  <input
+    id="email"
+    type="email"
+    maxlength="50"
+    formControlName="email"
+    placeholder="exemplo@email.com"
+    [ngClass]="{
+      'is-valid': f['email'].valid && f['email'].touched,
+      'is-invalid': f['email'].invalid && f['email'].touched || emailDuplicado
+    }"
+  />
+  <div class="feedback" *ngIf="f['email'].touched && f['email'].invalid || emailDuplicado">
+    <small *ngIf="f['email'].errors?.['required']">Obrigatório.</small>
+    <small *ngIf="f['email'].errors?.['email']">Formato inválido.</small>
+    <small *ngIf="emailDuplicado">Este e-mail já está em uso por outro usuário.</small>
+  </div>
+</div>
+
+
 
     <!-- Senha -->
     <div class="form-group">
@@ -126,9 +129,9 @@
 
     <!-- Botões -->
     <div class="botoes">
-      <button type="submit" class="btn-submit" [disabled]="registrationForm.invalid">
-        <i class="fa-solid fa-floppy-disk"></i> Cadastrar
-      </button>
+      <button type="submit" class="btn-submit">
+  <i class="fa-solid fa-floppy-disk"></i> Salvar alterações
+</button>
       <button type="reset" class="btn-cancelar">
         <i class="fa-solid fa-xmark"></i> Cancelar
       </button>

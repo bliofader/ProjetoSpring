@@ -1,21 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "../../../components/footer/footer.component";
-import { RouterLink } from '@angular/router';
 import { HomeComponent } from '../home.component';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
 import { UsuarioService } from '../../../services/usuario.service';
 import { Usuario } from '../../../entities/usuario';
-import { OnInit } from '@angular/core';
-
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [ HomeComponent, CommonModule, FormsModule, RouterOutlet, FooterComponent, RouterLink, NavbarComponent, HeaderTopComponent ],
+  imports: [
+    HomeComponent,
+    CommonModule,
+    FormsModule,
+    RouterOutlet,
+    FooterComponent,
+    RouterLink,
+    NavbarComponent,
+    HeaderTopComponent
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -23,7 +29,7 @@ export class AdminCadastroUsuarioComponent implements OnInit {
   searchTerm = '';
   usuarios: Usuario[] = [];
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuarioService.findAll().subscribe({
@@ -38,7 +44,7 @@ export class AdminCadastroUsuarioComponent implements OnInit {
 
   editarUsuario(usuario: Usuario) {
     console.log('Editando usuário:', usuario);
-    // redirecionar ou abrir modal
+    this.router.navigate(['/editar-usuario', usuario.id]); // ✅ redireciona com o ID
   }
 
   excluirUsuario(usuario: Usuario) {

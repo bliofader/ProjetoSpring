@@ -25,17 +25,32 @@ public class AuthService {
         );
 
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
-
         Usuario usuarioAutenticado = (Usuario) auth.getPrincipal();
 
         String token = tokenService.gerarToken(usuarioAutenticado);
 
-        // ✅ retorna o perfil do usuário junto com o token
-        return new TokenResponseDTO(
-                token,
-                usuarioAutenticado.getTipo(),   // Admin, Comum, Personal
-                usuarioAutenticado.getNome(),
-                usuarioAutenticado.getId().longValue()
-        );
+        // ✅ Log para garantir que o perfil está correto
+        System.out.println("🔍 Login realizado:");
+        System.out.println("Usuário: " + usuarioAutenticado.getEmail());
+        System.out.println("Perfil: " + usuarioAutenticado.getTipo());
+        System.out.println("Nome: " + usuarioAutenticado.getNome());
+
+        // ✅ Usando setters para garantir atribuição correta
+        TokenResponseDTO response = new TokenResponseDTO();
+        response.setToken(token);
+        response.setTipo("Bearer");
+        response.setNomeUsuario(usuarioAutenticado.getNome());
+        response.setPerfil(usuarioAutenticado.getTipo()); // ← perfil correto
+        response.setUsuarioId(usuarioAutenticado.getId().longValue());
+
+        // ✅ Log final da resposta
+        System.out.println("🔁 TokenResponseDTO:");
+        System.out.println("Token: " + response.getToken());
+        System.out.println("Tipo: " + response.getTipo());
+        System.out.println("Nome: " + response.getNomeUsuario());
+        System.out.println("Perfil: " + response.getPerfil());
+        System.out.println("ID: " + response.getUsuarioId());
+
+        return response;
     }
 }

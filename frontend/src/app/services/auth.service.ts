@@ -6,9 +6,9 @@ import { LoginRequest } from '../Models/login-request.model';
 
 export interface LoginResponse {
   token: string;
-  tipo: string;        // tipo do token (Bearer)
-  nomeUsuario: string;
-  perfil: string;      // perfil do usuário (Admin, Comum, Personal)
+  tipo: string;         // "Bearer"
+  nomeUsuario: string;  // nome do usuário
+  perfil: string;       // "Admin", "Comum", "Personal"
   usuarioId: number;
 }
 
@@ -25,37 +25,46 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, credenciais, { headers });
   }
 
-  salvarToken(token: string, idUsuario: number, nome?: string, perfil?: string): void {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      window.sessionStorage.setItem('jwt_token', token);
-      window.sessionStorage.setItem('usuarioId', idUsuario.toString());
-      if (nome) window.sessionStorage.setItem('usuarioNome', nome);
-      if (perfil) window.sessionStorage.setItem('usuarioPerfil', perfil);
+  salvarToken(token: string, idUsuario: number, nome: string, perfil: string): void {
+    if (this.isBrowser()) {
+      sessionStorage.setItem('jwt_token', token);
+      sessionStorage.setItem('usuarioId', idUsuario.toString());
+      sessionStorage.setItem('usuarioNome', nome);
+      sessionStorage.setItem('usuarioPerfil', perfil); // ✅ perfil correto
     }
-  }
-
-  getToken(): string | null {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      return window.sessionStorage.getItem('jwt_token');
-    }
-    return null;
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return this.isBrowser() && !!sessionStorage.getItem('jwt_token');
   }
 
   isAdmin(): boolean {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      // ✅ normaliza para evitar problemas de maiúscula/minúscula
-      return window.sessionStorage.getItem('usuarioPerfil')?.toLowerCase() === 'admin';
+    if (this.isBrowser()) {
+      const perfil = sessionStorage.getItem('usuarioPerfil');
+      return perfil?.toLowerCase() === 'admin';
     }
     return false;
   }
 
-  logout(): void {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      window.sessionStorage.clear();
+  getUsuario(): { nome: string; perfil: string; usuarioId: number } | null {
+    if (this.isBrowser()) {
+      const nome = sessionStorage.getItem('usuarioNome');
+      const perfil = sessionStorage.getItem('usuarioPerfil');
+      const usuarioId = sessionStorage.getItem('usuarioId');
+      if (nome && perfil && usuarioId) {
+        return { nome, perfil, usuarioId: Number(usuarioId) };
+      }
     }
+    return null;
+  }
+
+  logout(): void {
+    if (this.isBrowser()) {
+      sessionStorage.clear();
+    }
+  }
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof sessionStorage !== 'undefined';
   }
 }

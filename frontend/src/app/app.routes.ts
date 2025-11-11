@@ -80,7 +80,7 @@ export const routes: Routes = [
 { path: 'listar-listas', component: ListarListaComponent, title: 'Listar - Lista', canActivate: [adminGuard] },
 { path: 'editar-exercicio', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
 { path: 'editar-lista', component: EditarListaComponent, title: 'Editar - Lista', canActivate: [adminGuard] },
-{ path: 'editar-usuario', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
+{ path: 'editar-usuario/:id', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
 
 
 

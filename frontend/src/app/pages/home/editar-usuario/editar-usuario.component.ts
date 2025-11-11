@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../entities/usuario';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl,} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { RouterModule } from '@angular/router';
@@ -12,20 +16,22 @@ import { RouterModule } from '@angular/router';
   templateUrl: './editar-usuario.component.html',
   styleUrl: './editar-usuario.component.css',
 })
-export class EditarUsuarioComponent {
+export class EditarUsuarioComponent implements OnInit {
   registrationForm!: FormGroup;
+  usuarioId!: number;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private usuarioService: UsuarioService
+  ) {
     this.registrationForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
       dataNascimento: ['', Validators.required],
       cpf: [
         '',
-        [
-          Validators.required,
-          Validators.pattern(/^\d{11}$/), // apenas números, 11 dígitos
-        ],
+        [Validators.required, Validators.pattern(/^\d{11}$/)],
       ],
       email: [
         '',
@@ -37,23 +43,60 @@ export class EditarUsuarioComponent {
       ],
     });
   }
+emailDuplicado = false;
+  ngOnInit(): void {
+    this.usuarioId = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('🟢 ID recebido para edição:', this.usuarioId);
+
+    this.usuarioService.findById(this.usuarioId).subscribe({
+      next: (usuario: Usuario) => {
+        console.log('🟢 Dados recebidos:', usuario);
+        this.registrationForm.patchValue({
+          nome: usuario.nome,
+          tipo: usuario.tipo,
+          dataNascimento: usuario.dataNascimento,
+          cpf: usuario.cpf,
+          email: usuario.email,
+          senha: '' // não preenche senha por segurança
+        });
+      },
+      error: () => {
+        alert('Erro ao carregar dados do usuário.');
+      }
+    });
+  }
 
   get f(): { [key: string]: AbstractControl } {
     return this.registrationForm.controls;
   }
 
-
-  onSubmit(): void {
-    if (this.registrationForm.invalid) {
-      this.registrationForm.markAllAsTouched();
-      return;
-    }
-
-    const confirmacao = confirm('Deseja realmente cadastrar este usuário?');
-    if (confirmacao) {
-      console.log('✅ Usuário cadastrado:', this.registrationForm.value);
-      alert('Usuário cadastrado com sucesso!');
-      this.registrationForm.reset();
-    }
+ onSubmit(): void {
+  console.log('📤 Submissão iniciada');
+  if (this.registrationForm.invalid) {
+    this.registrationForm.markAllAsTouched();
+    return;
   }
+
+  const confirmacao = confirm('Deseja salvar as alterações deste usuário?');
+  if (!confirmacao) return;
+
+  this.emailDuplicado = false; // resetar antes de enviar
+
+  this.usuarioService.atualizarUsuario(this.usuarioId, this.registrationForm.value).subscribe({
+    next: () => {
+      alert('Usuário atualizado com sucesso!');
+      this.registrationForm.reset();
+    },
+    error: (err) => {
+      if (err.status === 400 && err.error?.message?.includes('E-mail já está em uso')) {
+        this.emailDuplicado = true;
+      } else {
+        alert('Erro ao atualizar usuário.');
+        console.error(err);
+      }
+    }
+  });
+}
+
+
 }

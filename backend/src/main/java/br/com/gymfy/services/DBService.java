@@ -48,6 +48,8 @@ public class DBService {
         );
 
         usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
+        System.out.println("Perfil do usuário 1: " + usuario1.getTipo());
+        System.out.println("Perfil do usuário 2: " + usuario2.getTipo());
 
         // Exercícios e personal continuam iguais
         Exercicio exercicio = new Exercicio("Costas1", "costas", "Costas", "avançado", "exercicio para costas", "", "");

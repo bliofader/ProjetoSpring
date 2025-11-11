@@ -17,23 +17,24 @@
       </ul>
 
       <!-- Menu de login sempre visível -->
-      <div class="login-menu">
-        <div class="login-icon">
-          <img src="assets/images/user.png" alt="Login">
-          <span>Login</span>
-        </div>
-        <div class="login-options">
-          <a href="/login-usuario">Usuário</a>
-          <hr>
-          <!-- ✅ só aparece se for Admin -->
-          <a href="/login-admin" *ngIf="authService.isAdmin()">Administrador</a>
-        </div>
+<div class="login-menu">
+  <div class="login-icon">
+    <img src="assets/images/user.png" alt="Login">
+    <span>Login</span>
+  </div>
+  <div class="login-options">
+    <a href="/login-usuario">Usuário</a>
+    <hr>
+    <!-- ✅ só aparece se for Admin -->
+    <a href="/admin" *ngIf="authService.isAdmin()">Administrador</a>
+  </div>
 
-        <!-- Botão de logout aparece só se logado -->
-        <div class="logout-menu" *ngIf="authService.isLoggedIn()">
-          <button class="btn-logout" (click)="logout()">Sair</button>
-        </div>
-      </div>
+  <!-- Botão de logout aparece só se logado -->
+  <div class="logout-menu" *ngIf="authService.isLoggedIn()">
+    <button class="btn-logout" (click)="logout()">Sair</button>
+  </div>
+</div>
+  
     </div>
   </nav>
 </section>
