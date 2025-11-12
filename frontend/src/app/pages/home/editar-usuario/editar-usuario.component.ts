@@ -21,6 +21,7 @@ export class EditarUsuarioComponent implements OnInit {
   usuarioId!: number;
   emailDuplicado = false;
   selectedFile: File | null = null;
+  emailOriginal = '';
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +40,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.usuarioId = Number(this.route.snapshot.paramMap.get('id'));
     this.usuarioService.findById(this.usuarioId).subscribe({
       next: (usuario: Usuario) => {
+        this.emailOriginal = usuario.email;
         this.registrationForm.patchValue({
           nome: usuario.nome,
           tipo: usuario.tipo,
@@ -61,16 +63,32 @@ export class EditarUsuarioComponent implements OnInit {
     }
   }
 
+  onEmailBlur(): void {
+    const email = this.f['email'].value;
+    if (email && email !== this.emailOriginal) {
+      this.usuarioService.findAll().subscribe({
+        next: (usuarios: Usuario[]) => {
+          const existe = usuarios.some(u => u.email === email && u.id !== this.usuarioId);
+          this.emailDuplicado = existe;
+        },
+        error: () => {
+          console.warn('Não foi possível validar o e-mail.');
+          this.emailDuplicado = false;
+        }
+      });
+    } else {
+      this.emailDuplicado = false;
+    }
+  }
+
   onSubmit(): void {
-    if (this.registrationForm.invalid) {
+    if (this.registrationForm.invalid || this.emailDuplicado) {
       this.registrationForm.markAllAsTouched();
       return;
     }
 
     const confirmacao = confirm('Deseja salvar as alterações deste usuário?');
     if (!confirmacao) return;
-
-    this.emailDuplicado = false;
 
     const usuario = this.registrationForm.getRawValue();
     const formData = new FormData();
@@ -86,12 +104,8 @@ export class EditarUsuarioComponent implements OnInit {
         this.selectedFile = null;
       },
       error: (err) => {
-        if (err.status === 400 && err.error?.message?.includes('E-mail já está em uso')) {
-          this.emailDuplicado = true;
-        } else {
-          alert('❌ Erro ao atualizar usuário.');
-          console.error(err);
-        }
+        alert('❌ Erro ao atualizar usuário.');
+        console.error(err);
       }
     });
   }

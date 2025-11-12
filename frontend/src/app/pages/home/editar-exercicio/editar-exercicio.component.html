@@ -41,6 +41,22 @@
         <small>Selecione um nível.</small>
       </div>
     </div>
+    <!-- Agrupamento -->
+<div class="form-group">
+  <label for="agrupamento">Agrupamento</label>
+  <select id="agrupamento" formControlName="agrupamento"
+    [ngClass]="{'is-valid': f['agrupamento'].valid && f['agrupamento'].touched, 'is-invalid': f['agrupamento'].invalid && f['agrupamento'].touched}">
+    <option value="">Selecione</option>
+    <option value="Superior">Superior</option>
+    <option value="Inferior">Inferior</option>
+    <option value="Cardio">Cardio</option>
+    <option value="Core">Core</option>
+  </select>
+  <div class="feedback" *ngIf="f['agrupamento'].touched && f['agrupamento'].invalid">
+    <small>Selecione um agrupamento.</small>
+  </div>
+</div>
+
 
     <!-- Nível -->
     <div class="form-group">

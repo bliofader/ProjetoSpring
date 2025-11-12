@@ -8,9 +8,11 @@ import {
   AbstractControl,
   ValidatorFn,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { HeaderTopComponent } from '../../../components/headertop/headertop.component';
 import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../entities/usuario';
 
 @Component({
   selector: 'app-login-cadastrar',
@@ -23,8 +25,13 @@ export class LoginCadastrarComponent {
   registrationForm!: FormGroup;
   previewImage: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
+  emailDuplicado = false;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) {
     this.registrationForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
@@ -43,7 +50,6 @@ export class LoginCadastrarComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-
       const reader = new FileReader();
       reader.onload = () => {
         this.previewImage = reader.result;
@@ -52,14 +58,30 @@ export class LoginCadastrarComponent {
     }
   }
 
+  onEmailBlur(): void {
+    const email = this.f['email'].value;
+    if (email) {
+      this.usuarioService.findAll().subscribe({
+        next: (usuarios: Usuario[]) => {
+          this.emailDuplicado = usuarios.some(u => u.email === email);
+        },
+        error: () => {
+          console.warn('Não foi possível validar o e-mail.');
+          this.emailDuplicado = false;
+        }
+      });
+    }
+  }
+
   onReset(): void {
     this.registrationForm.reset();
     this.previewImage = null;
     this.selectedFile = null;
+    this.emailDuplicado = false;
   }
 
   onSubmit(): void {
-    if (this.registrationForm.invalid) {
+    if (this.registrationForm.invalid || this.emailDuplicado) {
       this.registrationForm.markAllAsTouched();
       return;
     }
@@ -77,7 +99,7 @@ export class LoginCadastrarComponent {
     this.usuarioService.create(formData).subscribe({
       next: () => {
         alert('✅ Usuário cadastrado com sucesso!');
-        this.onReset();
+        this.router.navigate(['/login-usuario']);
       },
       error: (err: any) => {
         console.error('❌ Erro ao cadastrar usuário:', err);

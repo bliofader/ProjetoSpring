@@ -19,29 +19,31 @@ export class TelaExercicioDetalhesComponent implements OnInit {
   loading = true;
   erro = false;
 
-
   constructor(
     private route: ActivatedRoute,
     private exercicioService: ExercicioService
   ) {}
 
-
-
-ngOnInit(): void {
-  const id = this.route.snapshot.paramMap.get('id');
-  if (id) {
-    this.exercicioService.buscarPorId(+id).subscribe({
-      next: (res) => {
-        this.exercicio = res;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Erro ao buscar exercício', err);
-        this.erro = true;
-        this.loading = false;
-      }
-    });
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.exercicioService.buscarPorId(+id).subscribe({
+        next: (res) => {
+          this.exercicio = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Erro ao buscar exercício', err);
+          this.erro = true;
+          this.loading = false;
+        }
+      });
+    }
   }
-}
 
+  getVideoEmbedUrl(url: string): string {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/);
+    const videoId = match ? match[1] : null;
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+  }
 }

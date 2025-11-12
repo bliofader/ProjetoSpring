@@ -47,16 +47,18 @@
     <div class="form-group">
       <label for="email">E-mail</label>
       <input
-        id="email"
-        type="email"
-        maxlength="50"
-        formControlName="email"
-        placeholder="exemplo@email.com"
-        [ngClass]="{
-          'is-valid': f['email'].valid && f['email'].touched,
-          'is-invalid': f['email'].invalid && f['email'].touched || emailDuplicado
-        }"
-      />
+  id="email"
+  type="email"
+  maxlength="50"
+  formControlName="email"
+  placeholder="exemplo@email.com"
+  (blur)="onEmailBlur()"
+  [ngClass]="{
+    'is-valid': f['email'].valid && f['email'].touched && !emailDuplicado,
+    'is-invalid': f['email'].invalid && f['email'].touched || emailDuplicado
+  }"
+/>
+
       <div class="feedback" *ngIf="f['email'].touched && f['email'].invalid || emailDuplicado">
         <small *ngIf="f['email'].errors?.['required']">Obrigatório.</small>
         <small *ngIf="f['email'].errors?.['email']">Formato inválido.</small>

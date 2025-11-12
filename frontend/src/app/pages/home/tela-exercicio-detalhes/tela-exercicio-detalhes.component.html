@@ -1,43 +1,40 @@
 <app-header></app-header>
 
 <div class="content-container">
-    <div class="container-fundo">
-        <img src="assets/images/tela-exercicio/banner-exercicio.png" alt="">
-        <div class="info">
-            <h1>Confira Nossa Base de Exercícios</h1>
-            <h2>Explore nossa base de dados, repleta de treinos e <span>evolução contínua</span></h2>
-        </div>
+  <div class="container-fundo">
+    <img src="assets/images/tela-exercicio/banner-exercicio.png" alt="">
+    <div class="info">
+      <h1>Confira Nossa Base de Exercícios</h1>
+      <h2>Explore nossa base de dados, repleta de treinos e <span>evolução contínua</span></h2>
     </div>
- 
+  </div>
 
-    <div *ngIf="loading">Carregando exercício...</div>
-<div *ngIf="erro">Erro ao carregar exercício.</div>
+  <div *ngIf="loading" class="loading">Carregando exercício...</div>
+  <div *ngIf="erro" class="erro">Erro ao carregar exercício.</div>
 
-    <div class="detalhes-container" *ngIf="exercicio">
-        
-        <h2>{{ exercicio.nome }}</h2>
-        <div class="exercicio-visual">
-            <img [src]="'http://localhost:8080/uploads/' + exercicio.imagePath" alt="{{ exercicio.nome }}" class="exercicio-img" />
+  <div class="detalhes-container" *ngIf="exercicio">
+    <h2>{{ exercicio.nome }}</h2>
 
-            <p class="agrupamento">
-                agrupamento <br />
-                <span>{{ exercicio.agrupamento| titlecase }}</span>
-            </p>
-        </div>
+    <div class="exercicio-visual">
+      <img [src]="'http://localhost:8080/uploads/' + exercicio.imagePath" alt="{{ exercicio.nome }}" class="exercicio-img" />
+      <p class="agrupamento">
+        Agrupamento <br />
+        <span>{{ exercicio.agrupamento | titlecase }}</span>
+      </p>
+    </div>
 
-        <div class="descricao">
-            <h1>COMO FAZER</h1>
-            <p><strong>Tipo:</strong> {{ exercicio.tipo | titlecase }}</p>
-            <p>{{ exercicio.descricao }}</p>
-             
-        </div>
+    <div class="descricao">
+      <h1>COMO FAZER</h1>
+      <p><strong>Tipo:</strong> {{ exercicio.tipo | titlecase }}</p>
+      <p>{{ exercicio.descricao }}</p>
+    </div>
 
-        <!-- Video -->
+    <!-- Vídeo -->
     <div class="video-wrapper" *ngIf="exercicio.videoUrl">
       <h2>Vídeo de execução</h2>
       <div class="video-container">
         <iframe
-          [src]="exercicio.videoUrl | safeUrl"
+          [src]="getVideoEmbedUrl(exercicio.videoUrl) | safeUrl"
           title="{{ exercicio.nome }} - vídeo"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -45,10 +42,11 @@
         </iframe>
       </div>
     </div>
-       <div class="voltar-wrapper">
-  <button class="voltar-btn" routerLink="/tela-exercicio">← Voltar para lista</button>
-</div>
+
+    <div class="voltar-wrapper">
+      <button class="voltar-btn" routerLink="/tela-exercicio">← Voltar para lista</button>
     </div>
+  </div>
 </div>
 
 <app-footer></app-footer>

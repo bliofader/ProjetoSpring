@@ -1,53 +1,38 @@
 <app-header></app-header>
 <section>
-    <div class="content-container">
-        <div class="container-fundo">
-            <img src="assets/images/tela-exercicio/banner-exercicio.png" alt="">
-            <div class="info">
-                <h1>Confira Nossa Base de Exercícios</h1>
-                <h2>Explore nossa base de dados, repleta de treinos e <span>evolução contínua</span></h2>
-            </div>
-        </div>
-        <section class="exercise-categories">
-            <h2>Selecione um Exercício</h2>
-            <div class="category-buttons">
-                <button class="category-btn" [class.active]="selectedCategory === 'all'"
-                    (click)="filterExercises('all')">
-                    Todos
-                </button>
-
-                <button class="category-btn" [class.active]="selectedCategory === 'panturrilha'"
-                    (click)="filterExercises('panturrilha')">Panturrilha</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'costas'"
-                    (click)="filterExercises('costas')">Costas</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'peito'"
-                    (click)="filterExercises('peito')">Peito</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'ombro'"
-                    (click)="filterExercises('ombro')">Ombro</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'quadriceps'"
-                    (click)="filterExercises('quadriceps')">Quadríceps</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'abs'"
-                    (click)="filterExercises('abs')">Abs</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'triceps'"
-                    (click)="filterExercises('triceps')">Tríceps</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'biceps'"
-                    (click)="filterExercises('biceps')">Bíceps</button>
-                <button class="category-btn" [class.active]="selectedCategory === 'pernas'"
-                    (click)="filterExercises('pernas')">Pernas</button>
-            </div>
-        </section>
-
-        <section class="exercise-list">
-  <div *ngFor="let exercicio of filteredExercises" class="exercise-card">
-    <img [src]="'http://localhost:8080/uploads/' + exercicio.imagePath" alt="{{exercicio.nome}}" class="exercise-img">
-    <h3>{{ exercicio.nome }}</h3>
-    <p>Agrupamento <br> <span>{{ exercicio.agrupamento | titlecase }}</span></p>
-    <a [routerLink]="['/detalhes', exercicio.id]" class="inspect-btn">INSPECIONAR</a>
-  </div>
-</section>
-
-
-
+  <div class="content-container">
+    <div class="container-fundo">
+      <img src="assets/images/tela-exercicio/banner-exercicio.png" alt="">
+      <div class="info">
+        <h1>Confira Nossa Base de Exercícios</h1>
+        <h2>Explore nossa base de dados, repleta de treinos e <span>evolução contínua</span></h2>
+      </div>
     </div>
+
+    <section class="exercise-categories">
+      <h2>Selecione um Exercício</h2>
+      <div class="category-buttons">
+        <button class="category-btn" [class.active]="selectedCategory === 'all'" (click)="filterExercises('all')">Todos</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'panturrilha'" (click)="filterExercises('panturrilha')">Panturrilha</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'costas'" (click)="filterExercises('costas')">Costas</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'peito'" (click)="filterExercises('peito')">Peito</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'ombro'" (click)="filterExercises('ombro')">Ombro</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'quadriceps'" (click)="filterExercises('quadriceps')">Quadríceps</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'abs'" (click)="filterExercises('abs')">Abs</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'triceps'" (click)="filterExercises('triceps')">Tríceps</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'biceps'" (click)="filterExercises('biceps')">Bíceps</button>
+        <button class="category-btn" [class.active]="selectedCategory === 'pernas'" (click)="filterExercises('pernas')">Pernas</button>
+      </div>
+    </section>
+
+    <section class="exercise-list">
+      <div *ngFor="let exercicio of filteredExercises" class="exercise-card">
+        <img [src]="'http://localhost:8080/uploads/' + exercicio.imagePath" alt="{{exercicio.nome}}" class="exercise-img">
+        <h3>{{ exercicio.nome }}</h3>
+        <p>Agrupamento <br> <span>{{ exercicio.agrupamento | titlecase }}</span></p>
+        <a [routerLink]="['/detalhes', exercicio.id]" class="inspect-btn">INSPECIONAR</a>
+      </div>
+    </section>
+  </div>
 </section>
 <app-footer></app-footer>

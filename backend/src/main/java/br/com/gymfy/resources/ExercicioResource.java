@@ -88,6 +88,39 @@ public class ExercicioResource {
         return ResponseEntity.created(uri).body(exercicio);
     }
 
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Exercicio> atualizarExercicio(
+            @PathVariable Integer id,
+            @RequestParam("nome") String nome,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("agrupamento") String agrupamento,
+            @RequestParam("nivel") String nivel,
+            @RequestParam("descricao") String descricao,
+            @RequestParam(value = "videoUrl", required = false) String videoUrl,
+            @RequestParam(value = "imagem", required = false) MultipartFile imagem
+    ) throws IOException {
+
+        Exercicio exercicio = exercicioService.findById(id);
+        exercicio.setNome(nome);
+        exercicio.setTipo(tipo);
+        exercicio.setAgrupamento(agrupamento);
+        exercicio.setNivel(nivel);
+        exercicio.setDescricao(descricao);
+        exercicio.setVideoPath(videoUrl);
+
+        if (imagem != null && !imagem.isEmpty()) {
+            String fileName = UUID.randomUUID() + "_" + imagem.getOriginalFilename();
+            Path imagePath = Paths.get("uploads/" + fileName);
+            Files.createDirectories(imagePath.getParent());
+            Files.write(imagePath, imagem.getBytes());
+            exercicio.setImagePath(fileName);
+        }
+
+        Exercicio atualizado = exercicioService.CadastrarExecicio(exercicio); // reutiliza save()
+        return ResponseEntity.ok().body(atualizado);
+    }
+
+
 
 
     //deletar

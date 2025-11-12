@@ -45,6 +45,10 @@ export class AuthService {
     }
     return false;
   }
+  getUsuarioNome(): string {
+    return sessionStorage.getItem('usuarioNome') || 'Usuário';
+  }
+  
 
   getUsuario(): { nome: string; perfil: string; usuarioId: number } | null {
     if (this.isBrowser()) {

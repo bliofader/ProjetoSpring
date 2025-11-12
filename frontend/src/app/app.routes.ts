@@ -52,7 +52,6 @@ export const routes: Routes = [
 
   // Exercícios
   { path: 'tela-exercicio', component: TelaExercicioComponent, title: 'Gymfy - Exercícios' },
-  { path: 'detalhes/:nome', component: TelaExercicioDetalhesComponent, title: 'Gymfy - Detalhes dos Exercícios' },
   {
     path: 'detalhes/:id',
     loadComponent: () => import('./pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component')
@@ -81,6 +80,7 @@ export const routes: Routes = [
 { path: 'editar-exercicio', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
 { path: 'editar-lista', component: EditarListaComponent, title: 'Editar - Lista', canActivate: [adminGuard] },
 { path: 'editar-usuario/:id', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
+{ path: 'editar-exercicio/:id', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
 
 
 
