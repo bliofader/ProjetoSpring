@@ -1,0 +1,40 @@
+<main>
+  <header>
+    <app-header-usuario></app-header-usuario>
+  </header>
+
+  <section class="form-container">
+    <h2>Criar Nova Lista</h2>
+
+    <form (ngSubmit)="salvar()">
+      <label for="nome">Nome da Lista</label>
+      <input type="text" id="nome" [(ngModel)]="lista.nome" name="nome" required>
+
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" [(ngModel)]="lista.descricao" name="descricao"></textarea>
+
+      <label for="dia">Dia</label>
+      <input type="text" id="dia" [(ngModel)]="lista.dia" name="dia" required>
+
+      <h3>Selecione os exercícios</h3>
+      <div *ngFor="let exercicio of exercicios">
+        <label>
+          <input
+            type="checkbox"
+            [value]="exercicio.id"
+            (change)="handleCheckboxChange($event, exercicio.id)"
+          />
+          {{ exercicio.nome }}
+        </label>
+      </div>
+
+      <div class="BotaoCriarLista">
+        <button type="submit">Salvar</button>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+</main>

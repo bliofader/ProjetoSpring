@@ -16,29 +16,31 @@
         <li class="navbar-item"><a href="/tela-personal">Personais</a></li>
       </ul>
 
+      <!-- ✅ Menu de login/cadastro (somente se NÃO estiver logado) -->
+      <div class="login-menu" *ngIf="!authService.isLoggedIn()">
+        <div class="login-icon">
+          <img src="assets/images/user.png" alt="Login">
+        </div>
+        <div class="login-options">
+          <a href="/login-usuario">Login</a>
+        </div>
+      </div>
 
-<!-- Menu de boas-vindas (somente se estiver logado) -->
-<div class="login-menu" *ngIf="authService.isLoggedIn()">
-  <div class="login-icon">
-    <img src="assets/images/user.png" alt="Usuário">
-    <span>Bem-vindo, {{ authService.getUsuarioNome() }}</span>
-  </div>
-</div>
+      <!-- ✅ Menu de boas-vindas + opções (somente se estiver logado) -->
+      <div class="login-menu" *ngIf="authService.isLoggedIn()">
+        <div class="login-icon">
+          <img src="assets/images/user.png" alt="Usuário">
+          <span>Bem-vindo, {{ authService.getUsuarioNome() }}</span>
+        </div>
+      </div>
 
-
-<!-- Menu do usuário logado -->
-<div class="user-menu" *ngIf="authService.isLoggedIn()">
-  <a href="/user/home" class="user-link">
-    <span>Área do Usuário</span>
-  </a>
-
-  <!-- Link para admin, se for admin -->
-  <a href="/admin" class="admin-link" *ngIf="authService.isAdmin()">Administrador</a>
-
-  <button class="btn-logout" (click)="logout()">Sair</button>
-</div>
-
-  
+      <div class="user-menu" *ngIf="authService.isLoggedIn()">
+        <a href="/user/home" class="user-link">
+          <span>Área do Usuário</span>
+        </a>
+        <a href="/admin" class="admin-link" *ngIf="authService.isAdmin()">Administrador</a>
+        <button class="btn-logout" (click)="logout()">Sair</button>
+      </div>
     </div>
   </nav>
 </section>

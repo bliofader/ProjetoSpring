@@ -1,0 +1,32 @@
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+form label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

@@ -28,10 +28,11 @@ import { EditarUsuarioComponent } from './pages/home/editar-usuario/editar-usuar
 
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UserHomeComponent } from './pages/User/user-home/user-home.component';
-import { UserTreinoComponent } from './pages/User/user-treino/user-treino.component';
+import { UserTreinosComponent } from './pages/User/user-treino/user-treino.component';
 import { UserContaComponent } from './pages/User/user-conta/user-conta.component';
 import { UserPersonalComponent } from './pages/User/user-personal/user-personal.component';
 import { ListaUsuarioComponent } from './pages/User/lista-usuario/lista-usuario.component';
+import { CriarTreinoComponent } from './pages/User/criar-treino/criar-treino.component'; // ajuste o caminho conforme sua estrutura
 
 import { noAuthGuard } from './guards/no-auth.guard';
 import { authGuard } from './guards/auth.guard';
@@ -90,8 +91,15 @@ export const routes: Routes = [
 
   // Área do usuário autenticado
   { path: 'user/home', component: UserHomeComponent, title: 'Home - Usuários', canActivate: [authGuard] },
-  { path: 'user/treinos', component: UserTreinoComponent, title: 'Treino - Usuários', canActivate: [authGuard] },
+  { path: 'user/treinos', component: UserTreinosComponent, title: 'Treino - Usuários', canActivate: [authGuard] },
+{ path: 'user/lista/criar', component: CriarListaComponent, title: 'Criar Lista - Usuário', canActivate: [authGuard] },
+{ path: 'user/treino/criar', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
+{ path: 'user/lista/detalhes/:id', component: ListaUsuarioComponent, title: 'Lista - Usuário', canActivate: [authGuard] },
   { path: 'user/conta', component: UserContaComponent, title: 'Conta - Usuário', canActivate: [authGuard] },
   { path: 'user/personal', component: UserPersonalComponent, title: 'Personal - Usuário', canActivate: [authGuard] },
+{ path: 'user/lista/treino', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
   { path: 'user/lista/detalhes', component: ListaUsuarioComponent, title: 'Lista - Usuário', canActivate: [authGuard] }
+
+  //listas
+  
 ];

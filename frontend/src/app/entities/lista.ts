@@ -1,6 +1,6 @@
 export interface Lista {
-    id?: number,
-    nome: string,
-    data: Date,
-    dia: string
+  id?: number;
+  nome: string;
+  descricao?: string;
+  usuarioId: number;
 }

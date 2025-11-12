@@ -1,27 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ListaService } from '../../../services/lista.service';
+import { Lista } from '../../../entities/lista';
 import { HeaderUsuarioComponent } from '../../../components/header-usuario/header-usuario.component';
 import { UserSideabrComponent } from '../../../components/UserComponents/user-sideabr/user-sideabr.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
-import { Router } from '@angular/router'; // Importação necessária
 
 @Component({
-  selector: 'app-user-treino',
+  selector: 'app-user-treinos',
   standalone: true,
-  imports: [HeaderUsuarioComponent, UserSideabrComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    FooterComponent,
+    HeaderUsuarioComponent,
+    UserSideabrComponent
+  ],
   templateUrl: './user-treino.component.html',
-  styleUrl: './user-treino.component.css'
+  styleUrls: ['./user-treino.component.css']
 })
-export class UserTreinoComponent {
-  
-  
-  constructor(private router: Router) { }
+export class UserTreinosComponent implements OnInit {
+  listas: Lista[] = [];
 
-  goToDetalhesLista(): void {
-    this.router.navigateByUrl('user/lista/detalhes') 
-      .catch(error => console.error("Erro ao navegar para detalhes da lista:", error));
+  constructor(private listaService: ListaService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.listaService.listarPorUsuario().subscribe({
+      next: (res) => this.listas = res,
+      error: (err) => console.error('Erro ao carregar listas', err)
+    });
   }
 
-  onSubmit(){
-
+  goToDetalhesLista(id?: number): void {
+    if (id !== undefined) {
+      this.router.navigate(['/user/lista/detalhes', id]);
+    }
   }
+
+  goToCriarLista(): void {
+  this.router.navigate(['/user/treino/criar']);
+}
+
 }
