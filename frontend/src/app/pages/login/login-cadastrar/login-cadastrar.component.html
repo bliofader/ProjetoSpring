@@ -7,7 +7,7 @@
     <!-- Campos de texto -->
     <div class="form-group" *ngFor="let campo of ['nome', 'tipo', 'dataNascimento', 'cpf', 'email', 'senha']">
       <label [for]="campo">{{ campo === 'dataNascimento' ? 'Data de Nascimento' : campo | titlecase }}</label>
-      
+
       <!-- Input comum -->
       <input
         *ngIf="campo !== 'tipo'"
@@ -31,6 +31,7 @@
           'is-invalid': f['tipo'].invalid && f['tipo'].touched
         }"
       >
+        <option value="">Selecione</option>
         <option value="Personal">Personal</option>
         <option value="Comum">Comum</option>
       </select>
@@ -42,16 +43,16 @@
         <small *ngIf="f[campo].errors?.['pattern']">Formato inválido.</small>
         <small *ngIf="f[campo].errors?.['email']">E-mail inválido.</small>
         <small *ngIf="f[campo].errors?.['minlength']">Mínimo de caracteres não atingido.</small>
+        <small *ngIf="f[campo].errors?.['dataFutura']">A data não pode ser no futuro.</small>
+        <small *ngIf="f[campo].errors?.['cpfInvalido']">CPF inválido.</small>
       </div>
     </div>
 
     <!-- Upload de imagem -->
     <div class="form-group">
-      <label for="imagePath">Imagem (.png ou .jpeg)</label>
-      <input id="imagePath" type="file" accept="image/png, image/jpeg" (change)="onFileSelected($event)" />
-      <div class="preview" *ngIf="previewImage">
-        <img [src]="previewImage" alt="Pré-visualização da imagem" />
-      </div>
+      <label for="imagem">Imagem (.png ou .jpeg)</label>
+      <input id="imagem" type="file" accept="image/png, image/jpeg" (change)="onFileSelected($event)" />
+      <img *ngIf="previewImage" [src]="previewImage" alt="Preview" class="preview-img" />
     </div>
 
     <!-- Botões -->

@@ -19,6 +19,8 @@ import { RouterModule } from '@angular/router';
 export class EditarUsuarioComponent implements OnInit {
   registrationForm!: FormGroup;
   usuarioId!: number;
+  emailDuplicado = false;
+  selectedFile: File | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -28,41 +30,23 @@ export class EditarUsuarioComponent implements OnInit {
     this.registrationForm = this.fb.group({
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
-      dataNascimento: ['', Validators.required],
-      cpf: [
-        '',
-        [Validators.required, Validators.pattern(/^\d{11}$/)],
-      ],
-      email: [
-        '',
-        [Validators.required, Validators.email, Validators.maxLength(50)],
-      ],
-      senha: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(40)],
-      ],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
+      senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
     });
   }
-emailDuplicado = false;
+
   ngOnInit(): void {
     this.usuarioId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('🟢 ID recebido para edição:', this.usuarioId);
-
     this.usuarioService.findById(this.usuarioId).subscribe({
       next: (usuario: Usuario) => {
-        console.log('🟢 Dados recebidos:', usuario);
         this.registrationForm.patchValue({
           nome: usuario.nome,
           tipo: usuario.tipo,
-          dataNascimento: usuario.dataNascimento,
-          cpf: usuario.cpf,
           email: usuario.email,
-          senha: '' // não preenche senha por segurança
+          senha: ''
         });
       },
-      error: () => {
-        alert('Erro ao carregar dados do usuário.');
-      }
+      error: () => alert('Erro ao carregar dados do usuário.')
     });
   }
 
@@ -70,33 +54,45 @@ emailDuplicado = false;
     return this.registrationForm.controls;
   }
 
- onSubmit(): void {
-  console.log('📤 Submissão iniciada');
-  if (this.registrationForm.invalid) {
-    this.registrationForm.markAllAsTouched();
-    return;
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
   }
 
-  const confirmacao = confirm('Deseja salvar as alterações deste usuário?');
-  if (!confirmacao) return;
-
-  this.emailDuplicado = false; // resetar antes de enviar
-
-  this.usuarioService.atualizarUsuario(this.usuarioId, this.registrationForm.value).subscribe({
-    next: () => {
-      alert('Usuário atualizado com sucesso!');
-      this.registrationForm.reset();
-    },
-    error: (err) => {
-      if (err.status === 400 && err.error?.message?.includes('E-mail já está em uso')) {
-        this.emailDuplicado = true;
-      } else {
-        alert('Erro ao atualizar usuário.');
-        console.error(err);
-      }
+  onSubmit(): void {
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
+      return;
     }
-  });
-}
 
+    const confirmacao = confirm('Deseja salvar as alterações deste usuário?');
+    if (!confirmacao) return;
 
+    this.emailDuplicado = false;
+
+    const usuario = this.registrationForm.getRawValue();
+    const formData = new FormData();
+    formData.append('usuario', new Blob([JSON.stringify(usuario)], { type: 'application/json' }));
+    if (this.selectedFile) {
+      formData.append('imagem', this.selectedFile);
+    }
+
+    this.usuarioService.updateComImagem(this.usuarioId, formData).subscribe({
+      next: () => {
+        alert('✅ Usuário atualizado com sucesso!');
+        this.registrationForm.reset();
+        this.selectedFile = null;
+      },
+      error: (err) => {
+        if (err.status === 400 && err.error?.message?.includes('E-mail já está em uso')) {
+          this.emailDuplicado = true;
+        } else {
+          alert('❌ Erro ao atualizar usuário.');
+          console.error(err);
+        }
+      }
+    });
+  }
 }

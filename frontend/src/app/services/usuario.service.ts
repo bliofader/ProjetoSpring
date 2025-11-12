@@ -12,35 +12,22 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  // 🔐 Criação de usuário
-  createSemImagem(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.baseUrl, usuario);
-  }
-
-  createComImagem(usuario: Usuario, imagem: File): Observable<Usuario> {
-    const formData = new FormData();
-    formData.append('usuario', new Blob([JSON.stringify(usuario)], { type: 'application/json' }));
-    formData.append('imagem', imagem);
-
+  // ✅ Cadastro de usuário com imagem
+  create(formData: FormData): Observable<Usuario> {
     return this.http.post<Usuario>(this.baseUrl, formData);
   }
 
-  create(usuario: Usuario, imagem?: File): Observable<Usuario> {
-    return imagem ? this.createComImagem(usuario, imagem) : this.createSemImagem(usuario);
-  }
-
   // 🔍 Buscar usuário por ID
-  
   findById(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.baseUrl}/${id}`);
   }
 
-  // 🔍 Buscar todos
+  // 🔍 Buscar todos os usuários
   findAll(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.baseUrl);
   }
 
-  // 🔍 Buscar por tipo
+  // 🔍 Buscar usuários comuns
   findComuns(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.baseUrl}/tipo/Comum`);
   }
@@ -52,7 +39,7 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseUrl}/me`, { headers });
   }
 
-  // ✏️ Atualizar usuário com autenticação
+  // ✏️ Atualizar usuário sem imagem
   atualizarUsuario(id: number, dados: Partial<Usuario>): Observable<Usuario> {
     const token = sessionStorage.getItem('jwt_token');
     const headers = new HttpHeaders({
@@ -62,8 +49,17 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.baseUrl}/${id}`, dados, { headers });
   }
 
+  // ✏️ Atualizar usuário com imagem
+  updateComImagem(id: number, formData: FormData): Observable<Usuario> {
+    const token = sessionStorage.getItem('jwt_token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.put<Usuario>(`${this.baseUrl}/${id}`, formData, { headers });
+  }
+
   // 🗑️ Deletar usuário
   delete(id: number): Observable<string> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+    const token = sessionStorage.getItem('jwt_token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.delete(`${this.baseUrl}/${id}`, { headers, responseType: 'text' });
   }
 }

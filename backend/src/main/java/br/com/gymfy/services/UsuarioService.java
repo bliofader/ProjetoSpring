@@ -1,88 +1,106 @@
 package br.com.gymfy.services;
 
-
-import br.com.gymfy.entities.Exercicio;
+import br.com.gymfy.DTO.UsuarioCadastroDTO;
+import br.com.gymfy.DTO.UsuarioUpdateDTO;
 import br.com.gymfy.entities.Usuario;
+import br.com.gymfy.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import br.com.gymfy.repositories.UsuarioRepository;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
+
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public Usuario findById(Integer id) {
-        Optional<Usuario> usuario= usuarioRepository.findById(id);
-        return usuario.orElse(null);
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário com ID " + id + " não encontrado."));
     }
 
-
-
-    public List<Usuario> findAll(){
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        return usuarios;
-
-    }
-
-    public Usuario findByNome(String nome){
-        Optional<Usuario> usuarios = usuarioRepository.findByNome(nome);
-        return usuarios.orElse(null);
-
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
     }
 
     public List<Usuario> findByTipo(String tipo) {
         return usuarioRepository.findByTipo(tipo);
     }
 
-    public Usuario findByCpf(String cpf){
-        Optional<Usuario> usuarios = usuarioRepository.findByCpf(cpf);
-        return usuarios.orElse(null);
-    }
+    public Usuario cadastrarUsuario(UsuarioCadastroDTO dto, MultipartFile imagem) {
+        Optional<Usuario> existente = usuarioRepository.findByEmail(dto.getEmail());
+        if (existente.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail já está em uso por outro usuário.");
+        }
 
+        Usuario usuario = new Usuario();
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+        usuario.setTipo(dto.getTipo());
+        usuario.setCpf(dto.getCpf());
 
-    public Usuario cadastrarUsuario(Usuario usuario){
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); // ✅ Criptografando
+        // ✅ Conversão de LocalDate para java.sql.Date
+        usuario.setDataNascimento(Date.valueOf(dto.getDataNascimento()));
+
+        usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+
+        if (imagem != null && !imagem.isEmpty()) {
+            salvarImagem(usuario, imagem);
+        }
+
         return usuarioRepository.save(usuario);
     }
 
-    public void deletar(Integer id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if (usuario.isPresent()) {
-            usuarioRepository.deleteById(id);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário com ID " + id + " não encontrado.");
+    public Usuario updateComImagem(Integer id, UsuarioUpdateDTO dto, MultipartFile imagem) {
+        Usuario alterado = findById(id);
+
+        Optional<Usuario> existente = usuarioRepository.findByEmail(dto.getEmail());
+        if (existente.isPresent() && !existente.get().getId().equals(id)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail já está em uso por outro usuário.");
         }
+
+        alterado.setNome(dto.getNome());
+        alterado.setEmail(dto.getEmail());
+        alterado.setTipo(dto.getTipo());
+        alterado.setSenha(passwordEncoder.encode(dto.getSenha()));
+
+        if (imagem != null && !imagem.isEmpty()) {
+            salvarImagem(alterado, imagem);
+        }
+
+        return usuarioRepository.save(alterado);
     }
 
-    public Usuario update(Integer id, Usuario usuario) {
-        Usuario alterado = findById(id);
-        if (alterado != null) {
-            Optional<Usuario> existente = usuarioRepository.findByEmail(usuario.getEmail());
-            if (existente.isPresent() && !existente.get().getId().equals(id)) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "E-mail já está em uso por outro usuário.");
+    public void deletar(Integer id) {
+        Usuario usuario = findById(id);
+        usuarioRepository.delete(usuario);
+    }
+
+    private void salvarImagem(Usuario usuario, MultipartFile imagem) {
+        try {
+            String nomeArquivo = System.currentTimeMillis() + "_" + imagem.getOriginalFilename();
+            String pastaUpload = new File("").getAbsolutePath() + File.separator + "uploads";
+            File pasta = new File(pastaUpload);
+            if (!pasta.exists()) {
+                pasta.mkdirs();
             }
 
-            alterado.setNome(usuario.getNome());
-            alterado.setEmail(usuario.getEmail());
-            alterado.setDataNascimento(usuario.getDataNascimento());
-            alterado.setTipo(usuario.getTipo());
-            alterado.setSenha(passwordEncoder.encode(usuario.getSenha()));
-
-            return usuarioRepository.save(alterado);
+            String caminho = pastaUpload + File.separator + nomeArquivo;
+            imagem.transferTo(new File(caminho));
+            usuario.setImagem(nomeArquivo);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao salvar imagem: " + e.getMessage());
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário com ID " + id + " não encontrado.");
     }
-
-
 }
-
-

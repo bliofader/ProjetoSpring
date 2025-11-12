@@ -1,8 +1,11 @@
 package br.com.gymfy.resources;
 
-
-import br.com.gymfy.services.UsuarioService;
+import br.com.gymfy.DTO.UsuarioCadastroDTO;
+import br.com.gymfy.DTO.UsuarioResponseDTO;
+import br.com.gymfy.DTO.UsuarioUpdateDTO;
 import br.com.gymfy.entities.Usuario;
+import br.com.gymfy.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,68 +14,59 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping(value="/usuarios")
+@RequestMapping(value = "/usuarios")
 public class UsuarioResource {
+
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Usuario> findById(@PathVariable Integer id) {
+    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id) {
         Usuario usuario = usuarioService.findById(id);
-        return ResponseEntity.ok().body(usuario);
-
+        return ResponseEntity.ok().body(new UsuarioResponseDTO(usuario));
     }
 
     @GetMapping(value = "/tipo/{tipo}")
-    public ResponseEntity<List<Usuario>> findByTipo(@PathVariable String tipo) {
-        List<Usuario> usuarios = usuarioService.findByTipo(tipo);
+    public ResponseEntity<List<UsuarioResponseDTO>> findByTipo(@PathVariable String tipo) {
+        List<UsuarioResponseDTO> usuarios = usuarioService.findByTipo(tipo)
+                .stream().map(UsuarioResponseDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(usuarios);
     }
 
-
-
-    // Listar todos
     @GetMapping
-    public List<Usuario> findAll() {
-        List<Usuario> usuarios = usuarioService.findAll();
-        return usuarios;
+    public List<UsuarioResponseDTO> findAll() {
+        return usuarioService.findAll()
+                .stream().map(UsuarioResponseDTO::new).collect(Collectors.toList());
     }
-
 
     @PostMapping(consumes = "multipart/form-data")
-    public ResponseEntity<Usuario> cadastrarUsuarioComImagem(
-            @RequestPart("usuario") Usuario usuario,
+    public ResponseEntity<UsuarioResponseDTO> cadastrarUsuarioComImagem(
+            @RequestPart("usuario") @Valid UsuarioCadastroDTO dto,
             @RequestPart(value = "imagem", required = false) MultipartFile imagem) {
 
-        if (imagem != null && !imagem.isEmpty()) {
-            try {
-                String nomeArquivo = System.currentTimeMillis() + "_" + imagem.getOriginalFilename();
-                String caminho = "uploads/" + nomeArquivo; // pasta local
-                imagem.transferTo(new java.io.File(caminho));
-                usuario.setImagem(nomeArquivo);
-            } catch (Exception e) {
-                throw new RuntimeException("Erro ao salvar imagem: " + e.getMessage());
-            }
-        }
-
-        usuario = usuarioService.cadastrarUsuario(usuario);
+        Usuario novo = usuarioService.cadastrarUsuario(dto, imagem);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(usuario.getId()).toUri();
-        return ResponseEntity.created(uri).body(usuario);
+                .path("/{id}").buildAndExpand(novo.getId()).toUri();
+        return ResponseEntity.created(uri).body(new UsuarioResponseDTO(novo));
     }
-    //deletar
+
+    @PutMapping(value = "/{id}", consumes = "multipart/form-data")
+    public ResponseEntity<UsuarioResponseDTO> updateComImagem(
+            @PathVariable Integer id,
+            @RequestPart("usuario") @Valid UsuarioUpdateDTO dto,
+            @RequestPart(value = "imagem", required = false) MultipartFile imagem) {
+
+        Usuario alterado = usuarioService.updateComImagem(id, dto, imagem);
+        return ResponseEntity.ok().body(new UsuarioResponseDTO(alterado));
+    }
+
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deletar(@PathVariable Integer id){
+    public ResponseEntity<String> deletar(@PathVariable Integer id) {
         usuarioService.deletar(id);
         return ResponseEntity.ok("Usuário com ID " + id + " deletado com sucesso.");
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody Usuario usuario){
-        Usuario alterado = usuarioService.update(id,usuario);
-        return ResponseEntity.ok().body(alterado);
     }
 }

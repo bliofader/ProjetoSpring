@@ -1,9 +1,6 @@
-<!-- Cabeçalho -->
 <app-header-top></app-header-top>
-<!-- Menu de navegação -->
 <app-navbar></app-navbar>
 
-<!-- Conteúdo principal -->
 <main class="user-list">
   <h2><span class="highlight-bar"></span> Cadastro de Usuário</h2>
 
@@ -11,17 +8,8 @@
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome Completo</label>
-      <input
-        id="nome"
-        type="text"
-        maxlength="60"
-        formControlName="nome"
-        placeholder="Digite o nome completo"
-        [ngClass]="{
-          'is-valid': f['nome'].valid && f['nome'].touched,
-          'is-invalid': f['nome'].invalid && f['nome'].touched
-        }"
-      />
+      <input id="nome" type="text" maxlength="60" formControlName="nome" placeholder="Digite o nome completo"
+        [ngClass]="{ 'is-valid': f['nome'].valid && f['nome'].touched, 'is-invalid': f['nome'].invalid && f['nome'].touched }" />
       <div class="feedback" *ngIf="f['nome'].touched && f['nome'].invalid">
         <small *ngIf="f['nome'].errors?.['required']">O nome é obrigatório.</small>
         <small *ngIf="f['nome'].errors?.['maxlength']">Máximo de 60 caracteres.</small>
@@ -31,14 +19,8 @@
     <!-- Tipo -->
     <div class="form-group">
       <label for="tipo">Tipo de Usuário</label>
-      <select
-        id="tipo"
-        formControlName="tipo"
-        [ngClass]="{
-          'is-valid': f['tipo'].valid && f['tipo'].touched,
-          'is-invalid': f['tipo'].invalid && f['tipo'].touched
-        }"
-      >
+      <select id="tipo" formControlName="tipo"
+        [ngClass]="{ 'is-valid': f['tipo'].valid && f['tipo'].touched, 'is-invalid': f['tipo'].invalid && f['tipo'].touched }">
         <option value="">Selecione</option>
         <option value="Personal">Personal</option>
         <option value="Comum">Comum</option>
@@ -51,54 +33,31 @@
     <!-- Data -->
     <div class="form-group">
       <label for="dataNascimento">Data de Nascimento</label>
-      <input
-        id="dataNascimento"
-        type="date"
-        formControlName="dataNascimento"
-        [ngClass]="{
-          'is-valid': f['dataNascimento'].valid && f['dataNascimento'].touched,
-          'is-invalid': f['dataNascimento'].invalid && f['dataNascimento'].touched
-        }"
-      />
+      <input id="dataNascimento" type="date" formControlName="dataNascimento"
+        [ngClass]="{ 'is-valid': f['dataNascimento'].valid && f['dataNascimento'].touched, 'is-invalid': f['dataNascimento'].invalid && f['dataNascimento'].touched }" />
       <div class="feedback" *ngIf="f['dataNascimento'].touched && f['dataNascimento'].invalid">
-        <small>A data é obrigatória.</small>
+        <small *ngIf="f['dataNascimento'].errors?.['required']">A data é obrigatória.</small>
+        <small *ngIf="f['dataNascimento'].errors?.['dataFutura']">A data não pode ser no futuro.</small>
       </div>
     </div>
 
     <!-- CPF -->
     <div class="form-group">
       <label for="cpf">CPF</label>
-      <input
-        id="cpf"
-        type="text"
-        maxlength="11"
-        formControlName="cpf"
-        placeholder="Apenas números"
-        [ngClass]="{
-          'is-valid': f['cpf'].valid && f['cpf'].touched,
-          'is-invalid': f['cpf'].invalid && f['cpf'].touched
-        }"
-      />
+      <input id="cpf" type="text" maxlength="11" formControlName="cpf" placeholder="Apenas números"
+        [ngClass]="{ 'is-valid': f['cpf'].valid && f['cpf'].touched, 'is-invalid': f['cpf'].invalid && f['cpf'].touched }" />
       <div class="feedback" *ngIf="f['cpf'].touched && f['cpf'].invalid">
         <small *ngIf="f['cpf'].errors?.['required']">O CPF é obrigatório.</small>
-        <small *ngIf="f['cpf'].errors?.['pattern']">Deve conter 11 números válidos.</small>
+        <small *ngIf="f['cpf'].errors?.['pattern']">Deve conter 11 números.</small>
+        <small *ngIf="f['cpf'].errors?.['cpfInvalido']">CPF inválido.</small>
       </div>
     </div>
 
     <!-- Email -->
     <div class="form-group">
       <label for="email">E-mail</label>
-      <input
-        id="email"
-        type="email"
-        maxlength="50"
-        formControlName="email"
-        placeholder="exemplo@email.com"
-        [ngClass]="{
-          'is-valid': f['email'].valid && f['email'].touched,
-          'is-invalid': f['email'].invalid && f['email'].touched
-        }"
-      />
+      <input id="email" type="email" maxlength="50" formControlName="email" placeholder="exemplo@email.com"
+        [ngClass]="{ 'is-valid': f['email'].valid && f['email'].touched, 'is-invalid': f['email'].invalid && f['email'].touched }" />
       <div class="feedback" *ngIf="f['email'].touched && f['email'].invalid">
         <small *ngIf="f['email'].errors?.['required']">Obrigatório.</small>
         <small *ngIf="f['email'].errors?.['email']">Formato inválido.</small>
@@ -108,22 +67,10 @@
     <!-- Senha -->
     <div class="form-group">
       <label for="senha">Senha</label>
-      <input
-        id="senha"
-        type="password"
-        maxlength="40"
-        formControlName="senha"
-        placeholder="Digite uma senha"
-        [ngClass]="{
-          'is-valid': f['senha'].valid && f['senha'].touched,
-          'is-invalid': f['senha'].invalid && f['senha'].touched
-        }"
-      />
-      <div class="feedback" *ngIf="f['senha'].touched && f['senha'].invalid">
-        <small *ngIf="f['senha'].errors?.['required']">Obrigatória.</small>
-        <small *ngIf="f['senha'].errors?.['minlength']">Mínimo de 6 caracteres.</small>
-      </div>
+      <input id="senha" type="password" maxlength="40" formControlName="senha" placeholder="Digite uma senha"
+        [ngClass]="{ 'is-valid': f['senha'].valid && f['senha'].touched, 'is-invalid': f['senha'].invalid && f['senha'].touched }" />
     </div>
+  
 
     <!-- Botões -->
     <div class="botoes">
