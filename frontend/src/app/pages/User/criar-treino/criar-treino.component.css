@@ -1,32 +1,86 @@
+/* Container principal */
 .form-container {
   max-width: 600px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #f5f5f5;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Agrupamento de campos */
+form .form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels */
 form label {
   display: block;
-  margin-top: 12px;
+  margin-bottom: 6px;
   font-weight: bold;
+  color: #333;
 }
 
+/* Inputs e Textareas */
 form input,
 form textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  border-radius: 4px;
+  padding: 10px;
+  border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
+/* Checkboxes */
+.checkbox-group {
+  margin-bottom: 10px;
+}
+
+/* Botão de envio */
 button[type="submit"] {
-  margin-top: 20px;
-  background-color: var(--primary-color);
+  background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+/* Hover do botão */
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Loader animado */
+.loader {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Popup de confirmação */
+.popup {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }

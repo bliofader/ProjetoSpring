@@ -28,6 +28,7 @@ export class CriarTreinoComponent implements OnInit {
 
   exercicios: Exercicio[] = [];
   exercicioSelecionados: number[] = [];
+  salvando = false;
 
   constructor(
     private listaService: ListaService,
@@ -45,12 +46,11 @@ export class CriarTreinoComponent implements OnInit {
     });
   }
 
-handleCheckboxChange(event: Event, id?: number): void {
-  if (id === undefined) return;
-  const input = event.target as HTMLInputElement;
-  this.onToggleExercicio(id, input.checked);
-}
-
+  handleCheckboxChange(event: Event, id?: number): void {
+    if (id === undefined) return;
+    const input = event.target as HTMLInputElement;
+    this.onToggleExercicio(id, input.checked);
+  }
 
   onToggleExercicio(id: number, checked: boolean): void {
     if (checked) {
@@ -60,12 +60,32 @@ handleCheckboxChange(event: Event, id?: number): void {
     }
   }
 
-  salvar(): void {
-    this.lista.exercicioIds = this.exercicioSelecionados;
+  confirmacao = false;
 
-    this.listaService.criarLista(this.lista).subscribe({
-      next: (novaLista) => this.router.navigate(['/user/lista/detalhes', novaLista.id]),
-      error: (err) => console.error('Erro ao criar treino', err)
-    });
+salvar(): void {
+  if (this.salvando) return;
+  this.salvando = true;
+
+  if (!this.lista.nome || !this.lista.dia || this.exercicioSelecionados.length === 0) {
+    alert('Preencha todos os campos e selecione pelo menos um exercício.');
+    this.salvando = false;
+    return;
   }
+
+  this.lista.exercicioIds = this.exercicioSelecionados;
+
+  this.listaService.criarLista(this.lista).subscribe({
+    next: () => {
+      this.confirmacao = true;
+      setTimeout(() => {
+        this.router.navigate(['/user/treinos']);
+      }, 1500);
+    },
+    error: (err) => {
+      console.error('Erro ao criar treino', err);
+      this.salvando = false;
+    }
+  });
+}
+
 }

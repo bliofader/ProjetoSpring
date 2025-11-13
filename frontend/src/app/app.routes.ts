@@ -98,8 +98,16 @@ export const routes: Routes = [
   { path: 'user/conta', component: UserContaComponent, title: 'Conta - Usuário', canActivate: [authGuard] },
   { path: 'user/personal', component: UserPersonalComponent, title: 'Personal - Usuário', canActivate: [authGuard] },
 { path: 'user/lista/treino', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
-  { path: 'user/lista/detalhes', component: ListaUsuarioComponent, title: 'Lista - Usuário', canActivate: [authGuard] }
+  { path: 'user/lista/detalhes', component: ListaUsuarioComponent, title: 'Lista - Usuário', canActivate: [authGuard] },
 
   //listas
-  
+ {
+  path: 'user/treino/:id',
+  loadComponent: () => import('./pages/User/detalhes-lista/detalhes-lista.component')
+    .then(m => m.DetalhesListaComponent),
+  title: 'Detalhes do Treino - Usuário',
+  canActivate: [authGuard]
+}
+
+
 ];

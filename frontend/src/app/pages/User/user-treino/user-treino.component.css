@@ -1,83 +1,117 @@
-main{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+.treinos-layout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 30px;
 }
 
-.SideBar {
-    display: flex;
-    flex-direction: row;
-    width: 30em;
+
+.sidebar {
+  width: 220px;
 }
 
-section{
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1; 
+.listas-container {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.ContainerListas{
-    display: flex;
-    flex-direction: column;
-    margin-top: 10em;
-    width: 100%;
-    height: 100%;
+.listas-container h2 {
+  margin-bottom: 20px;
+  color: #333;
 }
 
-h4{
-    color: #7D7C7C;
-    margin-bottom: 3em;
+.card-lista {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 
-.Card{
-    width: 138px;
-    height: 100px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0px 4px 6px 1px #C6D932;
-
-    border-radius: 25px 25px 0px 0px;
-    
-    
-    transform-origin: center;
-    transition: transform 0.3s ease-in-out;
+.card-lista:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
-.Card:hover{
-    transform: scale(1.03);
-    cursor: pointer;
-
+.card-lista h3 {
+  margin: 0 0 8px;
+  color: #007bff;
 }
 
-.BotaoCriarLista{
-    margin-top: auto;
-    align-self: flex-end;
-    margin-top: 10em;
-    margin-right: 30px;
+.card-lista p {
+  margin: 0 0 6px;
+  color: #555;
 }
 
-button{
-    background-color: #C6D932;
-    color: #000;
-    font-size: 15px;
-
-    width: 150px;
-    height: 40px;
-    font-family: 'Lexend', sans-serif;
-    font-weight: bold;
-    border: none;
-
-    border-radius: 5px;
-
-    transform-origin: center;
-    transition: transform 0.3s ease-in-out;
+.card-lista span {
+  font-size: 14px;
+  color: #666;
 }
 
-button:hover{
-    transform: scale(1.03);
-    cursor: pointer;
+.BotaoCriarLista {
+  margin-top: 20px;
+  text-align: right;
 }
+
+.BotaoCriarLista button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.BotaoCriarLista button:hover {
+  background-color: #0056b3;
+}
+
+.empty-message {
+  font-style: italic;
+  color: #999;
+  margin-bottom: 20px;
+}
+.filtro-dias {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filtro-dias button {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  max-width: fit-content;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filtro-dias button:hover {
+  background-color: #e6f0ff;
+}
+
+.filtro-dias button.ativo {
+  background-color: #007bff;
+  color: white;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  margin-bottom: 20px;
+}
+

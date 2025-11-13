@@ -21,14 +21,32 @@ import { FooterComponent } from '../../../components/footer/footer.component';
 })
 export class UserTreinosComponent implements OnInit {
   listas: Lista[] = [];
+  listasFiltradas: Lista[] = [];
+  diasSemana: string[] = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
+  diaSelecionado: string | null = null;
 
   constructor(private listaService: ListaService, private router: Router) {}
 
   ngOnInit(): void {
     this.listaService.listarPorUsuario().subscribe({
-      next: (res) => this.listas = res,
+      next: (res) => {
+        this.listas = res;
+        this.listasFiltradas = res;
+      },
       error: (err) => console.error('Erro ao carregar listas', err)
     });
+  }
+
+  filtrarPorDia(dia: string): void {
+    this.diaSelecionado = dia;
+    this.listasFiltradas = this.listas.filter(lista =>
+      lista.dia?.toLowerCase() === dia.toLowerCase()
+    );
+  }
+
+  limparFiltro(): void {
+    this.diaSelecionado = null;
+    this.listasFiltradas = this.listas;
   }
 
   goToDetalhesLista(id?: number): void {
@@ -38,7 +56,6 @@ export class UserTreinosComponent implements OnInit {
   }
 
   goToCriarLista(): void {
-  this.router.navigate(['/user/treino/criar']);
-}
-
+    this.router.navigate(['/user/treino/criar']);
+  }
 }

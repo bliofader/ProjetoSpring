@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,8 @@ public class Usuario implements Serializable, UserDetails {
     String senha;
     @Column(name = "Imagem")
     private String imagem;
-
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lista> listas = new ArrayList<>();
 
     public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String imagem) {
         this.id = id;
@@ -127,6 +129,14 @@ public class Usuario implements Serializable, UserDetails {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public List<Lista> getListas() {
+        return listas;
+    }
+
+    public void setListas(List<Lista> listas) {
+        this.listas = listas;
     }
 
     @Override

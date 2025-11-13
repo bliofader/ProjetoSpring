@@ -19,4 +19,8 @@ export class ListaService {
   criarLista(dto: ListaDTO): Observable<Lista> {
     return this.http.post<Lista>(this.baseUrl, dto);
   }
+  buscarPorId(id: number): Observable<Lista> {
+  return this.http.get<Lista>(`${this.baseUrl}/${id}`);
+}
+
 }

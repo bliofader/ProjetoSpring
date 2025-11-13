@@ -2,36 +2,52 @@
   <header>
     <app-header-usuario></app-header-usuario>
   </header>
-
+  <h2></h2>
+<hr>
   <section class="form-container">
     <h2>Criar Nova Lista</h2>
 
     <form (ngSubmit)="salvar()">
-      <label for="nome">Nome da Lista</label>
-      <input type="text" id="nome" [(ngModel)]="lista.nome" name="nome" required>
+      <div class="form-group">
+        <label for="nome">Nome da Lista</label>
+        <input type="text" id="nome" [(ngModel)]="lista.nome" name="nome" required>
+      </div>
 
-      <label for="descricao">Descrição</label>
-      <textarea id="descricao" [(ngModel)]="lista.descricao" name="descricao"></textarea>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" [(ngModel)]="lista.descricao" name="descricao"></textarea>
+      </div>
 
-      <label for="dia">Dia</label>
-      <input type="text" id="dia" [(ngModel)]="lista.dia" name="dia" required>
+      <div class="form-group">
+        <label for="dia">Dia</label>
+        <input type="text" id="dia" [(ngModel)]="lista.dia" name="dia" required>
+      </div>
 
-      <h3>Selecione os exercícios</h3>
-      <div *ngFor="let exercicio of exercicios">
-        <label>
-          <input
-            type="checkbox"
-            [value]="exercicio.id"
-            (change)="handleCheckboxChange($event, exercicio.id)"
-          />
-          {{ exercicio.nome }}
-        </label>
+      <div class="form-group">
+        <h3>Selecione os exercícios</h3>
+        <div class="checkbox-group" *ngFor="let exercicio of exercicios">
+          <label>
+            <input
+              type="checkbox"
+              [value]="exercicio.id"
+              (change)="handleCheckboxChange($event, exercicio.id ?? 0)"
+            />
+            {{ exercicio.nome }}
+          </label>
+        </div>
       </div>
 
       <div class="BotaoCriarLista">
-        <button type="submit">Salvar</button>
+        <button type="submit" [disabled]="salvando">
+          <span *ngIf="!salvando">Salvar</span>
+          <span *ngIf="salvando" class="loader"></span>
+        </button>
       </div>
     </form>
+
+    <div class="popup" *ngIf="confirmacao">
+      <p>✅ Lista criada com sucesso!</p>
+    </div>
   </section>
 
   <footer>

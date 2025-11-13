@@ -44,6 +44,13 @@ public class ListaResource {
         return ResponseEntity.created(uri).body(lista);
     }
 
+    @GetMapping(value = "/usuario/{id}")
+    public ResponseEntity<List<Lista>> findByUsuario(@PathVariable Integer id) {
+        List<Lista> listas = listaService.findByUsuario(id);
+        return ResponseEntity.ok().body(listas);
+    }
+
+
 
     //deletar
     @DeleteMapping(value = "/{id}")

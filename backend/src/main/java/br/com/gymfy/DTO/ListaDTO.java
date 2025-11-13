@@ -5,8 +5,10 @@ import java.util.List;
 
 public class ListaDTO {
     private String nome;
+    private String descricao;
     private Date data;
     private String dia;
+    private Integer usuarioId;
     private List<Integer> exercicioIds;
 
     public String getNome() {
@@ -15,6 +17,14 @@ public class ListaDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Date getData() {
@@ -31,6 +41,14 @@ public class ListaDTO {
 
     public void setDia(String dia) {
         this.dia = dia;
+    }
+
+    public Integer getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Integer usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public List<Integer> getExercicioIds() {
