@@ -50,12 +50,14 @@ export class UserTreinosComponent implements OnInit {
   }
 
   goToDetalhesLista(id?: number): void {
-    if (id !== undefined) {
-      this.router.navigate(['/user/lista/detalhes', id]);
-    }
+  if (id !== undefined) {
+    this.router.navigate(['/user/lista/detalhes', id]); // ✅ rota correta
   }
+}
+
 
   goToCriarLista(): void {
     this.router.navigate(['/user/treino/criar']);
   }
+  
 }

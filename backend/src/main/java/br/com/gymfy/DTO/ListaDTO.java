@@ -11,51 +11,21 @@ public class ListaDTO {
     private Integer usuarioId;
     private List<Integer> exercicioIds;
 
-    public String getNome() {
-        return nome;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public Date getData() { return data; }
+    public void setData(Date data) { this.data = data; }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+    public String getDia() { return dia; }
+    public void setDia(String dia) { this.dia = dia; }
 
-    public Date getData() {
-        return data;
-    }
+    public Integer getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Integer usuarioId) { this.usuarioId = usuarioId; }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
-
-    public Integer getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public List<Integer> getExercicioIds() {
-        return exercicioIds;
-    }
-
-    public void setExercicioIds(List<Integer> exercicioIds) {
-        this.exercicioIds = exercicioIds;
-    }
+    public List<Integer> getExercicioIds() { return exercicioIds; }
+    public void setExercicioIds(List<Integer> exercicioIds) { this.exercicioIds = exercicioIds; }
 }

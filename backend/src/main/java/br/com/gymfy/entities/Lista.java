@@ -2,7 +2,6 @@ package br.com.gymfy.entities;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,24 +30,15 @@ public class Lista implements Serializable {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "lista_exercicios",
             joinColumns = @JoinColumn(name = "lista_id"),
             inverseJoinColumns = @JoinColumn(name = "exercicio_id")
     )
-    private List<Exercicio> exercicios = new ArrayList<>();
+    private List<Exercicio> exercicios;
 
-    // 🔧 Construtores
     public Lista() {}
-
-    public Lista(int id, String nome, String descricao, Date data, String dia) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.data = data;
-        this.dia = dia;
-    }
 
     public Lista(String nome, String descricao, Date data, String dia) {
         this.nome = nome;
@@ -57,80 +47,24 @@ public class Lista implements Serializable {
         this.dia = dia;
     }
 
-    public Lista(String nome, Date data, String dia) {
-        this.nome = nome;
-        this.data = data;
-        this.dia = dia;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    // 🔧 Getters e Setters
-    public int getId() {
-        return id;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public String getNome() {
-        return nome;
-    }
+    public Date getData() { return data; }
+    public void setData(Date data) { this.data = data; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getDia() { return dia; }
+    public void setDia(String dia) { this.dia = dia; }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Exercicio> getExercicios() {
-        return exercicios;
-    }
-
-    public void setExercicios(List<Exercicio> exercicios) {
-        this.exercicios = exercicios;
-    }
-
-    // 🔧 toString
-    @Override
-    public String toString() {
-        return "Lista{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", data=" + data +
-                ", dia='" + dia + '\'' +
-                ", usuario=" + (usuario != null ? usuario.getId() : "null") +
-                ", exercicios=" + exercicios +
-                '}';
-    }
+    public List<Exercicio> getExercicios() { return exercicios; }
+    public void setExercicios(List<Exercicio> exercicios) { this.exercicios = exercicios; }
 }

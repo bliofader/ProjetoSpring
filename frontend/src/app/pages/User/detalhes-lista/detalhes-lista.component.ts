@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ListaService } from '../../../services/lista.service';
 import { Lista } from '../../../entities/lista';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-detalhes-lista',
@@ -13,35 +11,28 @@ import { Router } from '@angular/router';
   templateUrl: './detalhes-lista.component.html',
   styleUrls: ['./detalhes-lista.component.css']
 })
-
 export class DetalhesListaComponent implements OnInit {
   lista?: Lista;
 
-constructor(
-  private route: ActivatedRoute,
-  private router: Router, // ✅ adicionado aqui
-  private listaService: ListaService
-) {}
-
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private listaService: ListaService
+  ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('ID recebido:', id); // ✅ debug
     this.listaService.buscarPorId(id).subscribe({
-      next: (res) => this.lista = res,
+      next: (res) => {
+        console.log('Lista recebida:', res); // ✅ debug
+        this.lista = res;
+      },
       error: (err) => console.error('Erro ao carregar detalhes da lista', err)
     });
-    
   }
 
-
-
-voltar(): void {
-  this.router.navigate(['/user/treinos']);
-}
-
-goToDetalhesLista(id?: number): void {
-  if (id !== undefined) {
-    this.router.navigate(['/user/treino', id]);
+  voltar(): void {
+    this.router.navigate(['/user/treinos']);
   }
-}
 }

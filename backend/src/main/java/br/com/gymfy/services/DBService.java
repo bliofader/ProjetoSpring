@@ -38,13 +38,13 @@ public class DBService {
         Usuario usuario1 = new Usuario(
                 "kauã diodato", "Comum", formato.parse("21/10/2004"),
                 "491.064.038-90", "kauadiodato@outlook.com",
-                passwordEncoder.encode("teste123"),"" // ✅ Criptografado
+                passwordEncoder.encode("teste123"),""
         );
 
         Usuario usuario2 = new Usuario(
                 "kauã diodato2", "Admin", formato.parse("21/10/2004"),
                 "491.064.038-90", "kauadiodato2@outlook.com",
-                passwordEncoder.encode("teste123"),"" // ✅ Criptografado
+                passwordEncoder.encode("teste123"),""
         );
 
         usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));

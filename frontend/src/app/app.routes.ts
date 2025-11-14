@@ -10,9 +10,7 @@ import { SobreNosComponent } from './pages/nav/sobre-nos/sobre-nos.component';
 import { ContatoComponent } from './pages/nav/contato/contato.component';
 
 import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
-import { TelaExercicioDetalhesComponent } from './pages/home/tela-exercicio-detalhes/tela-exercicio-detalhes.component';
 
-import { TelaPersonalInicialComponent } from './pages/home/tela-personal-inicial/tela-personal-inicial.component';
 import { ListaPersonaisComponent } from './pages/home/lista-personais/lista-personais.component';
 import { ListaPersonaisDetalhesComponent } from './pages/home/lista-personais-detalhes/lista-personais-detalhes.component';
 
@@ -31,8 +29,7 @@ import { UserHomeComponent } from './pages/User/user-home/user-home.component';
 import { UserTreinosComponent } from './pages/User/user-treino/user-treino.component';
 import { UserContaComponent } from './pages/User/user-conta/user-conta.component';
 import { UserPersonalComponent } from './pages/User/user-personal/user-personal.component';
-import { ListaUsuarioComponent } from './pages/User/lista-usuario/lista-usuario.component';
-import { CriarTreinoComponent } from './pages/User/criar-treino/criar-treino.component'; // ajuste o caminho conforme sua estrutura
+import { CriarTreinoComponent } from './pages/User/criar-treino/criar-treino.component';
 
 import { noAuthGuard } from './guards/no-auth.guard';
 import { authGuard } from './guards/auth.guard';
@@ -65,26 +62,17 @@ export const routes: Routes = [
   { path: 'personal-detalhes/:nome', component: ListaPersonaisDetalhesComponent, title: 'Detalhes - Personal' },
   { path: 'personal-detalhes/:id', component: ListaPersonaisDetalhesComponent },
 
-  // Admin
-
-
-
-
-
- // Admin (protegidas)
-{ path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin', canActivate: [adminGuard] },
-{ path: 'exercicios', component: AdminCadastroExercicioComponent, title: 'Gymfy - Exercícios', canActivate: [adminGuard] },
-{ path: 'cadastrarexercicios', component: CadastrarExerciciosComponent, title: 'Cad - Exercícios', canActivate: [adminGuard] },
-{ path: 'cadastrarusuario', component: CadastrarUsuarioComponent, title: 'Cad - Usuário', canActivate: [adminGuard] },
-{ path: 'criarlista', component: CriarListaComponent, title: 'Cadastrar - Lista', canActivate: [adminGuard] },
-{ path: 'listar-listas', component: ListarListaComponent, title: 'Listar - Lista', canActivate: [adminGuard] },
-{ path: 'editar-exercicio', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
-{ path: 'editar-lista', component: EditarListaComponent, title: 'Editar - Lista', canActivate: [adminGuard] },
-{ path: 'editar-usuario/:id', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
-{ path: 'editar-exercicio/:id', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
-
-
-
+  // Admin (protegidas)
+  { path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin', canActivate: [adminGuard] },
+  { path: 'exercicios', component: AdminCadastroExercicioComponent, title: 'Gymfy - Exercícios', canActivate: [adminGuard] },
+  { path: 'cadastrarexercicios', component: CadastrarExerciciosComponent, title: 'Cad - Exercícios', canActivate: [adminGuard] },
+  { path: 'cadastrarusuario', component: CadastrarUsuarioComponent, title: 'Cad - Usuário', canActivate: [adminGuard] },
+  { path: 'criarlista', component: CriarListaComponent, title: 'Cadastrar - Lista', canActivate: [adminGuard] },
+  { path: 'listar-listas', component: ListarListaComponent, title: 'Listar - Lista', canActivate: [adminGuard] },
+  { path: 'editar-exercicio', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
+  { path: 'editar-lista', component: EditarListaComponent, title: 'Editar - Lista', canActivate: [adminGuard] },
+  { path: 'editar-usuario/:id', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
+  { path: 'editar-exercicio/:id', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
 
   // Usuários
   { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' },
@@ -92,22 +80,17 @@ export const routes: Routes = [
   // Área do usuário autenticado
   { path: 'user/home', component: UserHomeComponent, title: 'Home - Usuários', canActivate: [authGuard] },
   { path: 'user/treinos', component: UserTreinosComponent, title: 'Treino - Usuários', canActivate: [authGuard] },
-{ path: 'user/lista/criar', component: CriarListaComponent, title: 'Criar Lista - Usuário', canActivate: [authGuard] },
-{ path: 'user/treino/criar', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
-{ path: 'user/lista/detalhes/:id', component: ListaUsuarioComponent, title: 'Lista - Usuário', canActivate: [authGuard] },
+  { path: 'user/lista/criar', component: CriarListaComponent, title: 'Criar Lista - Usuário', canActivate: [authGuard] },
+  { path: 'user/treino/criar', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
   { path: 'user/conta', component: UserContaComponent, title: 'Conta - Usuário', canActivate: [authGuard] },
   { path: 'user/personal', component: UserPersonalComponent, title: 'Personal - Usuário', canActivate: [authGuard] },
-{ path: 'user/lista/treino', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
-  { path: 'user/lista/detalhes', component: ListaUsuarioComponent, title: 'Lista - Usuário', canActivate: [authGuard] },
 
-  //listas
- {
-  path: 'user/treino/:id',
+  // ✅ Página de detalhes da lista/treino
+  {
+  path: 'user/lista/detalhes/:id',
   loadComponent: () => import('./pages/User/detalhes-lista/detalhes-lista.component')
     .then(m => m.DetalhesListaComponent),
-  title: 'Detalhes do Treino - Usuário',
+  title: 'Detalhes da Lista - Usuário',
   canActivate: [authGuard]
 }
-
-
 ];

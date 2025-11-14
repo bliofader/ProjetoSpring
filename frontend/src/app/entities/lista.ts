@@ -4,11 +4,15 @@ export interface Lista {
   descricao?: string;
   dia?: string;
   data?: Date;
-  usuarioId: number;
+  usuarioNome?: string;
   exercicios?: {
     id: number;
     nome: string;
-    grupoMuscular?: string;
+    tipo?: string;
+    agrupamento?: string;
+    nivel?: string;
     descricao?: string;
+    imagePath?: string;
+    videoUrl?: string;
   }[];
 }

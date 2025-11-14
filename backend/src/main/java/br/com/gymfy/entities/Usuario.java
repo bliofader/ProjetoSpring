@@ -1,5 +1,6 @@
 package br.com.gymfy.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -38,9 +40,13 @@ public class Usuario implements Serializable, UserDetails {
 
     @Column(name = "Senha")
     String senha;
+
     @Column(name = "Imagem")
     private String imagem;
+
+    // ✅ Evita loop infinito na serialização
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Lista> listas = new ArrayList<>();
 
     public Usuario(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String imagem) {
@@ -64,80 +70,34 @@ public class Usuario implements Serializable, UserDetails {
         this.imagem = imagem;
     }
 
-    public Usuario() {
-    }
+    public Usuario() {}
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public Date getDataNascimento() { return dataNascimento; }
+    public void setDataNascimento(Date dataNascimento) { this.dataNascimento = dataNascimento; }
 
-    public String getTipo() {
-        return tipo;
-    }
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+    public String getImagem() { return imagem; }
+    public void setImagem(String imagem) { this.imagem = imagem; }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
-
-    public List<Lista> getListas() {
-        return listas;
-    }
-
-    public void setListas(List<Lista> listas) {
-        this.listas = listas;
-    }
+    public List<Lista> getListas() { return listas; }
+    public void setListas(List<Lista> listas) { this.listas = listas; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -145,36 +105,22 @@ public class Usuario implements Serializable, UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return senha;
-    }
+    public String getPassword() { return senha; }
 
     @Override
-    public String getUsername() {
-        return email;
-    }
+    public String getUsername() { return email; }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
+    public boolean isAccountNonExpired() { return true; }
 
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
+    public boolean isEnabled() { return true; }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+    public boolean isAccountNonLocked() { return true; }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    public boolean isCredentialsNonExpired() { return true; }
 
     @Override
     public String toString() {
