@@ -21,6 +21,7 @@ export class HeaderTopComponent {
     const confirmacao = confirm('Deseja realmente sair do sistema?');
     if (confirmacao) {
       this.router.navigate(['/']);
+      sessionStorage.clear();
     }
   }
 

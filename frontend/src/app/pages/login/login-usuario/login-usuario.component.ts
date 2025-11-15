@@ -25,16 +25,22 @@ export class LoginUsuarioComponent {
     };
 
     this.authService.login(credenciais).subscribe({
-      next: (res) => {
-        // ✅ Corrigido: agora salva o perfil corretamente
-        this.authService.salvarToken(res.token, res.usuarioId, res.nomeUsuario, res.perfil);
-        console.log('Perfil salvo:', sessionStorage.getItem('usuarioPerfil')); // ✅ log para verificação
-        alert('Login realizado com sucesso!');
-        this.router.navigate(['/']);
-      },
-      error: () => {
-        alert('E-mail ou senha incorretos.');
-      }
-    });
+  next: (res) => {
+    this.authService.salvarToken(res.token, res.usuarioId, res.nomeUsuario, res.perfil);
+    console.log('Perfil salvo:', sessionStorage.getItem('usuarioPerfil'));
+    alert('Login realizado com sucesso!');
+
+    const perfil = sessionStorage.getItem('usuarioPerfil');
+    if (perfil?.toLowerCase() === 'admin') {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/user/home']);
+    }
+  },
+  error: () => {
+    alert('E-mail ou senha incorretos.');
+  }
+});
+
   }
 }

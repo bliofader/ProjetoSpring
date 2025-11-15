@@ -17,6 +17,9 @@
             </ul>
 
             <div class="sair-menu">
+                <span class="usuario-nome" *ngIf="nomeUsuario">
+                  {{ nomeUsuario }}
+                </span>
 
                 <div class="sair-icon">
                     <button  (click)="onLogout()">

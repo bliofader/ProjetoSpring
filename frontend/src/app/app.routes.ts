@@ -78,11 +78,11 @@ export const routes: Routes = [
   { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' },
 
   // Área do usuário autenticado
-  { path: 'user/home', component: UserHomeComponent, title: 'Home - Usuários', canActivate: [authGuard] },
-  { path: 'user/treinos', component: UserTreinosComponent, title: 'Treino - Usuários', canActivate: [authGuard] },
+  { path: 'user/home', component: UserHomeComponent, title: 'Home - Usuários'},
+  { path: 'user/treinos', component: UserTreinosComponent, title: 'Treino - Usuários'},
   { path: 'user/lista/criar', component: CriarListaComponent, title: 'Criar Lista - Usuário', canActivate: [authGuard] },
   { path: 'user/treino/criar', component: CriarTreinoComponent, title: 'Criar Treino - Usuário', canActivate: [authGuard] },
-  { path: 'user/conta', component: UserContaComponent, title: 'Conta - Usuário', canActivate: [authGuard] },
+  { path: 'user/conta', component: UserContaComponent, title: 'Conta - Usuário'},
   { path: 'user/personal', component: UserPersonalComponent, title: 'Personal - Usuário', canActivate: [authGuard] },
 
   // ✅ Página de detalhes da lista/treino
