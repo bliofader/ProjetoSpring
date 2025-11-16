@@ -1,60 +1,147 @@
 .content-container {
-    width: 100%;
-    font-family: 'Lexend', sans-serif;
-    margin-top: 130px;
+  width: 100%;
+  font-family: 'Lexend', sans-serif;
+  margin-top: 100px;
+  padding: 20px;
+  background: #f9f9f9; /* fundo suave */
 }
 
-.detalhes-container h2{
-    text-align: center;
-    color: var(--text-color2);
-    font-size: 40px;
-        border-top: #000 2px solid;
+.detalhes-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.detalhes-container h2 {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 36px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--primary-color);
+  padding-bottom: 10px;
 }
 
 .personal-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 30px;
 }
 
 .personal-visual img {
-    width: 500px;
-    border-bottom: 3px solid #000;
-
+  width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-
 .personal-visual p {
-    font-size: 20px;
-    margin: 5px 0 15px 20px;
-    color: var(--text-color2);
+  font-size: 18px;
+  color: var(--text-color2);
+  line-height: 1.4;
 }
 
 .personal-visual span {
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 30px;
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: 24px;
 }
 
 /* --- */
 
 .descricao {
-    font-family: 'Lexend', sans-serif;
-    color: var(--text-color2);
-    margin: 40px 167px;
-
+  font-family: 'Lexend', sans-serif;
+  color: var(--text-color2);
+  margin-top: 40px;
 }
 
-.descricao h1{
-    font-size: 30Px;
-    border-bottom: 2px solid #000
+.descricao h1 {
+  font-size: 24px;
+  border-bottom: 2px solid var(--primary-color);
+  margin-bottom: 15px;
+  padding-bottom: 5px;
 }
+
+.descricao p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* --- Mensagens --- */
+
+.mensagem-container {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f1f7ff;
+  border: 1px solid #d0e3ff;
+  border-radius: 10px;
+}
+
+.mensagem-container h3 {
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.mensagem-container textarea {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 15px;
+  resize: none;
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+}
+
+.mensagem-container textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.btn-enviar {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.btn-enviar:hover {
+  background: #0056b3; /* tom mais escuro */
+}
+
+.sucesso {
+  color: green;
+  margin-top: 10px;
+}
+
+.erro {
+  color: red;
+  margin-top: 10px;
+}
+
+.mensagem-bloqueada {
+  margin-top: 30px;
+  padding: 15px;
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  color: #856404;
+  text-align: center;
+}
+
+/* --- Loading e Error --- */
+
 .loading, .error {
   text-align: center;
   padding: 2rem;
   font-size: 1.2rem;
-  color: #555;
 }
 
 .error {

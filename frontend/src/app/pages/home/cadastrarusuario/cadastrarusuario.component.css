@@ -1,4 +1,4 @@
-/* Base */
+/* Base com variáveis */
 :root {
   --primary: #c7da33;
   --text: #222;
@@ -7,10 +7,6 @@
   --border: #ddd;
   --success: #28a745;
   --danger: #dc3545;
-  --btn-primary: #4caf50;
-  --btn-primary-hover: #3d8b41;
-  --btn-cancel: #e53935;
-  --btn-cancel-hover: #c62828;
   --shadow: 0 6px 14px rgba(0,0,0,0.1);
 }
 
@@ -25,6 +21,7 @@ body {
 /* Header + navbar */
 .logo img {
   width: 160px;
+  display: block; /* corrigido */
 }
 
 .header {
@@ -77,7 +74,7 @@ body {
 }
 
 .user-list h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: var(--text);
   margin-bottom: 25px;
@@ -171,7 +168,21 @@ textarea {
   font-weight: bold;
 }
 
-/* Seção de Personal */
+/* Preview de imagem */
+.preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.preview img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--primary);
+}
+
+/* Seção extra */
 .personal-extra {
   grid-column: 1 / -1;
   background: #fff;
@@ -203,56 +214,54 @@ textarea {
   }
 }
 
-/* Botões */
+/* Botão Cadastrar */
 .botoes {
   grid-column: 1 / -1;
   display: flex;
   justify-content: center;
-  gap: 20px;
   margin-top: 20px;
 }
 
-.btn-submit,
-.btn-cancelar {
+.btn-submit {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   border: none;
   padding: 12px 26px;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+  background-color: var(--primary); /* cor principal do site */
+  color: #000; /* contraste */
+  box-shadow: 0 4px 10px rgba(199, 218, 51, 0.3);
   transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
-.btn-submit {
-  background-color: var(--btn-primary);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.25);
-}
-
 .btn-submit:hover {
-  background-color: var(--btn-primary-hover);
+  background-color: #a9bb2b; /* tom mais escuro */
   transform: translateY(-2px);
 }
 
-.btn-cancelar {
-  background-color: var(--btn-cancel);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(229, 57, 53, 0.25);
-}
-
-.btn-cancelar:hover {
-  background-color: var(--btn-cancel-hover);
-  transform: translateY(-2px);
-}
-
-/* Ícones dentro dos botões */
-.btn-submit i,
-.btn-cancelar i {
+/* Ícones dentro do botão */
+.btn-submit i {
   font-size: 1rem;
-  color: #fff;
+  color: #000;
+}
+
+/* Ícones de ação */
+.btn-editar img {
+  color: #1976d2;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.btn-excluir img {
+  color: #e53935;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
 }
 
 /* Alertas */

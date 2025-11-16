@@ -143,6 +143,40 @@ header {
   transform: scale(1.05);
 }
 
+/* --- Mensagens --- */
+.mensagens-container {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f1f7ff;
+  border: 1px solid #d0e3ff;
+  border-radius: 10px;
+}
+
+.mensagens-container h2 {
+  margin-bottom: 15px;
+  color: #222;
+  font-size: 1.3rem;
+}
+
+.card-mensagem {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card-mensagem p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.card-mensagem .data-envio {
+  font-size: 0.85rem;
+  color: #666;
+}
+
 /* Rodapé */
 footer {
   text-align: center;

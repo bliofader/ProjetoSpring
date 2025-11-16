@@ -1,0 +1,117 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f4f6f9;
+  color: #222;
+  line-height: 1.5;
+}
+
+/* Botão voltar */
+.voltar-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.btn-voltar {
+  background-color: #c7da33; /* verde principal do site */
+  color: #000;
+  font-weight: bold;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(199, 218, 51, 0.3);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-voltar:hover {
+  background-color: #a9bb2b; /* tom mais escuro */
+  transform: translateY(-2px);
+}
+
+/* Container centralizado */
+.mensagens-container {
+  max-width: 800px;
+  margin: 0 auto 40px auto; /* centraliza horizontalmente */
+  background: #f1f7ff;
+  border: 1px solid #d0e3ff;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow-wrap: break-word;
+}
+
+.mensagens-container h2 {
+  margin-bottom: 20px;
+  color: #222;
+  font-size: 1.6rem;
+  text-align: center;
+  border-bottom: 2px solid #c7da33;
+  padding-bottom: 10px;
+}
+
+/* Estados */
+.loading,
+.error,
+.empty-message {
+  text-align: center;
+  font-size: 1rem;
+  margin: 20px 0;
+}
+
+.error {
+  color: #c00;
+}
+
+.empty-message {
+  font-style: italic;
+  color: #777;
+}
+
+/* Card de mensagem */
+.card-mensagem {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.card-mensagem p {
+  margin: 6px 0;
+  color: #333;
+}
+
+.card-mensagem strong {
+  color: #000;
+}
+
+.card-mensagem .data-envio {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: right;
+}
+
+/* Footer */
+footer {
+  background: #f1f1f1;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+}

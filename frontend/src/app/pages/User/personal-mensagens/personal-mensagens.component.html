@@ -1,0 +1,35 @@
+<main>
+  <!-- Botão voltar -->
+  <div class="voltar-container">
+  <button class="btn-voltar" (click)="voltar()">
+    ⬅ Voltar para página anterior
+  </button>
+</div>
+
+
+  <!-- Container centralizado -->
+  <div class="mensagens-container">
+    <h2>Mensagens Recebidas</h2>
+
+    <!-- Estados -->
+    <div *ngIf="isLoading" class="loading">Carregando mensagens...</div>
+    <div *ngIf="hasError && !isLoading" class="error">Erro ao carregar mensagens.</div>
+    <div *ngIf="!isLoading && !hasError && mensagens.length === 0" class="empty-message">
+      Nenhuma mensagem recebida.
+    </div>
+
+    <!-- Lista de mensagens -->
+    <div *ngIf="!isLoading && !hasError && mensagens.length > 0">
+      <div class="card-mensagem" *ngFor="let msg of mensagens">
+        <p><strong>Usuário {{ msg.idUsuario }}:</strong></p>
+        <p>{{ msg.conteudo }}</p>
+        <span class="data-envio">Enviado em: {{ msg.dataEnvio | date:'short' }}</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <app-footer></app-footer>
+</footer>

@@ -7,9 +7,8 @@ export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (authService.isLoggedIn() && authService.isAdmin()) {
-    return true;
+    return true; // ✅ apenas admin
   }
 
-  // ✅ redireciona para login ou página de acesso negado
-  return router.parseUrl('/login-cadastrar'); // ou '/acesso-negado'
+  return router.parseUrl('/acesso-negado'); // ou '/login-usuario'
 };

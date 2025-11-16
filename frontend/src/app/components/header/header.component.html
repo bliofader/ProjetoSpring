@@ -3,17 +3,17 @@
     <div class="navbar-container">
       <!-- Logo -->
       <div class="logo">
-        <a href="/" class="navbar-logo">
+        <a routerLink="/" class="navbar-logo">
           <img src="assets/images/logo.png" alt="logo" class="logo-image">
         </a>
       </div>
 
       <!-- Menu principal -->
       <ul class="navbar-list">
-        <li class="navbar-item"><a href="/sobre-nos">Sobre nós</a></li>
-        <li class="navbar-item"><a href="#planos">Planos</a></li>
-        <li class="navbar-item"><a href="/contato">Contato</a></li>
-        <li class="navbar-item"><a href="/tela-personal">Personais</a></li>
+        <li class="navbar-item"><a routerLink="/sobre-nos">Sobre nós</a></li>
+        <li class="navbar-item"><a routerLink="/#planos">Planos</a></li>
+        <li class="navbar-item"><a routerLink="/contato">Contato</a></li>
+        <li class="navbar-item"><a routerLink="/tela-personal">Personais</a></li>
       </ul>
 
       <!-- ✅ Menu de login/cadastro (somente se NÃO estiver logado) -->
@@ -22,7 +22,7 @@
           <img src="assets/images/user.png" alt="Login">
         </div>
         <div class="login-options">
-          <a href="/login-usuario">Login</a>
+          <a routerLink="/login-usuario">Login</a>
         </div>
       </div>
 
@@ -35,10 +35,10 @@
       </div>
 
       <div class="user-menu" *ngIf="authService.isLoggedIn()">
-        <a href="/user/home" class="user-link">
+        <a routerLink="/user/home" class="user-link">
           <span>Área do Usuário</span>
         </a>
-        <a href="/admin" class="admin-link" *ngIf="authService.isAdmin()">Administrador</a>
+        <a routerLink="/admin" class="admin-link" *ngIf="authService.isAdmin()">Administrador</a>
         <button class="btn-logout" (click)="logout()">Sair</button>
       </div>
     </div>

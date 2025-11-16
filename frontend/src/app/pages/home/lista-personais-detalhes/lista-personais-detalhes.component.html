@@ -32,8 +32,8 @@
       <p>{{ personal.redeSocial }}</p>
     </div>
 
-    <!-- ✅ Formulário de mensagens -->
-    <div class="mensagem-container">
+    <!-- ✅ Formulário de mensagens (apenas para usuário comum logado) -->
+    <div class="mensagem-container" *ngIf="usuarioLogado && usuarioLogado.perfil?.toLowerCase() === 'comum'">
       <h3>Entre em contato com {{ personal.nome }}</h3>
       <textarea [(ngModel)]="mensagem" placeholder="Escreva sua mensagem..." rows="4"></textarea>
       <button (click)="enviarMensagem()" class="btn-enviar">Enviar mensagem</button>
@@ -41,6 +41,11 @@
       <!-- Feedback -->
       <p class="sucesso" *ngIf="mensagemEnviada">✅ Mensagem enviada com sucesso!</p>
       <p class="erro" *ngIf="erroMensagem">❌ Erro ao enviar mensagem. Tente novamente.</p>
+    </div>
+
+    <!-- Caso não esteja logado ou não seja Comum -->
+    <div *ngIf="!usuarioLogado || usuarioLogado.perfil?.toLowerCase() !== 'comum'" class="mensagem-bloqueada">
+      <p>⚠️ Apenas usuários comuns logados podem enviar mensagens para um personal.</p>
     </div>
   </div>
 </div>

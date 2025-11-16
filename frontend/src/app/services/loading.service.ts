@@ -9,8 +9,4 @@ export class LoadingService {
   setLoading(state: boolean): void {
     this.isLoading.set(state);
   }
-  enviarMensagem(payload: any) {
-  return this.http.post('/api/mensagens', payload);
-}
-
 }

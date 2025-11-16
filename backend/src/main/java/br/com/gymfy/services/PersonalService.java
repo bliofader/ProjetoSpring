@@ -14,25 +14,28 @@ public class PersonalService {
     @Autowired
     private PersonalRepository personalRepository;
 
+    // Buscar por ID
     public Personal findById(Integer id) {
         Optional<Personal> personal = personalRepository.findById(id);
         return personal.orElse(null);
     }
 
+    // Listar todos
     public List<Personal> findAll() {
-        List<Personal> personais = personalRepository.findAll();
-        return personais;
+        return personalRepository.findAll();
     }
 
-
+    // Cadastrar
     public Personal cadastrarPersonal(Personal personal) {
         return personalRepository.save(personal);
     }
 
+    // Deletar
     public void deletar(Integer id) {
         personalRepository.deleteById(id);
     }
 
+    // Atualizar
     public Personal update(Integer id, Personal novo) {
         Personal atual = findById(id);
         if (atual != null) {

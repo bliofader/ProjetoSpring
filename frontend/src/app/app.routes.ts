@@ -10,7 +10,6 @@ import { SobreNosComponent } from './pages/nav/sobre-nos/sobre-nos.component';
 import { ContatoComponent } from './pages/nav/contato/contato.component';
 
 import { TelaExercicioComponent } from './pages/home/tela-exercicio/tela-exercicio.component';
-
 import { ListaPersonaisComponent } from './pages/home/lista-personais/lista-personais.component';
 import { ListaPersonaisDetalhesComponent } from './pages/home/lista-personais-detalhes/lista-personais-detalhes.component';
 
@@ -33,6 +32,7 @@ import { CriarTreinoComponent } from './pages/User/criar-treino/criar-treino.com
 import { noAuthGuard } from './guards/no-auth.guard';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
+import { personalGuard } from './guards/personal.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Gymfy - Home' },
@@ -58,7 +58,16 @@ export const routes: Routes = [
 
   // Personais
   { path: 'tela-personal', component: ListaPersonaisComponent, title: 'Gymfy - Personal' },
-  { path: 'personal-detalhes/:id', component: ListaPersonaisDetalhesComponent, title: 'Detalhes - Personal' }, // ✅ corrigido
+  { path: 'personal-detalhes/:id', component: ListaPersonaisDetalhesComponent, title: 'Detalhes - Personal' },
+
+  // ✅ Mensagens do Personal (rota protegida)
+  {
+    path: 'personal/mensagens',
+    loadComponent: () => import('./pages/User/personal-mensagens/personal-mensagens.component')
+      .then(m => m.PersonalMensagensComponent),
+    title: 'Mensagens - Personal',
+    canActivate: [personalGuard]
+  },
 
   // Admin (protegidas)
   { path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin', canActivate: [adminGuard] },
