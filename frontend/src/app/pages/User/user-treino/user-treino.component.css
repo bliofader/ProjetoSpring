@@ -4,18 +4,20 @@
   flex-wrap: nowrap;
   gap: 20px;
   padding: 30px;
+  flex-grow: 1;
 }
 
 
 .sidebar {
-  width: 220px;
+  width: 40em;
 }
 
 .listas-container {
-  flex: 1;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
+ flex: 1; 
+ padding: 20px;
+ height: fit-content; 
+ margin-top: 10em; 
+ margin-left: -15em;
 }
 
 .listas-container h2 {
@@ -58,16 +60,18 @@
 }
 
 .BotaoCriarLista button {
-  background-color: #007bff;
+  background-color: #C6D932;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .BotaoCriarLista button:hover {
-  background-color: #0056b3;
+  background-color: #C6D932;
+  transform: scale(1.1);
 }
 
 .empty-message {
@@ -85,9 +89,9 @@
 .filtro-dias button {
   padding: 6px 10px;
   font-size: 13px;
-  border: 1px solid #007bff;
+  border: 1px solid #C6D932;
   background-color: white;
-  color: #007bff;
+  color: #000;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
@@ -101,7 +105,7 @@
 }
 
 .filtro-dias button.ativo {
-  background-color: #007bff;
+  background-color: #C6D932;
   color: white;
 }
 

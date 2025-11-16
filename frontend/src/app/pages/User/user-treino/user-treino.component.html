@@ -9,37 +9,29 @@
     </div>
 
     <div class="listas-container">
-  <h2>Meus Treinos</h2>
+      <h2>Meus Treinos</h2>
 
-  <div class="filtro-dias">
-    <button
-      *ngFor="let dia of diasSemana"
-      (click)="filtrarPorDia(dia)"
-      [class.ativo]="diaSelecionado === dia"
-    >
-      {{ dia }}
-    </button>
-    <button (click)="limparFiltro()" [class.ativo]="!diaSelecionado">Todos</button>
-  </div>
+      <div class="filtro-dias">
+        <button *ngFor="let dia of diasSemana" (click)="filtrarPorDia(dia)" [class.ativo]="diaSelecionado === dia">
+          {{ dia }}
+        </button>
+        <button (click)="limparFiltro()" [class.ativo]="!diaSelecionado">Todos</button>
+      </div>
 
-  <div *ngIf="listasFiltradas.length === 0" class="empty-message">
-    Nenhuma lista encontrada. Crie seu primeiro treino!
-  </div>
+      <div *ngIf="listasFiltradas.length === 0" class="empty-message">
+        Nenhuma lista encontrada. Crie seu primeiro treino!
+      </div>
 
-  <div
-    class="card-lista"
-    *ngFor="let lista of listasFiltradas"
-    (click)="goToDetalhesLista(lista.id)"
-  >
-    <h3>{{ lista.nome }}</h3>
-    <p>{{ lista.descricao || 'Sem descrição' }}</p>
-    <span><strong>Dia:</strong> {{ lista.dia }}</span>
-  </div>
+      <div class="card-lista" *ngFor="let lista of listasFiltradas" (click)="goToDetalhesLista(lista.id)">
+        <h3>{{ lista.nome }}</h3>
+        <p>{{ lista.descricao || 'Sem descrição' }}</p>
+        <span><strong>Dia:</strong> {{ lista.dia }}</span>
+      </div>
 
-  <div class="BotaoCriarLista">
-    <button (click)="goToCriarLista()">Criar Lista</button>
-  </div>
-</div>
+      <div class="BotaoCriarLista">
+        <button (click)="goToCriarLista()">Criar Lista</button>
+      </div>
+    </div>
 
   </section>
 

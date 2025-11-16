@@ -36,7 +36,7 @@ export class UserContaComponent implements OnInit {
   usuarioId!: number;
 
   ngOnInit(): void {
-    const storedId = localStorage.getItem('usuarioId');
+    const storedId = sessionStorage.getItem('usuarioId');
     if (storedId) {
       this.usuarioId = +storedId;
     this.usuarioService.findById(this.usuarioId).subscribe({
@@ -93,7 +93,7 @@ export class UserContaComponent implements OnInit {
       next: (res: Usuario) => {
         this.loadingService.setLoading(false);
 
-        localStorage.setItem('usuarioNome', res.nome);
+        sessionStorage.setItem('usuarioNome', res.nome);
 
         this.dados = res;
 
