@@ -1,67 +1,48 @@
-main {
-  display: flex;
-  flex-direction: row;
+main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 7em;
 }
 
-/* Sidebar */
-section {
-  display: flex;
-  flex-direction: column;
-  margin-left: 5em;
-  width: 220px;
-  margin-top: 4em;
+section{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5em;
+    width: 190px;
+    margin-top: 4em;
 }
-
-h2 {
-  margin-bottom: 2em;
-  font-size: 1.4rem;
-  color: #333;
+h2{
+    margin-bottom: 2em;
 }
-
 .navbar-list {
   list-style: none;
-  margin-top: 2em;
-  padding: 0;
-  flex-grow: 1;
-}
-
-.navbar-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 2em;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.navbar-item:hover {
-  transform: translateX(5px);
-}
-
-.navbar-item img {
-  width: 28px;
-  height: 28px;
+  margin-top: 7em;
+  flex-grow: 1; 
 }
 
 .navbar-item a {
   text-decoration: none;
   color: #000;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   transition: color 0.3s;
 }
-
-.navbar-item a:hover {
-  color: #007bff; /* azul no hover */
+.navbar-item  {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 3em;
+}
+img{
+    width: 25px;
+    height: 25px;
 }
 
-/* ✅ Área de conteúdo ao lado da sidebar */
-.sidebar-content {
-  display: flex;
-  flex-direction: column;
-  margin-top: 4em;
-  margin-left: 3em;
-  width: 100%;
-  border-left: 1px solid #ccc;
-  padding-left: 2em;
+div{
+    display: flex;
+    flex-direction: column;
+    margin-top: 14em;
+    margin-left: 10em;
+    width: 300px;
+    border-left: 1px solid #000;
 }

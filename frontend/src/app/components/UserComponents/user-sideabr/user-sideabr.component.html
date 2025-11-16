@@ -1,28 +1,22 @@
 <main>
-  <section>
-    <h2>Minha Conta</h2>
+<section>
+    <h2>Minha Conta</h2>
 
-    <ul class="navbar-list">
-      <li class="navbar-item"> 
-        <img src="assets/images/halteres.png" alt="Treinos"> 
-        <a [routerLink]="['/user/treinos']">Treinos</a>
-      </li>
+    <ul class="navbar-list">
+                <li class="navbar-item"> 
+                    <img src="assets/images/halteres.png" alt=""> 
+                    <a [routerLink]="['/user/treinos']">Treinos</a>
+                </li>
+                <li class="navbar-item"> 
+                    <img src="assets/images/user-usuario.png" alt=""> 
+                    <a [routerLink]="['/user/conta']">Conta</a>
+                </li>
 
-      <li class="navbar-item"> 
-        <img src="assets/images/user-usuario.png" alt="Conta"> 
-        <a [routerLink]="['/user/conta']">Conta</a>
-      </li>
-
-      <!-- ✅ Apenas para Personal -->
-      <li class="navbar-item" *ngIf="isPersonal">
-        <img src="assets/images/chat.png" alt="Mensagens"> 
-        <a [routerLink]="['/personal/mensagens']">Mensagens</a>
-      </li>
-    </ul>
-  </section>
-
-  <!-- ✅ Conteúdo ao lado da sidebar -->
-  <div class="sidebar-content">
-    <!-- aqui entra o conteúdo da página -->
-  </div>
+                 <li class="navbar-item" *ngIf="isPersonal">
+                     <img src="assets/images/chat.png" alt="Mensagens"> 
+                    <a [routerLink]="['/personal/mensagens']">Mensagens</a>
+                </li>
+    </ul>
+</section>
+    <div></div>
 </main>

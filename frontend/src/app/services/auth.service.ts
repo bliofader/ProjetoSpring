@@ -38,6 +38,14 @@ export class AuthService {
     return this.isBrowser() && !!sessionStorage.getItem('jwt_token');
   }
 
+  isComum(): boolean{
+    if (this.isBrowser()) {
+      const perfil = sessionStorage.getItem('usuarioPerfil');
+      return perfil?.toLowerCase() === 'comum';
+    }
+    return false;
+  }
+
   isAdmin(): boolean {
     if (this.isBrowser()) {
       const perfil = sessionStorage.getItem('usuarioPerfil');

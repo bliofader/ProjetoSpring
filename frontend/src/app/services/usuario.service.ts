@@ -3,6 +3,7 @@ import { environment } from '../environments/environments';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../entities/usuario';
+import { UsuarioDadosDTO } from '../Models/UsuarioDadosDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +47,17 @@ export class UsuarioService {
   delete(id: number): Observable<string> {
     return this.http.delete(`${this.baseUrlUsuarios}/${id}`, { responseType: 'text' });
   }
+
+
+   atualizarDados(id: number, dados: UsuarioDadosDTO): Observable<string> {
+    const token = sessionStorage.getItem('jwt_token');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<string>(`${this.baseUrlUsuarios}/${id}`, dados, { headers });
+  }
+
 }

@@ -6,14 +6,25 @@
   margin: 0;
   padding: 0;
 }
+body, html{
+  
+  height: 100%; 
+  margin: 0;
 
+}
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: #f4f6f9;
   color: #222;
   line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
+main{
+  flex-grow: 1;
+}
 /* Botão voltar */
 .voltar-container {
   text-align: center;
@@ -41,7 +52,7 @@ body {
 /* Container centralizado */
 .mensagens-container {
   max-width: 800px;
-  margin: 0 auto 40px auto; /* centraliza horizontalmente */
+  margin: 0 auto; 
   background: #f1f7ff;
   border: 1px solid #d0e3ff;
   border-radius: 10px;
@@ -114,4 +125,5 @@ footer {
   font-size: 0.9rem;
   color: #555;
   border-top: 1px solid #ddd;
+  margin-top: 0;
 }

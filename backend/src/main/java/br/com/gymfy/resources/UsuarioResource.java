@@ -1,6 +1,7 @@
 package br.com.gymfy.resources;
 
 import br.com.gymfy.DTO.UsuarioCadastroDTO;
+import br.com.gymfy.DTO.UsuarioDadosDTO;
 import br.com.gymfy.DTO.UsuarioResponseDTO;
 import br.com.gymfy.DTO.UsuarioUpdateDTO;
 import br.com.gymfy.entities.Usuario;
@@ -80,6 +81,15 @@ public class UsuarioResource {
 
         Usuario alterado = usuarioService.updateComImagem(id, dto, imagem);
         return ResponseEntity.ok().body(new UsuarioResponseDTO(alterado));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> atualizarDados(
+            @PathVariable Integer id, // Usando Integer para consistência com outros métodos
+            @Valid @RequestBody UsuarioDadosDTO dto
+    ) {
+        usuarioService.atualizarDados(id, dto);
+        return ResponseEntity.ok("Dados do Usuário " + id + " atualizados com sucesso!");
     }
 
     @DeleteMapping(value = "/{id}")
