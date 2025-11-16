@@ -15,7 +15,7 @@ public class UsuarioCadastroDTO {
     private String nome;
 
     @NotBlank(message = "O tipo de usuário é obrigatório.")
-    private String tipo;
+    private String tipo; // "Comum" ou "Personal"
 
     @PastOrPresent(message = "A data de nascimento não pode ser futura.")
     private LocalDate dataNascimento;
@@ -33,15 +33,30 @@ public class UsuarioCadastroDTO {
     @Size(min = 6, max = 40, message = "A senha deve ter entre 6 e 40 caracteres.")
     private String senha;
 
+    // ✅ Campos extras para Personal
+    @Size(max = 60, message = "A especialidade deve ter no máximo 60 caracteres.")
+    private String especialidade;
+
+    @Size(max = 300, message = "A descrição deve ter no máximo 300 caracteres.")
+    private String descricao; // ✅ corrigido
+
+    @Size(max = 80, message = "A rede social deve ter no máximo 80 caracteres.")
+    private String redeSocial;
+
     public UsuarioCadastroDTO() {}
 
-    public UsuarioCadastroDTO(String nome, String tipo, LocalDate dataNascimento, String cpf, String email, String senha) {
+    public UsuarioCadastroDTO(String nome, String tipo, LocalDate dataNascimento, String cpf,
+                              String email, String senha,
+                              String especialidade, String descricao, String redeSocial) {
         this.nome = nome;
         this.tipo = tipo;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
+        this.especialidade = especialidade;
+        this.descricao = descricao;
+        this.redeSocial = redeSocial;
     }
 
     // Getters e setters
@@ -62,4 +77,13 @@ public class UsuarioCadastroDTO {
 
     public String getSenha() { return senha; }
     public void setSenha(String senha) { this.senha = senha; }
+
+    public String getEspecialidade() { return especialidade; }
+    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getRedeSocial() { return redeSocial; }
+    public void setRedeSocial(String redeSocial) { this.redeSocial = redeSocial; }
 }

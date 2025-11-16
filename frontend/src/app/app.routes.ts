@@ -24,7 +24,6 @@ import { EditarExercicioComponent } from './pages/home/editar-exercicio/editar-e
 import { EditarListaComponent } from './pages/home/editar-lista/editar-lista.component';
 import { EditarUsuarioComponent } from './pages/home/editar-usuario/editar-usuario.component';
 
-import { UsuarioComponent } from './usuario/usuario.component';
 import { UserHomeComponent } from './pages/User/user-home/user-home.component';
 import { UserTreinosComponent } from './pages/User/user-treino/user-treino.component';
 import { UserContaComponent } from './pages/User/user-conta/user-conta.component';
@@ -59,8 +58,7 @@ export const routes: Routes = [
 
   // Personais
   { path: 'tela-personal', component: ListaPersonaisComponent, title: 'Gymfy - Personal' },
-  { path: 'personal-detalhes/:nome', component: ListaPersonaisDetalhesComponent, title: 'Detalhes - Personal' },
-  { path: 'personal-detalhes/:id', component: ListaPersonaisDetalhesComponent },
+  { path: 'personal-detalhes/:id', component: ListaPersonaisDetalhesComponent, title: 'Detalhes - Personal' }, // ✅ corrigido
 
   // Admin (protegidas)
   { path: 'admin', component: AdminCadastroUsuarioComponent, title: 'Gymfy - Admin', canActivate: [adminGuard] },
@@ -74,9 +72,6 @@ export const routes: Routes = [
   { path: 'editar-usuario/:id', component: EditarUsuarioComponent, title: 'Editar - Usuário', canActivate: [adminGuard] },
   { path: 'editar-exercicio/:id', component: EditarExercicioComponent, title: 'Editar - Exercício', canActivate: [adminGuard] },
 
-  // Usuários
-  { path: 'usuarios', component: UsuarioComponent, title: 'Gymfy - Usuários Comuns' },
-
   // Área do usuário autenticado
   { path: 'user/home', component: UserHomeComponent, title: 'Home - Usuários', canActivate: [authGuard] },
   { path: 'user/treinos', component: UserTreinosComponent, title: 'Treino - Usuários', canActivate: [authGuard] },
@@ -87,10 +82,10 @@ export const routes: Routes = [
 
   // ✅ Página de detalhes da lista/treino
   {
-  path: 'user/lista/detalhes/:id',
-  loadComponent: () => import('./pages/User/detalhes-lista/detalhes-lista.component')
-    .then(m => m.DetalhesListaComponent),
-  title: 'Detalhes da Lista - Usuário',
-  canActivate: [authGuard]
-}
+    path: 'user/lista/detalhes/:id',
+    loadComponent: () => import('./pages/User/detalhes-lista/detalhes-lista.component')
+      .then(m => m.DetalhesListaComponent),
+    title: 'Detalhes da Lista - Usuário',
+    canActivate: [authGuard]
+  }
 ];

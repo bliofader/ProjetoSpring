@@ -1,21 +1,24 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Personal } from '../entities/personal';
-import { Observable } from 'rxjs';
-import { environment } from '../environments/environments';
+import { Injectable } from '@angular/core';
+import { Mensagem } from '../entities/mensagem';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class PersonalService {
-  baseUrl = environment.baseUrl + '/personais';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
-  getPersonalById(id: number): Observable<Personal> {
-    return this.http.get<Personal>(`${this.baseUrl}/${id}`);
+  getPersonalById(id: number) {
+    return this.http.get<any>(`${this.apiUrl}/personais/${id}`);
   }
 
-  getAllPersonais(): Observable<Personal[]> {
-    return this.http.get<Personal[]>(this.baseUrl);
+  enviarMensagem(payload: Partial<Mensagem>) {
+    return this.http.post(`${this.apiUrl}/mensagens`, payload);
+  }
+
+  listarMensagens(idPersonal: number) {
+    return this.http.get<Mensagem[]>(`${this.apiUrl}/mensagens/personal/${idPersonal}`);
   }
 }
-

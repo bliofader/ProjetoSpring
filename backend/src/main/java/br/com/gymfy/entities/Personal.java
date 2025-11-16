@@ -1,35 +1,40 @@
 package br.com.gymfy.entities;
+
 import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity(name = "Personais")
 public class Personal extends Usuario {
-    @Column(name = "Especialidade")
-    String especialidade;
 
-    @Column(name = "Descrição")
-    String descricão;
+    @Column(name = "Especialidade")
+    private String especialidade;
+
+    @Column(name = "Descricao") // ✅ corrigido sem acento
+    private String descricao;
 
     @Column(name = "Rede_Social")
-    String redeSocial;
+    private String redeSocial;
 
-    public Personal(){
+    public Personal() {
     }
-    public Personal(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String especialidade, String descricão, String redeSocial,String imagePath)
-    {
-        super(nome, tipo, dataNascimento, cpf, email, senha,imagePath);
+
+    public Personal(String nome, String tipo, Date dataNascimento, String cpf, String email, String senha,
+                    String especialidade, String descricao, String redeSocial, String imagePath) {
+        super(nome, tipo, dataNascimento, cpf, email, senha, imagePath);
         this.especialidade = especialidade;
-        this.descricão = descricão;
+        this.descricao = descricao;
         this.redeSocial = redeSocial;
     }
 
-    public Personal(int id,String nome, String tipo, Date dataNascimento, String cpf, String email, String senha, String especialidade, String descricão, String redeSocial,String imagePath) {
-        super(id,nome, tipo, dataNascimento, cpf, email, senha,imagePath);
+    public Personal(int id, String nome, String tipo, Date dataNascimento, String cpf, String email, String senha,
+                    String especialidade, String descricao, String redeSocial, String imagePath) {
+        super(id, nome, tipo, dataNascimento, cpf, email, senha, imagePath);
         this.especialidade = especialidade;
-        this.descricão = descricão;
+        this.descricao = descricao;
         this.redeSocial = redeSocial;
     }
 
+    // Getters e setters
     public String getEspecialidade() {
         return especialidade;
     }
@@ -38,12 +43,12 @@ public class Personal extends Usuario {
         this.especialidade = especialidade;
     }
 
-    public String getDescricão() {
-        return descricão;
+    public String getDescricao() { // ✅ corrigido
+        return descricao;
     }
 
-    public void setDescricão(String descricão) {
-        this.descricão = descricão;
+    public void setDescricao(String descricao) { // ✅ corrigido
+        this.descricao = descricao;
     }
 
     public String getRedeSocial() {
@@ -58,7 +63,7 @@ public class Personal extends Usuario {
     public String toString() {
         return super.toString() + "Personal{" +
                 "especialidade='" + especialidade + '\'' +
-                ", descricâo='" + descricão + '\'' +
+                ", descricao='" + descricao + '\'' + // ✅ corrigido
                 ", redeSocial='" + redeSocial + '\'' +
                 '}';
     }

@@ -16,50 +16,54 @@ public class UsuarioUpdateDTO {
     private String email;
 
     @NotBlank(message = "O tipo de usuário é obrigatório.")
-    private String tipo;
+    private String tipo; // "Comum" ou "Personal"
 
     @NotBlank(message = "A senha é obrigatória.")
     @Size(min = 6, max = 40, message = "A senha deve ter entre 6 e 40 caracteres.")
     private String senha;
 
+    // ✅ Campos extras para Personal
+    @Size(max = 60, message = "A especialidade deve ter no máximo 60 caracteres.")
+    private String especialidade;
+
+    @Size(max = 300, message = "A descrição deve ter no máximo 300 caracteres.")
+    private String descricao; // ✅ corrigido
+
+    @Size(max = 80, message = "A rede social deve ter no máximo 80 caracteres.")
+    private String redeSocial;
+
     public UsuarioUpdateDTO() {}
 
-    public UsuarioUpdateDTO(String nome, String email, String tipo, String senha) {
+    public UsuarioUpdateDTO(String nome, String email, String tipo, String senha,
+                            String especialidade, String descricao, String redeSocial) {
         this.nome = nome;
         this.email = email;
         this.tipo = tipo;
         this.senha = senha;
+        this.especialidade = especialidade;
+        this.descricao = descricao;
+        this.redeSocial = redeSocial;
     }
 
-    public String getNome() {
-        return nome;
-    }
+    // Getters e setters
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getTipo() { return tipo; }
+    public void setTipo(String tipo) { this.tipo = tipo; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
 
-    public String getTipo() {
-        return tipo;
-    }
+    public String getEspecialidade() { return especialidade; }
+    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    public String getRedeSocial() { return redeSocial; }
+    public void setRedeSocial(String redeSocial) { this.redeSocial = redeSocial; }
 }

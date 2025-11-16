@@ -7,6 +7,7 @@ import br.com.gymfy.entities.Usuario;
 import br.com.gymfy.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +44,24 @@ public class UsuarioResource {
                 .stream().map(UsuarioResponseDTO::new).collect(Collectors.toList());
     }
 
-    @PostMapping(consumes = "multipart/form-data")
+    @GetMapping(value = "/personais")
+    public ResponseEntity<List<UsuarioResponseDTO>> listarPersonais() {
+        List<UsuarioResponseDTO> personais = usuarioService.findByTipo("Personal")
+                .stream().map(UsuarioResponseDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(personais);
+    }
+
+    @GetMapping(value = "/personais/{id}")
+    public ResponseEntity<UsuarioResponseDTO> buscarPersonalPorId(@PathVariable Integer id) {
+        Usuario usuario = usuarioService.findById(id);
+        if (!"Personal".equalsIgnoreCase(usuario.getTipo())) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(new UsuarioResponseDTO(usuario));
+    }
+
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UsuarioResponseDTO> cadastrarUsuarioComImagem(
             @RequestPart("usuario") @Valid UsuarioCadastroDTO dto,
             @RequestPart(value = "imagem", required = false) MultipartFile imagem) {
@@ -54,7 +72,7 @@ public class UsuarioResource {
         return ResponseEntity.created(uri).body(new UsuarioResponseDTO(novo));
     }
 
-    @PutMapping(value = "/{id}", consumes = "multipart/form-data")
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UsuarioResponseDTO> updateComImagem(
             @PathVariable Integer id,
             @RequestPart("usuario") @Valid UsuarioUpdateDTO dto,

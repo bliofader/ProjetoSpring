@@ -36,9 +36,13 @@ export class LoginCadastrarComponent {
       nome: ['', [Validators.required, Validators.maxLength(60)]],
       tipo: ['', Validators.required],
       dataNascimento: ['', [Validators.required, this.dataNaoFuturaValidator]],
-      cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/), this.cpfValidoValidator]],
+      cpf: ['', [Validators.required, this.cpfMascaraMinimoValidator, this.cpfValidoValidator]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-      senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]]
+      senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
+      // ✅ Campos extras para Personal com validações
+      especialidade: ['', [Validators.maxLength(60)]],
+      descricao: ['', [Validators.maxLength(300)]],
+      redeSocial: ['', [Validators.maxLength(80)]]
     });
   }
 
@@ -86,10 +90,42 @@ export class LoginCadastrarComponent {
       return;
     }
 
+    const tipo = this.registrationForm.get('tipo')?.value;
+
+    if (tipo === 'Personal') {
+      if (!this.registrationForm.get('especialidade')?.value ||
+          !this.registrationForm.get('descricao')?.value ||
+          !this.registrationForm.get('redeSocial')?.value ||
+          !this.selectedFile) {
+        alert('Para cadastrar um Personal é obrigatório preencher os campos extras e enviar uma imagem.');
+        return;
+      }
+    }
+
     const confirmacao = confirm('Deseja realmente cadastrar este usuário?');
     if (!confirmacao) return;
 
-    const usuario = this.registrationForm.getRawValue();
+    const raw = this.registrationForm.getRawValue();
+
+    let usuario: any = {
+      nome: raw.nome,
+      tipo: raw.tipo,
+      dataNascimento: raw.dataNascimento,
+      cpf: String(raw.cpf || '').replace(/\D/g, ''), // ✅ remove máscara antes de enviar
+      email: raw.email,
+      senha: raw.senha,
+      imagePath: this.selectedFile ? this.selectedFile.name : null
+    };
+
+    if (tipo === 'Personal') {
+      usuario = {
+        ...usuario,
+        especialidade: raw.especialidade,
+        descricao: raw.descricao,
+        redeSocial: raw.redeSocial
+      };
+    }
+
     const formData = new FormData();
     formData.append('usuario', new Blob([JSON.stringify(usuario)], { type: 'application/json' }));
     if (this.selectedFile) {
@@ -108,20 +144,33 @@ export class LoginCadastrarComponent {
     });
   }
 
+  // ✅ Validação de data
   dataNaoFuturaValidator: ValidatorFn = (control: AbstractControl) => {
-    const data = new Date(control.value);
+    const valor = control.value;
+    if (!valor) return null;
+    const data = new Date(valor);
     const hoje = new Date();
     return data > hoje ? { dataFutura: true } : null;
   };
 
+  // ✅ Validação de máscara mínima do CPF
+  cpfMascaraMinimoValidator: ValidatorFn = (control: AbstractControl) => {
+    const masked = control.value || '';
+    return masked.length === 14 ? null : { cpfMinimo: true };
+  };
+
+  // ✅ Validação completa de CPF
   cpfValidoValidator: ValidatorFn = (control: AbstractControl) => {
-    const cpf = control.value;
-    if (!cpf || cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return { cpfInvalido: true };
+    const masked = control.value || '';
+    const cpf = String(masked).replace(/\D/g, '');
+
+    if (!cpf) return null; // deixa o 'required' cuidar do vazio
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return { cpfInvalido: true };
 
     const calcDigito = (base: number) => {
       let soma = 0;
       for (let i = 0; i < base; i++) {
-        soma += parseInt(cpf.charAt(i)) * (base + 1 - i);
+        soma += parseInt(cpf.charAt(i), 10) * (base + 1 - i);
       }
       const resto = soma % 11;
       return resto < 2 ? 0 : 11 - resto;
@@ -129,10 +178,29 @@ export class LoginCadastrarComponent {
 
     const dig1 = calcDigito(9);
     const dig2 = calcDigito(10);
-    if (dig1 !== parseInt(cpf.charAt(9)) || dig2 !== parseInt(cpf.charAt(10))) {
+    if (dig1 !== parseInt(cpf.charAt(9), 10) || dig2 !== parseInt(cpf.charAt(10), 10)) {
       return { cpfInvalido: true };
     }
 
     return null;
   };
+
+  // ✅ Máscara em tempo real para CPF
+  formatarCpf(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let digits = input.value.replace(/\D/g, '');
+    if (digits.length > 11) digits = digits.substring(0, 11);
+
+    let masked = digits;
+    if (digits.length > 9) {
+      masked = digits.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    } else if (digits.length > 6) {
+      masked = digits.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+    } else if (digits.length > 3) {
+      masked = digits.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+    }
+
+    input.value = masked;
+    this.registrationForm.get('cpf')?.patchValue(masked, { emitEvent: false });
+  }
 }

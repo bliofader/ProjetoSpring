@@ -4,13 +4,15 @@
   <h2><span class="highlight-bar"></span> Cadastro de Usuário</h2>
 
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-cadastro">
-    <!-- Campos de texto -->
+    <!-- Campos principais -->
     <div class="form-group" *ngFor="let campo of ['nome', 'tipo', 'dataNascimento', 'cpf', 'email', 'senha']">
-      <label [for]="campo">{{ campo === 'dataNascimento' ? 'Data de Nascimento' : campo | titlecase }}</label>
+      <label [for]="campo">
+        {{ campo === 'dataNascimento' ? 'Data de Nascimento' : campo | titlecase }}
+      </label>
 
       <!-- Input comum -->
       <input
-        *ngIf="campo !== 'tipo'"
+        *ngIf="campo !== 'tipo' && campo !== 'cpf'"
         [id]="campo"
         [type]="campo === 'senha' ? 'password' : campo === 'email' ? 'email' : campo === 'dataNascimento' ? 'date' : 'text'"
         [formControlName]="campo"
@@ -18,6 +20,21 @@
         [ngClass]="{
           'is-valid': f[campo].valid && f[campo].touched,
           'is-invalid': f[campo].invalid && f[campo].touched
+        }"
+      />
+
+      <!-- Campo CPF com máscara -->
+      <input
+        *ngIf="campo === 'cpf'"
+        id="cpf"
+        type="text"
+        maxlength="14"
+        formControlName="cpf"
+        placeholder="000.000.000-00"
+        (input)="formatarCpf($event)"
+        [ngClass]="{
+          'is-valid': f['cpf'].valid && f['cpf'].touched,
+          'is-invalid': f['cpf'].invalid && f['cpf'].touched
         }"
       />
 
@@ -44,6 +61,7 @@
         <small *ngIf="f[campo].errors?.['email']">E-mail inválido.</small>
         <small *ngIf="f[campo].errors?.['minlength']">Mínimo de caracteres não atingido.</small>
         <small *ngIf="f[campo].errors?.['dataFutura']">A data não pode ser no futuro.</small>
+        <small *ngIf="f[campo].errors?.['cpfMinimo']">Preencha o CPF completo (000.000.000-00).</small>
         <small *ngIf="f[campo].errors?.['cpfInvalido']">CPF inválido.</small>
       </div>
     </div>
@@ -53,6 +71,38 @@
       <label for="imagem">Imagem (.png ou .jpeg)</label>
       <input id="imagem" type="file" accept="image/png, image/jpeg" (change)="onFileSelected($event)" />
       <img *ngIf="previewImage" [src]="previewImage" alt="Preview" class="preview-img" />
+    </div>
+
+    <!-- ✅ Campos extras para Personal -->
+    <div class="personal-extra" *ngIf="registrationForm.get('tipo')?.value === 'Personal'">
+      <h3><span class="highlight-bar"></span> Informações de Personal</h3>
+
+      <div class="form-group">
+        <label for="especialidade">Especialidade</label>
+        <input id="especialidade" type="text" formControlName="especialidade" placeholder="Ex: Musculação, Crossfit" />
+        <div class="error-message" *ngIf="f['especialidade'].invalid && f['especialidade'].touched">
+          <small *ngIf="f['especialidade'].errors?.['required']">Obrigatória.</small>
+          <small *ngIf="f['especialidade'].errors?.['maxlength']">Máx. 60 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" formControlName="descricao" placeholder="Fale um pouco sobre você"></textarea>
+        <div class="error-message" *ngIf="f['descricao'].invalid && f['descricao'].touched">
+          <small *ngIf="f['descricao'].errors?.['required']">Obrigatória.</small>
+          <small *ngIf="f['descricao'].errors?.['maxlength']">Máx. 300 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="redeSocial">Rede Social</label>
+        <input id="redeSocial" type="text" formControlName="redeSocial" placeholder="Ex: @meuInstagram" />
+        <div class="error-message" *ngIf="f['redeSocial'].invalid && f['redeSocial'].touched">
+          <small *ngIf="f['redeSocial'].errors?.['required']">Obrigatória.</small>
+          <small *ngIf="f['redeSocial'].errors?.['maxlength']">Máx. 80 caracteres.</small>
+        </div>
+      </div>
     </div>
 
     <!-- Botões -->

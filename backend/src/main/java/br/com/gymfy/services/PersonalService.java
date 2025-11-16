@@ -41,7 +41,7 @@ public class PersonalService {
             atual.setCpf(novo.getCpf());
             atual.setDataNascimento(novo.getDataNascimento());
             atual.setEspecialidade(novo.getEspecialidade());
-            atual.setDescricão(novo.getDescricão());
+            atual.setDescricao(novo.getDescricao());
             atual.setRedeSocial(novo.getRedeSocial());
             return personalRepository.save(atual);
         }

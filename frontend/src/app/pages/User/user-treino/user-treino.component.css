@@ -1,110 +1,10 @@
-.treinos-layout {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 20px;
-  padding: 30px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
 }
 
-
-.sidebar {
-  width: 220px;
-}
-
-.listas-container {
-  flex: 1;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.listas-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.card-lista {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.card-lista:hover {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-lista h3 {
-  margin: 0 0 8px;
-  color: #007bff;
-}
-
-.card-lista p {
-  margin: 0 0 6px;
-  color: #555;
-}
-
-.card-lista span {
-  font-size: 14px;
-  color: #666;
-}
-
-.BotaoCriarLista {
-  margin-top: 20px;
-  text-align: right;
-}
-
-.BotaoCriarLista button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.BotaoCriarLista button:hover {
-  background-color: #0056b3;
-}
-
-.empty-message {
-  font-style: italic;
-  color: #999;
-  margin-bottom: 20px;
-}
-.filtro-dias {
-  margin-bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.filtro-dias button {
-  padding: 6px 10px;
-  font-size: 13px;
-  border: 1px solid #007bff;
-  background-color: white;
-  color: #007bff;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
-  max-width: fit-content;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.filtro-dias button:hover {
-  background-color: #e6f0ff;
-}
-
-.filtro-dias button.ativo {
-  background-color: #007bff;
-  color: white;
-}
-
+/* Layout principal */
 main {
   display: flex;
   flex-direction: column;
@@ -115,3 +15,139 @@ header {
   margin-bottom: 20px;
 }
 
+.treinos-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+}
+
+/* Container das listas */
+.listas-container {
+  flex: 1;
+  background-color: #f8f8f8;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.listas-container h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.highlight-bar {
+  display: inline-block;
+  width: 5px;
+  height: 22px;
+  background-color: #c7da33;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Filtro de dias */
+.filtro-dias {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filtro-dias button {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border: 1px solid #c7da33;
+  background-color: white;
+  color: #333;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.filtro-dias button:hover {
+  background-color: #e6f0d9;
+}
+
+.filtro-dias button.ativo {
+  background-color: #c7da33;
+  color: #000;
+}
+
+/* Mensagem vazia */
+.empty-message {
+  font-style: italic;
+  color: #999;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Cards de treino */
+.card-lista {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card-lista:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-lista h3 {
+  margin: 0 0 8px;
+  color: #c7da33;
+  font-size: 1.2rem;
+}
+
+.card-lista p {
+  margin: 0 0 6px;
+  color: #555;
+}
+
+.card-lista span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Botão criar lista */
+.BotaoCriarLista {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.BotaoCriarLista button {
+  background-color: #c7da33;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.BotaoCriarLista button:hover {
+  background-color: #a6b82a;
+  transform: scale(1.05);
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.85rem;
+  color: #333;
+  margin-top: 30px;
+}

@@ -1,15 +1,33 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <app-header-top></app-header-top>
 <app-navbar></app-navbar>
 
 <main class="user-list">
   <h2><span class="highlight-bar"></span> Cadastro de Usuário</h2>
 
+  <!-- Alerta vermelho -->
+  <div class="alerta erro" *ngIf="alertaCampos">
+    ⚠️ Preencha todos os campos obrigatórios corretamente.
+  </div>
+
+  <!-- Alerta verde -->
+  <div class="alerta sucesso" *ngIf="sucessoCadastro">
+    ✅ Usuário cadastrado com sucesso!
+  </div>
+
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-cadastro">
     <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome Completo</label>
-      <input id="nome" type="text" maxlength="60" formControlName="nome" placeholder="Digite o nome completo"
-        [ngClass]="{ 'is-valid': f['nome'].valid && f['nome'].touched, 'is-invalid': f['nome'].invalid && f['nome'].touched }" />
+      <input
+        id="nome"
+        type="text"
+        maxlength="60"
+        formControlName="nome"
+        placeholder="Digite o nome completo"
+        [ngClass]="{ 'is-valid': f['nome'].valid && f['nome'].touched, 'is-invalid': f['nome'].invalid && f['nome'].touched }"
+      />
       <div class="feedback" *ngIf="f['nome'].touched && f['nome'].invalid">
         <small *ngIf="f['nome'].errors?.['required']">O nome é obrigatório.</small>
         <small *ngIf="f['nome'].errors?.['maxlength']">Máximo de 60 caracteres.</small>
@@ -19,8 +37,11 @@
     <!-- Tipo -->
     <div class="form-group">
       <label for="tipo">Tipo de Usuário</label>
-      <select id="tipo" formControlName="tipo"
-        [ngClass]="{ 'is-valid': f['tipo'].valid && f['tipo'].touched, 'is-invalid': f['tipo'].invalid && f['tipo'].touched }">
+      <select
+        id="tipo"
+        formControlName="tipo"
+        [ngClass]="{ 'is-valid': f['tipo'].valid && f['tipo'].touched, 'is-invalid': f['tipo'].invalid && f['tipo'].touched }"
+      >
         <option value="">Selecione</option>
         <option value="Personal">Personal</option>
         <option value="Comum">Comum</option>
@@ -33,8 +54,13 @@
     <!-- Data -->
     <div class="form-group">
       <label for="dataNascimento">Data de Nascimento</label>
-      <input id="dataNascimento" type="date" formControlName="dataNascimento"
-        [ngClass]="{ 'is-valid': f['dataNascimento'].valid && f['dataNascimento'].touched, 'is-invalid': f['dataNascimento'].invalid && f['dataNascimento'].touched }" />
+      <input
+        id="dataNascimento"
+        type="date"
+        formControlName="dataNascimento"
+        (input)="limitarAno($event)"
+        [ngClass]="{ 'is-valid': f['dataNascimento'].valid && f['dataNascimento'].touched, 'is-invalid': f['dataNascimento'].invalid && f['dataNascimento'].touched }"
+      />
       <div class="feedback" *ngIf="f['dataNascimento'].touched && f['dataNascimento'].invalid">
         <small *ngIf="f['dataNascimento'].errors?.['required']">A data é obrigatória.</small>
         <small *ngIf="f['dataNascimento'].errors?.['dataFutura']">A data não pode ser no futuro.</small>
@@ -44,11 +70,17 @@
     <!-- CPF -->
     <div class="form-group">
       <label for="cpf">CPF</label>
-      <input id="cpf" type="text" maxlength="11" formControlName="cpf" placeholder="Apenas números"
-        [ngClass]="{ 'is-valid': f['cpf'].valid && f['cpf'].touched, 'is-invalid': f['cpf'].invalid && f['cpf'].touched }" />
+      <input
+        id="cpf"
+        type="text"
+        maxlength="14"
+        formControlName="cpf"
+        placeholder="000.000.000-00"
+        (input)="formatarCpf($event)"
+        [ngClass]="{ 'is-valid': f['cpf'].valid && f['cpf'].touched, 'is-invalid': f['cpf'].invalid && f['cpf'].touched }"
+      />
       <div class="feedback" *ngIf="f['cpf'].touched && f['cpf'].invalid">
         <small *ngIf="f['cpf'].errors?.['required']">O CPF é obrigatório.</small>
-        <small *ngIf="f['cpf'].errors?.['pattern']">Deve conter 11 números.</small>
         <small *ngIf="f['cpf'].errors?.['cpfInvalido']">CPF inválido.</small>
       </div>
     </div>
@@ -56,33 +88,111 @@
     <!-- Email -->
     <div class="form-group">
       <label for="email">E-mail</label>
-      <input id="email" type="email" maxlength="50" formControlName="email" placeholder="exemplo@email.com"
-        [ngClass]="{ 'is-valid': f['email'].valid && f['email'].touched, 'is-invalid': f['email'].invalid && f['email'].touched }" />
+      <input
+        id="email"
+        type="email"
+        maxlength="50"
+        formControlName="email"
+        placeholder="exemplo@email.com"
+        [ngClass]="{ 'is-valid': f['email'].valid && f['email'].touched, 'is-invalid': f['email'].invalid && f['email'].touched }"
+      />
       <div class="feedback" *ngIf="f['email'].touched && f['email'].invalid">
         <small *ngIf="f['email'].errors?.['required']">Obrigatório.</small>
         <small *ngIf="f['email'].errors?.['email']">Formato inválido.</small>
       </div>
     </div>
 
+    <!-- Upload de Imagem -->
+<div class="form-group">
+  <label for="imagem">Foto de Perfil</label>
+  <input
+    id="imagem"
+    type="file"
+    (change)="onFileSelected($event)"
+    accept="image/*"
+    [ngClass]="{ 'is-invalid': registrationForm.get('tipo')?.value === 'Personal' && !selectedFile }"
+  />
+  <div class="feedback" *ngIf="registrationForm.get('tipo')?.value === 'Personal' && !selectedFile">
+    <small>Imagem obrigatória para Personal.</small>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview" *ngIf="previewImage">
+    <img [src]="previewImage" alt="Preview da imagem" />
+  </div>
+</div>
+
+
     <!-- Senha -->
     <div class="form-group">
       <label for="senha">Senha</label>
-      <input id="senha" type="password" maxlength="40" formControlName="senha" placeholder="Digite uma senha"
-        [ngClass]="{ 'is-valid': f['senha'].valid && f['senha'].touched, 'is-invalid': f['senha'].invalid && f['senha'].touched }" />
+      <input
+        id="senha"
+        type="password"
+        maxlength="40"
+        formControlName="senha"
+        placeholder="Digite uma senha"
+        [ngClass]="{ 'is-valid': f['senha'].valid && f['senha'].touched, 'is-invalid': f['senha'].invalid && f['senha'].touched }"
+      />
     </div>
-  
+
+    <!-- Campos extras para Personal -->
+    <div class="personal-extra" *ngIf="registrationForm.get('tipo')?.value === 'Personal'">
+      <h3><span class="highlight-bar"></span> Informações de Personal</h3>
+
+      <div class="form-group">
+        <label for="especialidade">Especialidade</label>
+        <input
+          id="especialidade"
+          type="text"
+          formControlName="especialidade"
+          placeholder="Ex: Musculação, Crossfit"
+          [ngClass]="{ 'is-invalid': f['especialidade'].invalid && f['especialidade'].touched }"
+        />
+        <div class="feedback" *ngIf="f['especialidade'].touched && f['especialidade'].invalid">
+          <small *ngIf="f['especialidade'].errors?.['required']">Obrigatória.</small>
+          <small *ngIf="f['especialidade'].errors?.['maxlength']">Máx. 60 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea
+          id="descricao"
+          formControlName="descricao"
+          placeholder="Fale um pouco sobre você"
+          [ngClass]="{ 'is-invalid': f['descricao'].invalid && f['descricao'].touched }"
+        ></textarea>
+        <div class="feedback" *ngIf="f['descricao'].touched && f['descricao'].invalid">
+          <small *ngIf="f['descricao'].errors?.['required']">Obrigatória.</small>
+          <small *ngIf="f['descricao'].errors?.['maxlength']">Máx. 300 caracteres.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="redeSocial">Rede Social</label>
+        <input
+          id="redeSocial"
+          type="text"
+          formControlName="redeSocial"
+          placeholder="Ex: @meuInstagram"
+          [ngClass]="{ 'is-invalid': f['redeSocial'].invalid && f['redeSocial'].touched }"
+        />
+        <div class="feedback" *ngIf="f['redeSocial'].touched && f['redeSocial'].invalid">
+          <small *ngIf="f['redeSocial'].errors?.['required']">Obrigatória.</small>
+          <small *ngIf="f['redeSocial'].errors?.['maxlength']">Máx. 80 caracteres.</small>
+        </div>
+      </div>
+    </div>
 
     <!-- Botões -->
-    <div class="botoes">
-      <button type="submit" class="btn-submit" [disabled]="registrationForm.invalid">
-        <i class="fa-solid fa-floppy-disk"></i> Cadastrar
-      </button>
-      <button type="reset" class="btn-cancelar">
-        <i class="fa-solid fa-xmark"></i> Cancelar
-      </button>
-    </div>
+<div class="botoes">
+  <button type="submit" class="btn-submit" [disabled]="registrationForm.invalid">
+    <i class="fa-solid fa-floppy-disk"></i> <span>Cadastrar</span>
+  </button>
+</div>
+
   </form>
 </main>
 
-<!-- Rodapé -->
 <app-footer></app-footer>

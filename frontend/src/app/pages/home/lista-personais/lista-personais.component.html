@@ -16,15 +16,15 @@
 
     <!-- Lista de personais -->
     <div class="personal-list" *ngIf="!isLoading && !hasError">
-      <div *ngFor="let personal of personais" class="personal-card">
-        <img [src]="personal.imagePath" [alt]="personal.nome" class="personal-img" />
-        <h3>{{ personal.nome }}</h3>
-        <p>Especialidade <br> <span>{{ personal.especialidade }}</span></p>
-        <a [routerLink]="['/personal-detalhes', personal.id]" class="inspect-btn">
-          Ver Perfil
-        </a>
-      </div>
-    </div>
+  <div *ngFor="let personal of personais" class="personal-card">
+    <img [src]="personal.imagem" [alt]="personal.nome" class="personal-img" />
+    <h3>{{ personal.nome }}</h3>
+    <p>Especialidade <br> <span>{{ personal.especialidade }}</span></p>
+    <a [routerLink]="['/personal-detalhes', personal.id]" class="inspect-btn">
+      Ver Perfil
+    </a>
+  </div>
+</div>
   </div>
 </section>
 
