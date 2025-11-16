@@ -3,11 +3,13 @@ import { environment } from '../environments/environments';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../entities/usuario';
+import { UsuarioDadosDTO } from '../Models/usuario-dados.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+
   baseUrl = environment.baseUrl + '/usuarios';
 
   constructor(private http: HttpClient) {}
@@ -39,14 +41,16 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.baseUrl}/me`, { headers });
   }
 
-  // ✏️ Atualizar usuário sem imagem
-  atualizarUsuario(id: number, dados: Partial<Usuario>): Observable<Usuario> {
+  // ✏️ Atualizar Nome, Email, CPF e Data de Nascimento (sem imagem)
+  atualizarDados(id: number, dados: UsuarioDadosDTO): Observable<string> {
     const token = sessionStorage.getItem('jwt_token');
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put<Usuario>(`${this.baseUrl}/${id}`, dados, { headers });
+
+    return this.http.put<string>(`${this.baseUrl}/${id}`, dados, { headers });
   }
 
   // ✏️ Atualizar usuário com imagem
@@ -62,4 +66,16 @@ export class UsuarioService {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return this.http.delete(`${this.baseUrl}/${id}`, { headers, responseType: 'text' });
   }
+
+  // ✏️ Atualizar usuário (sem imagem)
+atualizarUsuario(id: number, dados: Partial<Usuario>): Observable<Usuario> {
+  const token = sessionStorage.getItem('jwt_token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.put<Usuario>(`${this.baseUrl}/${id}`, dados, { headers });
+}
+
 }

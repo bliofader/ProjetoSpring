@@ -15,7 +15,10 @@
         <input type="text" placeholder="Nome" [(ngModel)]="dados.nome">
         <input type="text" placeholder="Email" [(ngModel)]="dados.email">
         <input type="text" placeholder="CPF" [(ngModel)]="dados.cpf">
+
+        <!-- Campo de data 100% compatível -->
         <input type="date" placeholder="Data de nascimento" [(ngModel)]="dados.dataNascimento">
+
         <button class="BotaoAlterar" (click)="onAlterar()">Alterar</button>
       </div>
     </div>

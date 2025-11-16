@@ -1,6 +1,7 @@
 package br.com.gymfy.services;
 
 import br.com.gymfy.DTO.UsuarioCadastroDTO;
+import br.com.gymfy.DTO.UsuarioDadosDTO;
 import br.com.gymfy.DTO.UsuarioUpdateDTO;
 import br.com.gymfy.entities.Usuario;
 import br.com.gymfy.repositories.UsuarioRepository;
@@ -13,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,4 +106,32 @@ public class UsuarioService {
             throw new RuntimeException("Erro ao salvar imagem: " + e.getMessage());
         }
     }
+
+    public void atualizarDados(Integer id, UsuarioDadosDTO dto) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+        usuario.setCpf(dto.getCpf());
+
+        try {
+            // Converte String → java.util.Date
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date dataUtil = formato.parse(dto.getDataNascimento());
+
+            // Converte java.util.Date → java.sql.Date
+            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+
+            usuario.setDataNascimento(dataSql);
+
+        } catch (ParseException e) {
+            throw new RuntimeException("Formato de data inválido. Use yyyy-MM-dd.");
+        }
+
+        usuarioRepository.save(usuario);
+    }
+
+
+
 }
