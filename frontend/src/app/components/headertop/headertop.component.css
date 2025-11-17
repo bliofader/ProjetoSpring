@@ -15,12 +15,13 @@
   cursor: pointer;
 }
 
-/* Aqui o truque: criamos um espaçador flexível */
+/* Aqui o truque: removemos o margin que o empurrava para o centro */
 .header-right {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-right: 80px; /* empurra levemente para o centro */
+  /* margin-right: 80px; <--- REMOVIDO para ir para a direita */
+  margin-right: 5em;
 }
 
 /* Ícone de perfil */
@@ -45,7 +46,7 @@
   transform: scale(1.1);
 }
 
-/* Botão de sair */
+/* Botão de sair (Manter e Adicionar ajuste para a imagem) */
 .btn-logout {
   background-color: #e53935;
   border: none;
@@ -66,6 +67,15 @@
   transform: scale(1.05);
 }
 
+/* ✅ NOVO: Estiliza o ícone dentro do botão de logout */
+.btn-logout .logout-icon {
+  width: 18px; /* Tamanho do ícone */
+  height: 18px;
+  /* Para garantir que o ícone mantenha a cor branca do texto */
+  filter: invert(100%); 
+}
+
+
 /* Ajuste de responsividade */
 @media (max-width: 768px) {
   .header {
@@ -74,7 +84,6 @@
   }
 
   .header-right {
-    margin-right: 0;
     justify-content: center;
   }
 }

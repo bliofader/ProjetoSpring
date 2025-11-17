@@ -46,6 +46,14 @@ export class AuthService {
     return false;
   }
 
+  isPersonal(): boolean{
+    if (this.isBrowser()) {
+      const perfil = sessionStorage.getItem('usuarioPerfil');
+      return perfil?.toLowerCase() === 'personal';
+    }
+    return false;
+  }
+
   isAdmin(): boolean {
     if (this.isBrowser()) {
       const perfil = sessionStorage.getItem('usuarioPerfil');

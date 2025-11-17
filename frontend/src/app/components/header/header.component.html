@@ -30,7 +30,7 @@
  }
 
 
- @if (authService.isComum()) {
+ @if (authService.isComum() || authService.isPersonal()) {
  <a href="/user/home" class="login-menu-link">
  <div class="login-icon">
  <img src="assets/images/user.png" alt="Login">
